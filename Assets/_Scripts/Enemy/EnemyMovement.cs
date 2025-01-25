@@ -55,6 +55,10 @@ public class EnemyMovement : MonoBehaviour
 
     private void SetDestination(Vector3 destination)
     {
+        // Return if the agent is null or disabled
+        if (_navMeshAgent == null || !_navMeshAgent.enabled)
+            return;
+        
         // Set the destination of the NavMeshAgent to the destination
         _navMeshAgent.SetDestination(destination);
     }
