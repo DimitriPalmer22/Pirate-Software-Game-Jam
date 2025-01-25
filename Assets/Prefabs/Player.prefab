@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8377982198443731798}
   - component: {fileID: 699579395252495290}
   - component: {fileID: 5711259853604689081}
+  - component: {fileID: 116502483128458377}
   - component: {fileID: 5763907321819213520}
   m_Layer: 0
   m_Name: Player
@@ -187,6 +188,21 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &116502483128458377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5818159250884689914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c5ee737e8428354086b12956dfec507, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  invincibilityDuration: 1
+  maxHealth: 100
+  currentHealth: 100
 --- !u!114 &5763907321819213520
 MonoBehaviour:
   m_ObjectHideFlags: 0
