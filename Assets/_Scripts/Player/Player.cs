@@ -1,20 +1,21 @@
 using System;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
 public class Player : MonoBehaviour, IActor
 {
     #region Serialized Fields
-    
+
     [SerializeField, Min(0)] private float invincibilityDuration = 1f;
-    
+
     #endregion
-    
+
     #region Private Fields
 
     private CountdownTimer _invincibilityTimer;
-    
+
     #endregion
-    
+
     #region IActor
 
     [SerializeField, Min(0)] private float maxHealth;
@@ -75,7 +76,15 @@ public class Player : MonoBehaviour, IActor
 
     #region Getters
 
+    public PlayerControls PlayerControls { get; private set; }
+
     public GameObject GameObject => gameObject;
+
+    public Rigidbody Rigidbody { get; private set; }
+
+    public PlayerController PlayerController { get; private set; }
+
+    public PlayerWeaponManager PlayerWeaponManager { get; private set; }
 
     #endregion
 
@@ -83,20 +92,36 @@ public class Player : MonoBehaviour, IActor
     {
         // Create the invincibility timer
         _invincibilityTimer = new CountdownTimer(invincibilityDuration);
+
+        // Initialize the components
+        InitializeComponents();
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void InitializeComponents()
     {
+        PlayerControls = new PlayerControls();
+        Rigidbody = GetComponent<Rigidbody>();
+        PlayerController = GetComponent<PlayerController>();
+        PlayerWeaponManager = GetComponent<PlayerWeaponManager>();
+    }
+
+    private void OnEnable()
+    {
+        PlayerControls.Enable();
+    }
+
+    private void OnDisable()
+    {
+        PlayerControls.Disable();
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         // Update the invincibility timer
         UpdateInvincibility();
     }
-    
+
     private void UpdateInvincibility()
     {
         // Update the invincibility timer
