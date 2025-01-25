@@ -4,6 +4,8 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class Player : MonoBehaviour, IActor
 {
+    public static Player Instance { get; private set; }
+    
     #region Serialized Fields
 
     [SerializeField, Min(0)] private float invincibilityDuration = 1f;
@@ -90,6 +92,9 @@ public class Player : MonoBehaviour, IActor
 
     private void Awake()
     {
+        // Set the instance
+        Instance = this;
+        
         // Create the invincibility timer
         _invincibilityTimer = new CountdownTimer(invincibilityDuration);
 
