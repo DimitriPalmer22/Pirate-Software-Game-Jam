@@ -164,6 +164,6 @@ MonoBehaviour:
   layersToIgnore:
     serializedVersion: 2
     m_Bits: 192
-  baseDamage: 10
+  baseDamage: 25
   range: 40
   velocity: 1000
