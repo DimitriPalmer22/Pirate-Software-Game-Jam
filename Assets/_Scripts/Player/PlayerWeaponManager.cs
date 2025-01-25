@@ -10,6 +10,7 @@ public class PlayerWeaponManager : MonoBehaviour
     [SerializeField] private Transform firePoint;
     [SerializeField] private PlayerWeapon bulletPrefab;
     [SerializeField] private float fireRate = 0.5f;
+    [SerializeField] private Animator animatorForShooting;
 
     #endregion
     
@@ -61,11 +62,15 @@ public class PlayerWeaponManager : MonoBehaviour
     private void OnShootCanceled(InputAction.CallbackContext obj)
     {
         _isShooting = false;
+        //stop the firing animation
+        animatorForShooting.SetBool("NormalFiring", false);
     }
 
     private void OnShootPerformed(InputAction.CallbackContext obj)
     {
         _isShooting = true;
+        //start the firing animation
+        animatorForShooting.SetBool("NormalFiring", true);
     }
 
     #endregion

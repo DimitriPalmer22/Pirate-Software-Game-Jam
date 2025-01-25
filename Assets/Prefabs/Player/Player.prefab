@@ -249,6 +249,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 16
+  animator: {fileID: 6226352149878942045}
 --- !u!114 &2392279437143218790
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -264,6 +265,7 @@ MonoBehaviour:
   firePoint: {fileID: 458331295295263998}
   bulletPrefab: {fileID: 6413863324505719948, guid: dd39dcca81bffb643944275f11ed769f, type: 3}
   fireRate: 0.125
+  animatorForShooting: {fileID: 0}
 --- !u!1001 &505221071835141324
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -343,5 +345,10 @@ PrefabInstance:
 --- !u!4 &38384630226481959 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: a005c280febf1e64f85763fec150d3f5, type: 3}
+  m_PrefabInstance: {fileID: 505221071835141324}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &6226352149878942045 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: a005c280febf1e64f85763fec150d3f5, type: 3}
   m_PrefabInstance: {fileID: 505221071835141324}
   m_PrefabAsset: {fileID: 0}

@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     #region Serialized Fields
 
     [SerializeField, Min(0)] private float moveSpeed = 8f;
+    [SerializeField]private Animator animator;
 
     #endregion
 
@@ -16,6 +17,9 @@ public class PlayerController : MonoBehaviour
     private Vector2 _movementInput;
 
     private Vector3 _aimForward;
+    
+    private Vector3 _lastPosition;
+    private Vector3 _currentVelocity;
 
     #endregion
 
@@ -115,11 +119,14 @@ public class PlayerController : MonoBehaviour
     private void OnMovementPerformed(InputAction.CallbackContext obj)
     {
         _movementInput = obj.ReadValue<Vector2>();
+        animator.SetFloat("Speed", _movementInput.magnitude);
     }
 
     private void OnMovementCanceled(InputAction.CallbackContext obj)
     {
         _movementInput = Vector2.zero;
+        animator.SetFloat("Speed", 0);
+
     }
 
     #endregion
@@ -130,11 +137,21 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        
+        // // Store current position before movement
+        //Vector3 oldPosition = transform.position;
+
         // Update the player's position
         UpdatePosition();
 
         // Update the player's rotation
         UpdateRotation();
+        // Update the player's animation
+    
+        // Compute pseudo-velocity based on how far we moved
+        //_currentVelocity = (transform.position - oldPosition) / Time.fixedDeltaTime;
+    
+        UpdateAnimationDirection();
     }
 
     private void UpdatePosition()
@@ -155,6 +172,49 @@ public class PlayerController : MonoBehaviour
 
         // Move the player
         Player.Rigidbody.MovePosition(Player.Rigidbody.position + movement * Time.fixedDeltaTime);
+        //store the velocity       
+        Player.Rigidbody.linearVelocity = movement;
+    }
+
+    private void UpdateAnimationDirection()
+    {
+        
+        //get the velocity of the player based on movement
+        Vector3 velocity = Player.Rigidbody.linearVelocity;
+        
+        // calculate the dot product between the forward vector and the velocity vector
+        float direction = Vector3.Dot(transform.forward, velocity);
+        Debug.Log("Dot: " + direction);
+        
+        //threshold to check if the player is moving
+        float threshold = 0.1f;
+        float animDirection;
+
+        //check if the player is moving forward or backwards
+        if (direction > threshold)
+        {
+            //positive dot => moving forward
+            animDirection = 1;
+            Debug.Log("Object is moving Forward");
+            animator.SetFloat("Direction", animDirection);
+        }
+        else if (direction < -threshold)
+        {
+            animDirection = -1;
+            // Negative dot => moving backward
+            Debug.Log("Object is moving backward.");
+            animator.SetFloat("Direction", animDirection);
+        }
+        else
+        {
+            animDirection = 0;
+            // Dot is zero => perpendicular or no movement
+            Debug.Log("Object is not moving in the forward/backward direction.");
+            animator.SetFloat("Direction", animDirection);
+        }
+        
+        
+
     }
 
     private void UpdateRotation()
