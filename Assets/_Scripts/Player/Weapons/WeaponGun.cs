@@ -64,12 +64,9 @@ public class WeaponGun : PlayerWeapon
             yield return null;
         }
 
-        if (hit)
-        {
-            // If the object hit has an IActor component, deal damage to it
-            if (hitInfo.collider.TryGetComponent(out IActor actor))
-                actor?.ChangeHealth(-baseDamage, playerWeaponManager.Player, this, hitInfo.point);
-        }
+        // If the object hit has an IActor component, deal damage to it
+        if (hit && hitInfo.collider != null && hitInfo.collider.TryGetComponent(out IActor actor))
+            actor?.ChangeHealth(-baseDamage, playerWeaponManager.Player, this, hitInfo.point);
 
         // Wait for 5 seconds to let the trail disappear
         yield return new WaitForSeconds(5);

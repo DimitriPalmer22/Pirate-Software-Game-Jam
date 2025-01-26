@@ -35,13 +35,18 @@ public class ChainLightning : PlayerWeapon
         );
 
         if (!Physics.Raycast(ray, out var hitInfo, range, ~layersToIgnore))
-            yield break;
+        {
+            // yield break;
+        }
 
         // Get the enemy component from the hit object
-        var hit = hitInfo.collider.TryGetComponentInParent(out Enemy currentEnemy);
+        Enemy currentEnemy = null;
+       
+        if (hitInfo.collider != null)
+            hitInfo.collider.TryGetComponentInParent(out currentEnemy);
 
-        if (!hit || currentEnemy == null)
-            yield break;
+        // if (!hit || currentEnemy == null)
+        //     yield break;
 
         // Instantiate the trail prefab
         var trail = Instantiate(bulletPrefab, playerWeaponManager.FirePoint.position, Quaternion.identity);
@@ -56,8 +61,33 @@ public class ChainLightning : PlayerWeapon
 
         var previousPosition = playerWeaponManager.FirePoint.position;
 
+        // If the current enemy is null, break
+        if (currentEnemy == null)
+        {
+            var endPosition = ray.GetPoint(range);
+
+            var remainingStepCount = chainStepCount;
+            while (remainingStepCount > 0)
+            {
+                remainingStepCount--;
+
+                // Lerp the position of the trail to the enemy position
+                var trailPosition = Vector3.Lerp(previousPosition, endPosition,
+                    1f - (remainingStepCount / (float)chainStepCount));
+
+                // Set the position of the trail
+                trail.transform.position = trailPosition;
+
+                // Set the forward direction of the trail
+                trail.transform.forward = endPosition - previousPosition;
+
+                // Wait for the step delay time
+                yield return new WaitForSeconds(chainDelayTime / chainStepCount);
+            }
+        }
+
         // Keep shooting the projectile at the current enemy
-        while (remainingChainCount > 0)
+        while (remainingChainCount > 0 && currentEnemy != null)
         {
             // Remove the current enemy from the remaining enemies
             remainingEnemies.Remove(currentEnemy);
@@ -142,7 +172,7 @@ public class ChainLightning : PlayerWeapon
         {
             if (enemy == null)
                 continue;
-            
+
             var distance = Vector3.Distance(position, enemy.transform.position);
 
             // Continue if the enemy is out of range

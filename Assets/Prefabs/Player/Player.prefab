@@ -263,7 +263,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firePoint: {fileID: 458331295295263998}
-  animatorForShooting: {fileID: 0}
+  animatorForShooting: {fileID: 6226352149878942045}
   weapons:
   - {fileID: 6413863324505719948, guid: dd39dcca81bffb643944275f11ed769f, type: 3}
 --- !u!1001 &505221071835141324

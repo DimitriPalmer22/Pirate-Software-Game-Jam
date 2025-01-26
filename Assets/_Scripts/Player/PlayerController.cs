@@ -5,6 +5,8 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Player), typeof(PlayerInput))]
 public class PlayerController : MonoBehaviour
 {
+    private static readonly int SpeedAnimationID = Animator.StringToHash("Speed");
+
     #region Serialized Fields
 
     [SerializeField, Min(0)] private float moveSpeed = 8f;
@@ -121,7 +123,7 @@ public class PlayerController : MonoBehaviour
         _movementInput = obj.ReadValue<Vector2>();
         
         //temp: set the speed of the player based on the movement input
-        animator.SetFloat("Speed", _movementInput.magnitude);
+        animator.SetFloat(SpeedAnimationID, _movementInput.magnitude);
     }
 
     private void OnMovementCanceled(InputAction.CallbackContext obj)
@@ -129,7 +131,7 @@ public class PlayerController : MonoBehaviour
         _movementInput = Vector2.zero;
         
         //temp: set the speed of the player to zero
-        animator.SetFloat("Speed", 0);
+        animator.SetFloat(SpeedAnimationID, 0);
 
     }
 
@@ -167,10 +169,7 @@ public class PlayerController : MonoBehaviour
 
         var movement = (camForward * _movementInput.y + camRight * _movementInput.x) * moveSpeed;
 
-        // Move the player
-        Player.Rigidbody.MovePosition(Player.Rigidbody.position + movement * Time.fixedDeltaTime);
-        
-        //set the velocity       
+        // Set the velocity       
         Player.Rigidbody.linearVelocity = movement;
     }
 
@@ -179,10 +178,10 @@ public class PlayerController : MonoBehaviour
     private void UpdateAnimationDirection()
     {
         //get the velocity of the player in world space
-        Vector3 worldVelocity = Player.Rigidbody.linearVelocity;
+        var worldVelocity = Player.Rigidbody.linearVelocity;
         
         //convert the velocity to local space
-        Vector3 localVelocity = transform.InverseTransformDirection(worldVelocity);
+        var localVelocity = transform.InverseTransformDirection(worldVelocity);
         
         //set the local velocity
         _localVelX = localVelocity.x;
@@ -201,11 +200,11 @@ public class PlayerController : MonoBehaviour
         _localVelZ = Mathf.Clamp(_localVelZ, -1, 1);
         
         // calculate the dot product between the forward vector and the velocity
-        float direction = Vector3.Dot(transform.forward, worldVelocity);
-        Debug.Log("Dot: " + direction);
+        var direction = Vector3.Dot(transform.forward, worldVelocity);
+        // Debug.Log("Dot: " + direction);
         
         //threshold to check if the player is moving
-        float threshold = 0.1f;
+        var threshold = 0.1f;
 
         //check if the player is moving forward or backwards
         if (direction > threshold)

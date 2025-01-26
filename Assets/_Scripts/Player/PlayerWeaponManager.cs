@@ -7,6 +7,8 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Player))]
 public class PlayerWeaponManager : MonoBehaviour
 {
+    private static readonly int NormalFiringAnimationID = Animator.StringToHash("NormalFiring");
+
     #region Serialized Fields
 
     [SerializeField] private Transform firePoint;
@@ -63,7 +65,7 @@ public class PlayerWeaponManager : MonoBehaviour
         StartShooting();
         
         // start the firing animation
-        animatorForShooting?.SetBool("NormalFiring", true);
+        animatorForShooting?.SetBool(NormalFiringAnimationID, true);
     }
 
     private void OnShootCanceled(InputAction.CallbackContext obj)
@@ -72,7 +74,7 @@ public class PlayerWeaponManager : MonoBehaviour
         StopShooting();
 
         // stop the firing animation
-        animatorForShooting?.SetBool("NormalFiring", false);
+        animatorForShooting?.SetBool(NormalFiringAnimationID, false);
     }
 
     #endregion
@@ -104,5 +106,13 @@ public class PlayerWeaponManager : MonoBehaviour
             // Stop the bullet
             weaponInstance.StopShooting(this);
         }
+    }
+    
+    public void AddWeapon(PlayerWeapon weapon)
+    {
+        // Check if the weapon is already instantiated
+        // Instantiate the weapon prefab
+        if (!_prefabInstances.ContainsKey(weapon))
+            _prefabInstances.Add(weapon, Instantiate(weapon, firePoint.transform));
     }
 }
