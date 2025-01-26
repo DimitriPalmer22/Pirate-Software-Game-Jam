@@ -59,7 +59,7 @@ public class WaveText : MonoBehaviour
         {
             _stayOnScreenTimer.SetMaxTimeAndReset(stayOnScreenTime);
             _desiredOpacity = maxAlpha;
-            text.text = $"Wave Complete!\nNext Wave In\n{WaveManager.Instance.TimeBetweenWavesRemaining:0.00}";
+            text.text = $"Next Wave In\n{WaveManager.Instance.TimeBetweenWavesRemaining:0.00}";
         }
 
         // Update the stay on screen timer

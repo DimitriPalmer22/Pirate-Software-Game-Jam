@@ -42,6 +42,8 @@ public class WaveManager : MonoBehaviour, IDebugged
     public int CurrentWaveIndex => _currentWaveIndex;
     
     public float TimeBetweenWavesRemaining { get; private set; }
+    
+    private bool IsLastBatch => _currentWaveBatchIndex >= _currentWave.EnemyBatchInfos.Length;
 
     #endregion
 
@@ -181,7 +183,7 @@ public class WaveManager : MonoBehaviour, IDebugged
     private void CheckIfWaveOverOnEnemyDeath(object sender, HealthChangedEventArgs args)
     {
         // If there are no enemies left in the wave, invoke the on wave complete event
-        if (_enemiesInWave.Count != 0 || _isBetweenWaves) 
+        if (_enemiesInWave.Count != 0 || _isBetweenWaves || !IsLastBatch)
             return;
         
         onWaveComplete?.Invoke();
