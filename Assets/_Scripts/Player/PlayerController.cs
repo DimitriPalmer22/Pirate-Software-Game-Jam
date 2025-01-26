@@ -168,7 +168,9 @@ public class PlayerController : MonoBehaviour
         var movement = (camForward * _movementInput.y + camRight * _movementInput.x) * moveSpeed;
 
         // Move the player
-        // Player.Rigidbody.MovePosition(Player.Rigidbody.position + movement * Time.fixedDeltaTime);
+        Player.Rigidbody.MovePosition(Player.Rigidbody.position + movement * Time.fixedDeltaTime);
+        
+        //set the velocity       
         Player.Rigidbody.linearVelocity = movement;
     }
 
@@ -176,18 +178,6 @@ public class PlayerController : MonoBehaviour
     // Update the animation direction of the player
     private void UpdateAnimationDirection()
     {
-<<<<<<< Updated upstream
-        //Use velocity of the player based on movement
-        var velocity = Player.Rigidbody.linearVelocity;
-        
-        // calculate the dot product between the forward vector and the velocity
-        var direction = Vector3.Dot(transform.forward, velocity);
-        // Debug.Log("Dot: " + direction);
-        
-        //threshold to check if the player is moving
-        var threshold = 0.1f;
-        float animDirection;
-=======
         //get the velocity of the player in world space
         Vector3 worldVelocity = Player.Rigidbody.linearVelocity;
         
@@ -216,7 +206,6 @@ public class PlayerController : MonoBehaviour
         
         //threshold to check if the player is moving
         float threshold = 0.1f;
->>>>>>> Stashed changes
 
         //check if the player is moving forward or backwards
         if (direction > threshold)
@@ -244,7 +233,10 @@ public class PlayerController : MonoBehaviour
 
         var rotation = Quaternion.LookRotation(_aimForward);
         Player.Rigidbody.MoveRotation(rotation);
+        
     }
+    
+    
 
     #endregion
 
