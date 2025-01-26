@@ -17,10 +17,10 @@ public class PlayerController : MonoBehaviour
     private Vector2 _movementInput;
 
     private Vector3 _aimForward;
-    
-    private Vector3 _lastPosition;
-    private Vector3 _currentVelocity;
 
+    private float _localVelX;
+    private float _localVelZ;
+    
     #endregion
 
     #region Getters
@@ -172,8 +172,11 @@ public class PlayerController : MonoBehaviour
         Player.Rigidbody.linearVelocity = movement;
     }
 
+
+    // Update the animation direction of the player
     private void UpdateAnimationDirection()
     {
+<<<<<<< Updated upstream
         //Use velocity of the player based on movement
         var velocity = Player.Rigidbody.linearVelocity;
         
@@ -184,30 +187,53 @@ public class PlayerController : MonoBehaviour
         //threshold to check if the player is moving
         var threshold = 0.1f;
         float animDirection;
+=======
+        //get the velocity of the player in world space
+        Vector3 worldVelocity = Player.Rigidbody.linearVelocity;
+        
+        //convert the velocity to local space
+        Vector3 localVelocity = transform.InverseTransformDirection(worldVelocity);
+        
+        //set the local velocity
+        _localVelX = localVelocity.x;
+        _localVelZ = localVelocity.z;
+        
+        //normalize the local velocity
+        _localVelX /= moveSpeed;
+        _localVelZ /= moveSpeed;
+        
+        //feed the local velocity to the animator
+        animator.SetFloat("VelX", _localVelX, 0.1f, Time.deltaTime);
+        animator.SetFloat("VelZ", _localVelZ, 0.1f, Time.deltaTime);
+       
+        //clamp the local velocity
+        _localVelX = Mathf.Clamp(_localVelX, -1, 1);
+        _localVelZ = Mathf.Clamp(_localVelZ, -1, 1);
+        
+        // calculate the dot product between the forward vector and the velocity
+        float direction = Vector3.Dot(transform.forward, worldVelocity);
+        Debug.Log("Dot: " + direction);
+        
+        //threshold to check if the player is moving
+        float threshold = 0.1f;
+>>>>>>> Stashed changes
 
         //check if the player is moving forward or backwards
         if (direction > threshold)
         {
             //positive dot => moving forward
-            animDirection = 1;
             Debug.Log("Object is moving Forward");
         }
         else if (direction < -threshold)
         {
-            animDirection = -1;
             // Negative dot => moving backward
             Debug.Log("Object is moving backward.");
         }
         else
         {
-            animDirection = 0;
             // Dot is zero => perpendicular or no movement
             Debug.Log("Object is not moving in the forward/backward direction.");
         }
-        animator.SetFloat("Direction", animDirection);
-        
-        
-
     }
 
     private void UpdateRotation()
