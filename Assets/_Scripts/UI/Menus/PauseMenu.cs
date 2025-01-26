@@ -3,14 +3,21 @@ using UnityEngine.InputSystem;
 
 public class PauseMenu : GameMenu
 {
+    public static PauseMenu Instance { get; private set; }
+    
+    public Action OnPause;
+    public Action OnResume;
+    
     private PlayerControls _playerControls;
-
     
     protected override void CustomAwake()
     {
+        // Set the instance
+        Instance = this;
+        
+        // Initialize the input
         _playerControls = new PlayerControls();
     }
-
     
     private void OnEnable()
     {
@@ -37,7 +44,7 @@ public class PauseMenu : GameMenu
     {
         // If the menu is active, deactivate it
         if (IsActive)
-            Deactivate();
+            Resume();
 
         // If the menu is not active, activate it
         else
@@ -50,6 +57,8 @@ public class PauseMenu : GameMenu
 
     protected override void CustomActivate()
     {
+        // Invoke the pause event
+        OnPause?.Invoke();
     }
 
     protected override void CustomDeactivate()
@@ -68,5 +77,8 @@ public class PauseMenu : GameMenu
     {
         // Deactivate the menu
         Deactivate();
+        
+        // Invoke the resume event
+        OnResume?.Invoke();
     }
 }

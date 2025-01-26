@@ -120,6 +120,22 @@ public class Player : MonoBehaviour, IActor
         PlayerControls.Disable();
     }
 
+    private void Start()
+    {
+        PauseMenu.Instance.OnPause += DisableControlsOnPaused;
+        PauseMenu.Instance.OnResume += EnableControlsOnPaused;
+    }
+
+    private void EnableControlsOnPaused()
+    {
+        PlayerControls.Player.Enable();
+    }
+
+    private void DisableControlsOnPaused()
+    {
+        PlayerControls.Player.Disable();
+    }
+
     // Update is called once per frame
     private void Update()
     {
