@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,18 +10,16 @@ public class PlayerWeaponManager : MonoBehaviour
     #region Serialized Fields
 
     [SerializeField] private Transform firePoint;
-    [SerializeField] private PlayerWeapon bulletPrefab;
-    [SerializeField] private float fireRate = 0.5f;
     [SerializeField] private Animator animatorForShooting;
 
+    [SerializeField] private List<PlayerWeapon> weapons;
+
     #endregion
-    
+
     #region Private Fields
 
-    private bool _isShooting;
-    
-    private float _fireRateTimer;
-    
+    private readonly Dictionary<PlayerWeapon, PlayerWeapon> _prefabInstances = new();
+
     #endregion
 
     #region Getters
@@ -27,8 +27,6 @@ public class PlayerWeaponManager : MonoBehaviour
     public Player Player { get; private set; }
 
     public Transform FirePoint => firePoint;
-
-    public PlayerWeapon BulletPrefab => bulletPrefab;
 
     #endregion
 
@@ -59,49 +57,52 @@ public class PlayerWeaponManager : MonoBehaviour
         Player.PlayerControls.Player.Shoot.canceled += OnShootCanceled;
     }
 
-    private void OnShootCanceled(InputAction.CallbackContext obj)
-    {
-        _isShooting = false;
-        //stop the firing animation
-        animatorForShooting.SetBool("NormalFiring", false);
-    }
-
     private void OnShootPerformed(InputAction.CallbackContext obj)
     {
-        _isShooting = true;
-        //start the firing animation
-        animatorForShooting.SetBool("NormalFiring", true);
+        // Start shooting
+        StartShooting();
+        
+        // start the firing animation
+        animatorForShooting?.SetBool("NormalFiring", true);
+    }
+
+    private void OnShootCanceled(InputAction.CallbackContext obj)
+    {
+        // Stop shooting
+        StopShooting();
+
+        // stop the firing animation
+        animatorForShooting?.SetBool("NormalFiring", false);
     }
 
     #endregion
 
-    private void Update()
+    private void StartShooting()
     {
-        // Update the fire rate timer
-        UpdateFireRateTimer();
-        
-        // Shoot if the player is shooting
-        while (_isShooting && _fireRateTimer >= fireRate)
-            Shoot();
+        foreach (var weapon in weapons)
+        {
+            // Check if the weapon is already instantiated
+            // Instantiate the weapon prefab
+            if (!_prefabInstances.ContainsKey(weapon))
+                _prefabInstances.Add(weapon, Instantiate(weapon, firePoint.transform));
+
+            // Get the weapon instance
+            var weaponInstance = _prefabInstances[weapon];
+
+            // Shoot the bullet
+            weaponInstance.StartShooting(this);
+        }
     }
 
-    private void UpdateFireRateTimer()
+    private void StopShooting()
     {
-        if (!_isShooting)
-            _fireRateTimer = Mathf.Clamp(_fireRateTimer + Time.deltaTime, 0, fireRate);
-        else
-            _fireRateTimer += Time.deltaTime;
-    }
+        foreach (var weapon in weapons.Where(weapon => _prefabInstances.ContainsKey(weapon)))
+        {
+            // Get the weapon instance
+            var weaponInstance = _prefabInstances[weapon];
 
-    private void Shoot()
-    {
-        var bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
-        
-        // Shoot the bullet
-        bullet.Shoot(this);
-        
-        // Reset the fire rate timer
-        _fireRateTimer -= fireRate;
+            // Stop the bullet
+            weaponInstance.StopShooting(this);
+        }
     }
-    
 }

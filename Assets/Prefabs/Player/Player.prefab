@@ -263,9 +263,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firePoint: {fileID: 458331295295263998}
-  bulletPrefab: {fileID: 6413863324505719948, guid: dd39dcca81bffb643944275f11ed769f, type: 3}
-  fireRate: 0.125
   animatorForShooting: {fileID: 0}
+  weapons:
+  - {fileID: 6413863324505719948, guid: dd39dcca81bffb643944275f11ed769f, type: 3}
 --- !u!1001 &505221071835141324
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -324,14 +324,7 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: abd58dd7bf8de1c4e9fe8d2c0d4b8f7a, type: 2}
     - target: {fileID: 5866666021909216657, guid: a005c280febf1e64f85763fec150d3f5, type: 3}
       propertyPath: m_WarningMessage
-      value: "\nBinding warning: Some generic clip(s) animate transforms that are
-        already bound by a Humanoid avatar. These transforms can only be changed
-        by Humanoid clips.\n\tTransform 'mixamorig:Hips'\n\tTransform 'mixamorig:LeftFoot'\n\tTransform
-        'mixamorig:LeftHandThumb2'\n\tTransform 'mixamorig:LeftHandIndex1'\n\tTransform
-        'mixamorig:LeftHandPinky2'\n\tTransform 'mixamorig:RightHandRing2'\n\tTransform
-        'mixamorig:Spine1'\n\tTransform 'mixamorig:LeftToeBase'\n\tTransform 'mixamorig:LeftHandThumb3'\n\tTransform
-        'mixamorig:RightArm'\n\tand more ...\n\tFrom animation clip 'Firing_PoweredUp'\n\tFrom
-        animation clip 'Firing_normal'"
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: a005c280febf1e64f85763fec150d3f5, type: 3}
       propertyPath: m_ApplyRootMotion
