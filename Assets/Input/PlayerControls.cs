@@ -240,6 +240,34 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Debug"",
+            ""id"": ""99ef05c8-0058-4cf0-95fa-2cf38033be76"",
+            ""actions"": [
+                {
+                    ""name"": ""Debug"",
+                    ""type"": ""Button"",
+                    ""id"": ""eb8ccc2c-276b-43ea-ad04-98be080d6edd"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""75b2011e-aa55-4c51-a369-23eeca9cc918"",
+                    ""path"": ""<Keyboard>/f1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";KB n M"",
+                    ""action"": ""Debug"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -279,11 +307,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Player_AimMouse = m_Player.FindAction("AimMouse", throwIfNotFound: true);
         m_Player_AimStick = m_Player.FindAction("AimStick", throwIfNotFound: true);
         m_Player_Dodge = m_Player.FindAction("Dodge", throwIfNotFound: true);
+        // Debug
+        m_Debug = asset.FindActionMap("Debug", throwIfNotFound: true);
+        m_Debug_Debug = m_Debug.FindAction("Debug", throwIfNotFound: true);
     }
 
     ~@PlayerControls()
     {
         UnityEngine.Debug.Assert(!m_Player.enabled, "This will cause a leak and performance issues, PlayerControls.Player.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_Debug.enabled, "This will cause a leak and performance issues, PlayerControls.Debug.Disable() has not been called.");
     }
 
     public void Dispose()
@@ -419,6 +451,52 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         }
     }
     public PlayerActions @Player => new PlayerActions(this);
+
+    // Debug
+    private readonly InputActionMap m_Debug;
+    private List<IDebugActions> m_DebugActionsCallbackInterfaces = new List<IDebugActions>();
+    private readonly InputAction m_Debug_Debug;
+    public struct DebugActions
+    {
+        private @PlayerControls m_Wrapper;
+        public DebugActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Debug => m_Wrapper.m_Debug_Debug;
+        public InputActionMap Get() { return m_Wrapper.m_Debug; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(DebugActions set) { return set.Get(); }
+        public void AddCallbacks(IDebugActions instance)
+        {
+            if (instance == null || m_Wrapper.m_DebugActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_DebugActionsCallbackInterfaces.Add(instance);
+            @Debug.started += instance.OnDebug;
+            @Debug.performed += instance.OnDebug;
+            @Debug.canceled += instance.OnDebug;
+        }
+
+        private void UnregisterCallbacks(IDebugActions instance)
+        {
+            @Debug.started -= instance.OnDebug;
+            @Debug.performed -= instance.OnDebug;
+            @Debug.canceled -= instance.OnDebug;
+        }
+
+        public void RemoveCallbacks(IDebugActions instance)
+        {
+            if (m_Wrapper.m_DebugActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IDebugActions instance)
+        {
+            foreach (var item in m_Wrapper.m_DebugActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_DebugActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public DebugActions @Debug => new DebugActions(this);
     private int m_KBnMSchemeIndex = -1;
     public InputControlScheme KBnMScheme
     {
@@ -444,5 +522,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnAimMouse(InputAction.CallbackContext context);
         void OnAimStick(InputAction.CallbackContext context);
         void OnDodge(InputAction.CallbackContext context);
+    }
+    public interface IDebugActions
+    {
+        void OnDebug(InputAction.CallbackContext context);
     }
 }

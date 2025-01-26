@@ -4,6 +4,7 @@ using Object = UnityEngine.Object;
 
 public static class CustomFunctions
 {
+    public const float DEFAULT_FRAME_AMOUNT = 1 / 60f;
     private const int MAX_COMPONENT_SEARCH_DEPTH = 20;
 
     public static TComponent GetComponentInParent<TComponent>(
