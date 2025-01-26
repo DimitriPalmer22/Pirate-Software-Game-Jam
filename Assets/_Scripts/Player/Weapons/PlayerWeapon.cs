@@ -3,23 +3,39 @@ using UnityEngine;
 
 public abstract class PlayerWeapon : MonoBehaviour, IDamager
 {
+    #region Serialized Fields
+
+    [SerializeField] private WeaponType weaponType;
+
     [SerializeField] protected LayerMask layersToIgnore;
 
     [SerializeField, Min(0)] protected float baseDamage = 10;
     [SerializeField, Min(0)] protected float fireRate = 0.125f;
     [SerializeField, Min(0)] protected float range = 20f;
 
-    protected bool isShooting;
-    protected float fireRateTimer;
+    #endregion
+
+    #region Protected & Private Fields
+
+    private bool _isShooting;
+    private float _fireRateTimer;
+
+    #endregion
+
+    #region Getters
 
     protected PlayerWeaponManager PlayerWeaponManager { get; private set; }
 
     public GameObject GameObject => gameObject;
 
+    public WeaponType WeaponType => weaponType;
+
+    #endregion
+
     private void Awake()
     {
         // Initialize the fire rate timer
-        fireRateTimer = fireRate;
+        _fireRateTimer = fireRate;
 
         // Custom Awake function
         CustomAwake();
@@ -43,26 +59,26 @@ public abstract class PlayerWeapon : MonoBehaviour, IDamager
 
     private void UpdateFireRateTimer()
     {
-        if (!isShooting)
-            fireRateTimer = Mathf.Clamp(fireRateTimer + Time.deltaTime, 0, fireRate);
+        if (!_isShooting)
+            _fireRateTimer = Mathf.Clamp(_fireRateTimer + Time.deltaTime, 0, fireRate);
         else
-            fireRateTimer += Time.deltaTime;
+            _fireRateTimer += Time.deltaTime;
     }
 
     private void Shoot(PlayerWeaponManager playerWeaponManager)
     {
         // Return if the fire rate timer is not ready
-        if (fireRateTimer < fireRate || !isShooting)
+        if (_fireRateTimer < fireRate || !_isShooting)
             return;
 
         // Call the custom shoot function
         CustomShoot(playerWeaponManager);
 
         // Reset the fire rate timer
-        fireRateTimer -= fireRate;
+        _fireRateTimer -= fireRate;
 
         // Recurse if the fire rate timer is still ready
-        if (fireRateTimer >= fireRate && fireRate > 0)
+        if (_fireRateTimer >= fireRate && fireRate > 0)
             Shoot(playerWeaponManager);
     }
 
@@ -73,7 +89,7 @@ public abstract class PlayerWeapon : MonoBehaviour, IDamager
         PlayerWeaponManager = playerWeaponManager;
 
         // Set the shooting flag
-        isShooting = true;
+        _isShooting = true;
 
         CustomStartShooting(playerWeaponManager);
     }
@@ -83,7 +99,7 @@ public abstract class PlayerWeapon : MonoBehaviour, IDamager
     public void StopShooting(PlayerWeaponManager playerWeaponManager)
     {
         // Reset the shooting flag
-        isShooting = false;
+        _isShooting = false;
 
         CustomStopShooting(playerWeaponManager);
     }

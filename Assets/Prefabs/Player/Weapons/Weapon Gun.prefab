@@ -44,11 +44,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbdada4804c04a8c9b888fa513184f4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponType: 1
   layersToIgnore:
     serializedVersion: 2
     m_Bits: 192
-  bulletPrefab: {fileID: 6006259092124854573, guid: 850d2b3408fd2d347b57c81eb54cfd98, type: 3}
   baseDamage: 34
   fireRate: 0.125
   range: 40
+  bulletPrefab: {fileID: 6006259092124854573, guid: 850d2b3408fd2d347b57c81eb54cfd98, type: 3}
   velocity: 1000
