@@ -1,8 +1,13 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour, IActor
 {
+    private static HashSet<Enemy> _allEnemies = new();
+    
+    public static IReadOnlyCollection<Enemy> AllEnemies => _allEnemies;
+    
     #region IActor
 
     [SerializeField, Min(0)] private float maxHealth;
@@ -63,6 +68,11 @@ public class Enemy : MonoBehaviour, IActor
     {
         // Set the current health to the max health
         currentHealth = maxHealth;
+        
+        // Add this enemy to the list of all enemies
+        _allEnemies.Add(this);
+        
+        OnDeath += (sender, args) => _allEnemies.Remove(this);
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created

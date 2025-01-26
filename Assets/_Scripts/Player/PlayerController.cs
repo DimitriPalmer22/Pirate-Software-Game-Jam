@@ -168,23 +168,21 @@ public class PlayerController : MonoBehaviour
         var movement = (camForward * _movementInput.y + camRight * _movementInput.x) * moveSpeed;
 
         // Move the player
-        Player.Rigidbody.MovePosition(Player.Rigidbody.position + movement * Time.fixedDeltaTime);
-        
-        //set the velocity       
+        // Player.Rigidbody.MovePosition(Player.Rigidbody.position + movement * Time.fixedDeltaTime);
         Player.Rigidbody.linearVelocity = movement;
     }
 
     private void UpdateAnimationDirection()
     {
         //Use velocity of the player based on movement
-        Vector3 velocity = Player.Rigidbody.linearVelocity;
+        var velocity = Player.Rigidbody.linearVelocity;
         
         // calculate the dot product between the forward vector and the velocity
-        float direction = Vector3.Dot(transform.forward, velocity);
-        Debug.Log("Dot: " + direction);
+        var direction = Vector3.Dot(transform.forward, velocity);
+        // Debug.Log("Dot: " + direction);
         
         //threshold to check if the player is moving
-        float threshold = 0.1f;
+        var threshold = 0.1f;
         float animDirection;
 
         //check if the player is moving forward or backwards

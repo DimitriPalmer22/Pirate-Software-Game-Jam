@@ -7,58 +7,26 @@ public class WeaponGun : PlayerWeapon
     #region Serialized Fields
 
     [SerializeField] private GameObject bulletPrefab;
-
-    [SerializeField, Min(0)] private float baseDamage = 10;
-    [SerializeField, Min(0)] private float fireRate = 0.125f;
-    [SerializeField, Min(0)] private float range = 20f;
     [SerializeField, Min(0)] private float velocity = 100;
 
     #endregion
 
     #region Private Fields
 
-    private bool _isShooting;
-    private float _fireRateTimer;
-
     #endregion
 
-    private void Awake()
+    protected override void CustomAwake()
     {
-        // Initialize the fire rate timer
-        _fireRateTimer = fireRate;
     }
 
-    private void Update()
+    protected override void CustomUpdate()
     {
-        // Update the fire rate timer
-        UpdateFireRateTimer();
-        
-        Shoot(PlayerWeaponManager);
     }
 
-    private void UpdateFireRateTimer()
+    protected override void CustomShoot(PlayerWeaponManager playerWeaponManager)
     {
-        if (!_isShooting)
-            _fireRateTimer = Mathf.Clamp(_fireRateTimer + Time.deltaTime, 0, fireRate);
-        else
-            _fireRateTimer += Time.deltaTime;
-    }
-
-    private void Shoot(PlayerWeaponManager playerWeaponManager)
-    {
-        // Return if the fire rate timer is not ready
-        if (_fireRateTimer < fireRate || !_isShooting)
-            return;
-        
         // Start the shoot coroutine
         playerWeaponManager.StartCoroutine(ShootCoroutine(playerWeaponManager));
-        
-        // Reset the fire rate timer
-        _fireRateTimer -= fireRate;
-        
-        // Recurse if the fire rate timer is still ready
-        if (_fireRateTimer >= fireRate && fireRate > 0)
-            Shoot(playerWeaponManager);
     }
 
     private IEnumerator ShootCoroutine(PlayerWeaponManager playerWeaponManager)
@@ -112,13 +80,9 @@ public class WeaponGun : PlayerWeapon
 
     protected override void CustomStartShooting(PlayerWeaponManager playerWeaponManager)
     {
-        // Set the shooting flag
-        _isShooting = true;
     }
 
     protected override void CustomStopShooting(PlayerWeaponManager playerWeaponManager)
     {
-        // Reset the shooting flag
-        _isShooting = false;
     }
 }

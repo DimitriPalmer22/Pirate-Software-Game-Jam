@@ -65,8 +65,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.75, y: 1.75, z: 1.75}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 38384630226481959}
   - {fileID: 458331295295263998}
@@ -248,7 +248,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca36e08cde8263e4ab10bb82bd1f59fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 16
+  moveSpeed: 12
   animator: {fileID: 6226352149878942045}
 --- !u!114 &2392279437143218790
 MonoBehaviour:
