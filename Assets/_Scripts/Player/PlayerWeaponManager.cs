@@ -30,6 +30,8 @@ public class PlayerWeaponManager : MonoBehaviour
 
     public Transform FirePoint => firePoint;
 
+    public IReadOnlyCollection<PlayerWeapon> Weapons => weapons;
+
     #endregion
 
     #region Initialization Functions
@@ -63,7 +65,7 @@ public class PlayerWeaponManager : MonoBehaviour
     {
         // Start shooting
         StartShooting();
-        
+
         // start the firing animation
         animatorForShooting?.SetBool(NormalFiringAnimationID, true);
     }
@@ -107,12 +109,13 @@ public class PlayerWeaponManager : MonoBehaviour
             weaponInstance.StopShooting(this);
         }
     }
-    
+
     public void AddWeapon(PlayerWeapon weapon)
     {
-        // Check if the weapon is already instantiated
-        // Instantiate the weapon prefab
-        if (!_prefabInstances.ContainsKey(weapon))
-            _prefabInstances.Add(weapon, Instantiate(weapon, firePoint.transform));
+        // Check if the weapon is already in the list
+        if (weapons.Contains(weapon))
+            return;
+        
+        weapons.Add(weapon);
     }
 }

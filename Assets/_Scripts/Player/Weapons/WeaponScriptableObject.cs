@@ -9,8 +9,16 @@ public class WeaponScriptableObject : ScriptableObject
     private static readonly HashSet<WeaponScriptableObject> allWeapons = new();
     public static IReadOnlyCollection<WeaponScriptableObject> AllWeapons => allWeapons;
 
+    [SerializeField] private string displayName;
+    [SerializeField] private Sprite icon;
+
     [SerializeField] private WeaponType weaponType;
     [SerializeField] private PlayerWeapon weaponPrefab;
+
+    public string DisplayName => displayName;
+    public Sprite Icon => icon;
+    public WeaponType WeaponType => weaponType;
+    public PlayerWeapon WeaponPrefab => weaponPrefab;
 
     public WeaponScriptableObject()
     {
@@ -21,5 +29,10 @@ public class WeaponScriptableObject : ScriptableObject
     public static PlayerWeapon GetWeaponPrefab(WeaponType weaponType)
     {
         return AllWeapons.FirstOrDefault(weapon => weapon.weaponType == weaponType)?.weaponPrefab;
+    }
+
+    public static WeaponScriptableObject GetWeaponScriptableObject(WeaponType weaponType)
+    {
+        return AllWeapons.FirstOrDefault(weapon => weapon.weaponType == weaponType);
     }
 }

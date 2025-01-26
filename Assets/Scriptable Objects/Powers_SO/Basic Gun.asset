@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68db67877f33431f9c58145b6df6cc2f, type: 3}
   m_Name: Basic Gun
   m_EditorClassIdentifier: 
+  displayName: Basic Gun
+  icon: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
   weaponType: 1
   weaponPrefab: {fileID: 6413863324505719948, guid: dd39dcca81bffb643944275f11ed769f, type: 3}
