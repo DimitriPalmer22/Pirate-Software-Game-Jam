@@ -66,11 +66,13 @@ public class WaveManager : MonoBehaviour, IDebugged
     {
         onWaveComplete += SpawnNextWaveOnWaveComplete;
         
-        SetWave(CreateRandomEnemyWave(5, 3));
+        SpawnNextWaveOnWaveComplete();
     }
 
     private void SpawnNextWaveOnWaveComplete()
     {
+        _isBetweenWaves = true;
+        
         // Start the coroutine to wait between waves
         StartCoroutine(WaitBetweenWaves());
     }
@@ -89,6 +91,9 @@ public class WaveManager : MonoBehaviour, IDebugged
         }
         
         TimeBetweenWavesRemaining = 0;
+        
+        // Reset the wave
+        _isBetweenWaves = false;
         
         // Spawn the next wave
         SetWave(CreateRandomEnemyWave(5, 3));
