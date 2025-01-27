@@ -16,8 +16,14 @@ MonoBehaviour:
   icon: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
   weaponType: 1
   weaponPrefab: {fileID: 6413863324505719948, guid: dd39dcca81bffb643944275f11ed769f, type: 3}
-  upgrade1Stack: 3
-  upgrade2Stack: 1
-  upgrade3Stack: 1
-  upgrade4Stack: 1
-  upgrade5Stack: 1
+  upgrades:
+  - maxStack: 1
+    weight: 30
+  - maxStack: 1
+    weight: 30
+  - maxStack: 1
+    weight: 15
+  - maxStack: 1
+    weight: 15
+  - maxStack: 1
+    weight: 10

@@ -6,6 +6,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Weapon SO", menuName = "Weapon")]
 public class WeaponScriptableObject : ScriptableObject
 {
+    public const int UPGRADES_COUNT = 5;
+    
     private static readonly HashSet<WeaponScriptableObject> allWeapons = new();
     public static IReadOnlyCollection<WeaponScriptableObject> AllWeapons => allWeapons;
 
@@ -17,13 +19,8 @@ public class WeaponScriptableObject : ScriptableObject
     [SerializeField] private WeaponType weaponType;
     [SerializeField] private PlayerWeapon weaponPrefab;
 
-    [Header("Upgrades"), SerializeField, Min(1)]
-    private int upgrade1Stack = 1;
-
-    [SerializeField, Min(1)] private int upgrade2Stack = 1;
-    [SerializeField, Min(1)] private int upgrade3Stack = 1;
-    [SerializeField, Min(1)] private int upgrade4Stack = 1;
-    [SerializeField, Min(1)] private int upgrade5Stack = 1;
+    [Header("Upgrades")]
+    [SerializeField] private WeaponUpgradeInfo[] upgrades = new WeaponUpgradeInfo[UPGRADES_COUNT];
 
     #endregion
 
@@ -34,11 +31,11 @@ public class WeaponScriptableObject : ScriptableObject
     public WeaponType WeaponType => weaponType;
     public PlayerWeapon WeaponPrefab => weaponPrefab;
 
-    public int Upgrade1Stack => upgrade1Stack;
-    public int Upgrade2Stack => upgrade2Stack;
-    public int Upgrade3Stack => upgrade3Stack;
-    public int Upgrade4Stack => upgrade4Stack;
-    public int Upgrade5Stack => upgrade5Stack;
+    public int Upgrade1Stack => upgrades[0].MaxStack;
+    public int Upgrade2Stack => upgrades[1].MaxStack;
+    public int Upgrade3Stack => upgrades[2].MaxStack;
+    public int Upgrade4Stack => upgrades[3].MaxStack;
+    public int Upgrade5Stack => upgrades[4].MaxStack;
 
     #endregion
 
