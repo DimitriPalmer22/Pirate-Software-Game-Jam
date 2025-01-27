@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2191491896742125786}
   - component: {fileID: 7763400134525689509}
   - component: {fileID: 1177571508411109676}
+  - component: {fileID: 9080662188476713863}
   m_Layer: 0
   m_Name: Maneki Statue
   m_TagString: Untagged
@@ -108,3 +109,15 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &9080662188476713863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7116007501057297710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f209fb5603314e1aa46f0fc3be1813b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

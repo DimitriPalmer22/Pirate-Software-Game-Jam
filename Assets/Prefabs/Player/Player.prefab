@@ -48,6 +48,7 @@ GameObject:
   - component: {fileID: 116502483128458377}
   - component: {fileID: 5763907321819213520}
   - component: {fileID: 2392279437143218790}
+  - component: {fileID: 3564863347449053751}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -265,6 +266,19 @@ MonoBehaviour:
   firePoint: {fileID: 458331295295263998}
   animatorForShooting: {fileID: 6226352149878942045}
   weaponPrefabs: []
+--- !u!114 &3564863347449053751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5818159250884689914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 407d253a24974c91b0215727e9dccb5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionRange: 3
 --- !u!1001 &505221071835141324
 PrefabInstance:
   m_ObjectHideFlags: 0

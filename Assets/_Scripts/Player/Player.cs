@@ -84,6 +84,8 @@ public class Player : MonoBehaviour, IActor
     public PlayerController PlayerController { get; private set; }
 
     public PlayerWeaponManager PlayerWeaponManager { get; private set; }
+    
+    public PlayerInteraction PlayerInteraction { get; private set; }
 
     #endregion
 
@@ -105,6 +107,7 @@ public class Player : MonoBehaviour, IActor
         Rigidbody = GetComponent<Rigidbody>();
         PlayerController = GetComponent<PlayerController>();
         PlayerWeaponManager = GetComponent<PlayerWeaponManager>();
+        PlayerInteraction = GetComponent<PlayerInteraction>();
     }
 
     private void OnEnable()

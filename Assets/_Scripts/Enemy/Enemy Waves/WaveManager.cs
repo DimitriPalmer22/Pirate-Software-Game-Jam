@@ -46,6 +46,8 @@ public class WaveManager : MonoBehaviour, IDebugged
     public float TimeBetweenWavesRemaining { get; private set; }
     
     private bool IsLastBatch => _currentWaveBatchIndex >= _currentWave.EnemyBatchInfos.Length;
+    
+    public bool HasStartedGame => _hasGameStarted;
 
     #endregion
 
