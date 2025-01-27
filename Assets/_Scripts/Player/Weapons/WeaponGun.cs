@@ -41,7 +41,7 @@ public class WeaponGun : PlayerWeapon
 
         // Perform a raycast
         var ray = new Ray(playerWeaponManager.FirePoint.position,
-            new Vector3(playerWeaponManager.FirePoint.forward.x, 0, playerWeaponManager.FirePoint.forward.z)
+            new Vector3(playerWeaponManager.AimForward.x, 0,playerWeaponManager.AimForward.z)
         );
 
         // Keep track of the start and end positions of the ray

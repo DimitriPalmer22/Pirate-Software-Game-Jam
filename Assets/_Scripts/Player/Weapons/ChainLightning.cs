@@ -12,7 +12,7 @@ public class ChainLightning : PlayerWeapon
     [SerializeField, Min(0)] private float chainStopTime = .25f;
     [SerializeField, Min(0)] private int chainStepCount = 3;
     [SerializeField, Min(0)] private float enemyStunTime = .5f;
-    
+
     [SerializeField] private Sound chainLightningSound;
 
     protected override void CustomAwake()
@@ -33,7 +33,8 @@ public class ChainLightning : PlayerWeapon
     {
         // Fire out a raycast in the direction of the player's aim to get the first enemy
         var ray = new Ray(playerWeaponManager.FirePoint.transform.position,
-            playerWeaponManager.FirePoint.transform.forward
+            // playerWeaponManager.FirePoint.transform.forward
+            playerWeaponManager.AimForward
         );
 
         Physics.Raycast(ray, out var hitInfo, range, ~layersToIgnore);
@@ -96,7 +97,7 @@ public class ChainLightning : PlayerWeapon
             var enemyPosition = currentEnemy.transform.position;
 
             // TODO: Do more stuff here. Spawn a VFX, play a sound, etc.
-            
+
             // Play the sound at the enemy position
             var audioSource = SoundManager.Instance.PlaySfxAtPoint(chainLightningSound, enemyPosition);
 
@@ -114,7 +115,7 @@ public class ChainLightning : PlayerWeapon
 
                 // Set the forward direction of the trail
                 trail.transform.forward = enemyPosition - previousPosition;
-                
+
                 // Move the audio source to the trail position
                 if (audioSource != null)
                     audioSource.transform.position = trailPosition;

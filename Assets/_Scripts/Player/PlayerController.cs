@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     #region Serialized Fields
 
     [SerializeField, Min(0)] private float moveSpeed = 8f;
-    [SerializeField]private Animator animator;
+    [SerializeField] private Animator animator;
 
     #endregion
 
@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
 
     private float _localVelX;
     private float _localVelZ;
-    
+
     #endregion
 
     #region Getters
@@ -30,7 +30,6 @@ public class PlayerController : MonoBehaviour
     public Player Player { get; private set; }
 
     public PlayerInput PlayerInput { get; private set; }
-
 
     #endregion
 
@@ -121,7 +120,7 @@ public class PlayerController : MonoBehaviour
     private void OnMovementPerformed(InputAction.CallbackContext obj)
     {
         _movementInput = obj.ReadValue<Vector2>();
-        
+
         //temp: set the speed of the player based on the movement input
         animator.SetFloat(SpeedAnimationID, _movementInput.magnitude);
     }
@@ -129,10 +128,9 @@ public class PlayerController : MonoBehaviour
     private void OnMovementCanceled(InputAction.CallbackContext obj)
     {
         _movementInput = Vector2.zero;
-        
+
         //temp: set the speed of the player to zero
         animator.SetFloat(SpeedAnimationID, 0);
-
     }
 
     #endregion
@@ -148,7 +146,7 @@ public class PlayerController : MonoBehaviour
 
         // Update the player's rotation
         UpdateRotation();
-        
+
         // Update the player's animation
         UpdateAnimationDirection();
     }
@@ -179,30 +177,30 @@ public class PlayerController : MonoBehaviour
     {
         //get the velocity of the player in world space
         var worldVelocity = Player.Rigidbody.linearVelocity;
-        
+
         //convert the velocity to local space
         var localVelocity = transform.InverseTransformDirection(worldVelocity);
-        
+
         //set the local velocity
         _localVelX = localVelocity.x;
         _localVelZ = localVelocity.z;
-        
+
         //normalize the local velocity
         _localVelX /= moveSpeed;
         _localVelZ /= moveSpeed;
-        
+
         //feed the local velocity to the animator
         animator.SetFloat("VelX", _localVelX, 0.1f, Time.deltaTime);
         animator.SetFloat("VelZ", _localVelZ, 0.1f, Time.deltaTime);
-       
+
         //clamp the local velocity
         _localVelX = Mathf.Clamp(_localVelX, -1, 1);
         _localVelZ = Mathf.Clamp(_localVelZ, -1, 1);
-        
+
         // calculate the dot product between the forward vector and the velocity
         var direction = Vector3.Dot(transform.forward, worldVelocity);
         // Debug.Log("Dot: " + direction);
-        
+
         //threshold to check if the player is moving
         var threshold = 0.1f;
 
@@ -232,10 +230,7 @@ public class PlayerController : MonoBehaviour
 
         var rotation = Quaternion.LookRotation(_aimForward);
         Player.Rigidbody.MoveRotation(rotation);
-        
     }
-    
-    
 
     #endregion
 

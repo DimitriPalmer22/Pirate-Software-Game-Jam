@@ -266,6 +266,8 @@ MonoBehaviour:
   firePoint: {fileID: 458331295295263998}
   animatorForShooting: {fileID: 6226352149878942045}
   weaponPrefabs: []
+  aimSnapAngle: 20
+  aimSnapRange: 25
 --- !u!114 &3564863347449053751
 MonoBehaviour:
   m_ObjectHideFlags: 0
