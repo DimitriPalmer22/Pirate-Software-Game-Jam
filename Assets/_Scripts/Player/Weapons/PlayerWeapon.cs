@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public abstract class PlayerWeapon : MonoBehaviour, IDamager
@@ -19,6 +21,9 @@ public abstract class PlayerWeapon : MonoBehaviour, IDamager
 
     private bool _isShooting;
     private float _fireRateTimer;
+
+    private readonly int[] _upgradeCounts = new int[WeaponScriptableObject.UPGRADES_COUNT];
+    private readonly Action[] _upgradeFunctions = new Action[WeaponScriptableObject.UPGRADES_COUNT];
 
     #endregion
 
@@ -42,20 +47,12 @@ public abstract class PlayerWeapon : MonoBehaviour, IDamager
             return _weaponSo;
         }
     }
-    
-    public int Upgrade1Count { get; private set; }
-    public int Upgrade2Count { get; private set; }
-    public int Upgrade3Count { get; private set; }
-    public int Upgrade4Count { get; private set; }
-    public int Upgrade5Count { get; private set; }
-    
+
     public bool HasAllUpgrades =>
         WeaponScriptableObject != null &&
-        Upgrade1Count >= WeaponScriptableObject.Upgrade1Stack &&
-        Upgrade2Count >= WeaponScriptableObject.Upgrade2Stack &&
-        Upgrade3Count >= WeaponScriptableObject.Upgrade3Stack &&
-        Upgrade4Count >= WeaponScriptableObject.Upgrade4Stack &&
-        Upgrade5Count >= WeaponScriptableObject.Upgrade5Stack;
+        Enumerable
+            .Range(0, WeaponScriptableObject.UPGRADES_COUNT)
+            .All(i => _upgradeCounts[i] >= WeaponScriptableObject.Upgrades[i].MaxStack);
 
     #endregion
 
@@ -66,6 +63,18 @@ public abstract class PlayerWeapon : MonoBehaviour, IDamager
 
         // Custom Awake function
         CustomAwake();
+
+        // Map the upgrade functions
+        MapUpgradeFunctions();
+    }
+
+    private void MapUpgradeFunctions()
+    {
+        MapUpgradeFunction(0, CustomUpgrade1);
+        MapUpgradeFunction(1, CustomUpgrade2);
+        MapUpgradeFunction(2, CustomUpgrade3);
+        MapUpgradeFunction(3, CustomUpgrade4);
+        MapUpgradeFunction(4, CustomUpgrade5);
     }
 
     protected abstract void CustomAwake();
@@ -135,77 +144,60 @@ public abstract class PlayerWeapon : MonoBehaviour, IDamager
 
     #region Upgrades
 
-    public void Upgrade1()
+    public void Upgrade(int index)
     {
-        if (Upgrade1Count >= WeaponScriptableObject.Upgrade1Stack)
+        if (_upgradeCounts[index] >= WeaponScriptableObject.Upgrades[index].MaxStack)
         {
-            Debug.Log($"Returning!: {Upgrade1Count}, {WeaponScriptableObject.Upgrade1Stack}");
-            
+            Debug.Log(
+                $"Returning!: ({index}) {_upgradeCounts[index]}, {WeaponScriptableObject.Upgrades[index].MaxStack}");
             return;
         }
 
         // Set the upgrade flags
-        Upgrade1Count++;
+        _upgradeCounts[index]++;
 
-        CustomUpgrade1();
+        // Run the upgrade function
+        _upgradeFunctions[index]?.Invoke();
     }
+
 
     protected abstract void CustomUpgrade1();
-
-    public void Upgrade2()
-    {
-        if (Upgrade2Count >= WeaponScriptableObject.Upgrade2Stack)
-            return;
-
-        // Set the upgrade flags
-        Upgrade2Count++;
-
-        CustomUpgrade2();
-    }
-
     protected abstract void CustomUpgrade2();
-
-
-    public void Upgrade3()
-    {
-        if (Upgrade3Count >= WeaponScriptableObject.Upgrade3Stack)
-            return;
-
-        // Set the upgrade flags
-        Upgrade3Count++;
-
-        CustomUpgrade3();
-    }
-
     protected abstract void CustomUpgrade3();
-
-
-    public void Upgrade4()
-    {
-        if (Upgrade4Count >= WeaponScriptableObject.Upgrade4Stack)
-            return;
-
-        // Set the upgrade flags
-        Upgrade4Count++;
-
-        CustomUpgrade4();
-    }
-
     protected abstract void CustomUpgrade4();
+    protected abstract void CustomUpgrade5();
 
-
-    public void Upgrade5()
+    public WeaponUpgradeToken[] GetUpgradeTokens()
     {
-        if (Upgrade5Count >= WeaponScriptableObject.Upgrade5Stack)
-            return;
+        var upgradeTokens = new List<WeaponUpgradeToken>();
 
-        // Set the upgrade flags
-        Upgrade5Count++;
+        // For each upgrade
+        for (var upgradeIndex = 0; upgradeIndex < WeaponScriptableObject.UPGRADES_COUNT; upgradeIndex++)
+        {
+            for (
+                var remainingStacks = _upgradeCounts[upgradeIndex];
+                remainingStacks < WeaponScriptableObject.Upgrades[upgradeIndex].MaxStack;
+                remainingStacks++
+            )
+            {
+                var weight = WeaponScriptableObject.Upgrades[upgradeIndex].Weight;
 
-        CustomUpgrade5();
+                // Create an upgrade token
+                var upgradeToken = new WeaponUpgradeToken(WeaponScriptableObject, weight, upgradeIndex);
+
+                // Add the upgrade token to the list
+                upgradeTokens.Add(upgradeToken);
+            }
+        }
+
+        // Return the upgrade tokens
+        return upgradeTokens.ToArray();
     }
 
-    protected abstract void CustomUpgrade5();
+    private void MapUpgradeFunction(int index, Action action)
+    {
+        _upgradeFunctions[index] = action;
+    }
 
     #endregion
 }

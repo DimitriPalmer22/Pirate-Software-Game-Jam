@@ -31,11 +31,7 @@ public class WeaponScriptableObject : ScriptableObject
     public WeaponType WeaponType => weaponType;
     public PlayerWeapon WeaponPrefab => weaponPrefab;
 
-    public int Upgrade1Stack => upgrades[0].MaxStack;
-    public int Upgrade2Stack => upgrades[1].MaxStack;
-    public int Upgrade3Stack => upgrades[2].MaxStack;
-    public int Upgrade4Stack => upgrades[3].MaxStack;
-    public int Upgrade5Stack => upgrades[4].MaxStack;
+    public IReadOnlyList<WeaponUpgradeInfo> Upgrades => upgrades;
 
     #endregion
 

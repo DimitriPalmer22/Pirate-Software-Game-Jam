@@ -41,7 +41,7 @@ public class ChainLightning : PlayerWeapon
 
         // Get the enemy component from the hit object
         Enemy currentEnemy = null;
-       
+
         if (hitInfo.collider != null)
             hitInfo.collider.TryGetComponentInParent(out currentEnemy);
 
@@ -198,11 +198,11 @@ public class ChainLightning : PlayerWeapon
     }
 
     #region Upgrades
-    
+
     protected override void CustomUpgrade1()
     {
         Debug.Log($"Chain Lightning Upgrade 1!");
-        
+
         fireRate /= 1.5f;
     }
 
@@ -221,6 +221,6 @@ public class ChainLightning : PlayerWeapon
     protected override void CustomUpgrade5()
     {
     }
-    
+
     #endregion
 }

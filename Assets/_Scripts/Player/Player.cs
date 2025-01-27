@@ -133,7 +133,15 @@ public class Player : MonoBehaviour, IActor
         UpdateInvincibility();
 
         if (Input.GetKeyDown(KeyCode.G))
-            PlayerWeaponManager.GetWeapon(PlayerWeaponManager.WeaponPrefabs.First()).Upgrade1();
+        {
+            var weapon = PlayerWeaponManager.GetWeapon(PlayerWeaponManager.WeaponPrefabs.First());
+
+            var randomToken = WeaponUpgradeToken.ChooseRandomUpgradeToken(weapon.GetUpgradeTokens());
+            
+            weapon.Upgrade(randomToken.UpgradeIndex);
+            
+            Debug.Log($"Upgraded: {randomToken.UpgradeIndex}");
+        }
     }
 
     private void UpdateInvincibility()
