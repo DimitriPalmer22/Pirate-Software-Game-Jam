@@ -43,8 +43,8 @@ Light:
   m_Enabled: 1
   serializedVersion: 11
   m_Type: 2
-  m_Color: {r: 0.93816304, g: 0.36320752, b: 1, a: 1}
-  m_Intensity: 10
+  m_Color: {r: 0.22677112, g: 0.9811321, b: 0.28898466, a: 1}
+  m_Intensity: 1
   m_Range: 8.42
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -199,13 +199,13 @@ VisualEffect:
         m_Overridden: 0
     m_Vector4f:
       m_Array:
-      - m_Value: {x: 9.189588, y: 0, z: 7.9555464, w: 1}
+      - m_Value: {x: 0, y: 10.30118, z: 0.3843874, w: 1}
         m_Name: New Color
         m_Overridden: 1
-      - m_Value: {x: 2.828427, y: 0, z: 1.5993198, w: 0}
+      - m_Value: {x: 1.7578174, y: 3.776172, z: 1.0865399, w: 0}
         m_Name: New Color 1
         m_Overridden: 1
-      - m_Value: {x: 7.856934, y: 1.4808881, z: 5.0042114, w: 0}
+      - m_Value: {x: 2.3673706, y: 10.489624, z: 1.3359427, w: 0}
         m_Name: New Color 2
         m_Overridden: 1
     m_Uint:
@@ -220,9 +220,9 @@ VisualEffect:
       m_Array:
       - m_Value:
           serializedVersion: 2
-          key0: {r: 1, g: 0, b: 0.6351261, a: 1}
-          key1: {r: 0.32019937, g: 0.010572627, b: 0.21412098, a: 0.8}
-          key2: {r: 0.78431374, g: 0.6988484, b: 0.41568628, a: 1}
+          key0: {r: 0.19709778, g: 1, b: 0, a: 1}
+          key1: {r: 0.27959237, g: 0.9716981, b: 0.30481723, a: 0.8}
+          key2: {r: 0.32019937, g: 0.010572627, b: 0.21412098, a: 1}
           key3: {r: 0, g: 0, b: 0, a: 0}
           key4: {r: 0, g: 0, b: 0, a: 0}
           key5: {r: 0, g: 0, b: 0, a: 0}
@@ -245,7 +245,7 @@ VisualEffect:
           atime6: 0
           atime7: 0
           m_Mode: 0
-          m_ColorSpace: -1
+          m_ColorSpace: 1
           m_NumColorKeys: 2
           m_NumAlphaKeys: 2
         m_Name: New Gradient
@@ -405,8 +405,8 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.86137784, g: 0.25516194, b: 0.8867924, a: 1}
-      key1: {r: 0.56153405, g: 0.08290317, b: 0.6509434, a: 1}
+      key0: {r: 0.3066038, g: 1, b: 0.5331143, a: 1}
+      key1: {r: 0.023584902, g: 1, b: 0.09016488, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
