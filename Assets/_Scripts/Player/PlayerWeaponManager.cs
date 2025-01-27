@@ -32,6 +32,8 @@ public class PlayerWeaponManager : MonoBehaviour
     public Transform FirePoint => firePoint;
 
     public IReadOnlyCollection<PlayerWeapon> WeaponPrefabs => weaponPrefabs;
+    
+    public bool HasAllUpgrades => weaponPrefabs.All(weapon => weapon.HasAllUpgrades);
 
     #endregion
 

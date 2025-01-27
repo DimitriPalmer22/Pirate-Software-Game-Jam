@@ -37,7 +37,7 @@ public abstract class PlayerWeapon : MonoBehaviour, IDamager
 
     private WeaponScriptableObject _weaponSo;
 
-    private WeaponScriptableObject WeaponScriptableObject
+    public WeaponScriptableObject WeaponScriptableObject
     {
         get
         {

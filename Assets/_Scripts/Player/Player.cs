@@ -6,7 +6,7 @@ using UnityEngine;
 public class Player : MonoBehaviour, IActor
 {
     public static Player Instance { get; private set; }
-    
+
     #region Serialized Fields
 
     [SerializeField, Min(0)] private float invincibilityDuration = 1f;
@@ -69,10 +69,6 @@ public class Player : MonoBehaviour, IActor
         // Start the invincibility timer
         _invincibilityTimer.SetMaxTimeAndReset(invincibilityDuration);
         _invincibilityTimer.Start();
-
-        // // Reset the passive regen timer
-        // _passiveRegenTimer.SetMaxTimeAndReset(passiveRegenDelay);
-        // _passiveRegenTimer.Start();
     }
 
     #endregion
@@ -95,7 +91,7 @@ public class Player : MonoBehaviour, IActor
     {
         // Set the instance
         Instance = this;
-        
+
         // Create the invincibility timer
         _invincibilityTimer = new CountdownTimer(invincibilityDuration);
 
@@ -128,7 +124,7 @@ public class Player : MonoBehaviour, IActor
             PlayerControls.Disable();
         else
             PlayerControls.Enable();
-        
+
         // Update the invincibility timer
         UpdateInvincibility();
 
@@ -137,10 +133,14 @@ public class Player : MonoBehaviour, IActor
             var weapon = PlayerWeaponManager.GetWeapon(PlayerWeaponManager.WeaponPrefabs.First());
 
             var randomToken = WeaponUpgradeToken.ChooseRandomUpgradeToken(weapon.GetUpgradeTokens());
-            
-            weapon.Upgrade(randomToken.UpgradeIndex);
-            
-            Debug.Log($"Upgraded: {randomToken.UpgradeIndex}");
+
+            if (randomToken != null)
+            {
+                weapon.Upgrade(randomToken.UpgradeIndex);
+
+                Debug.Log(
+                    $"Upgraded: {randomToken.UpgradeIndex} ({weapon.WeaponScriptableObject.Upgrades[randomToken.UpgradeIndex].UpgradeName})");
+            }
         }
     }
 

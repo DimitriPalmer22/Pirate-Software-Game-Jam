@@ -67,8 +67,22 @@ public class WaveManager : MonoBehaviour, IDebugged
     private void Start()
     {
         onWaveComplete += SpawnNextWaveOnWaveComplete;
+        onWaveComplete += UpgradePowerOnWaveComplete;
         
         SpawnNextWaveOnWaveComplete();
+    }
+
+    private void UpgradePowerOnWaveComplete()
+    {
+        if (_currentWaveIndex % 5 != 3)
+            return;
+        
+        // If the player has all upgrades, don't upgrade
+        if (Player.Instance.PlayerWeaponManager.HasAllUpgrades)
+            return;
+        
+        // Upgrade the player's power
+        UpgradePicker.Instance.Activate();
     }
 
     private void SpawnNextWaveOnWaveComplete()

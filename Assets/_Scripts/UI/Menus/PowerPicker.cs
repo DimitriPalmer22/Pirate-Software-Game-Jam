@@ -6,12 +6,15 @@ using Random = UnityEngine.Random;
 
 public class PowerPicker : GameMenu
 {
+    public static PowerPicker Instance { get; private set; }
+    
     [SerializeField, Min(0)] private int maxWeapons = 3;
     [SerializeField] private PowerButton powerButtonPrefab;
     [SerializeField] private GameObject powerButtonParent;
 
     protected override void CustomAwake()
     {
+        Instance = this;
     }
 
     protected override void CustomDestroy()
