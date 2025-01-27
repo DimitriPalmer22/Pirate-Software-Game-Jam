@@ -30,6 +30,33 @@ public abstract class PlayerWeapon : MonoBehaviour, IDamager
 
     public WeaponType WeaponType => weaponType;
 
+    private WeaponScriptableObject _weaponSo;
+
+    private WeaponScriptableObject WeaponScriptableObject
+    {
+        get
+        {
+            if (_weaponSo == null)
+                _weaponSo = WeaponScriptableObject.GetWeaponScriptableObject(weaponType);
+
+            return _weaponSo;
+        }
+    }
+    
+    public int Upgrade1Count { get; private set; }
+    public int Upgrade2Count { get; private set; }
+    public int Upgrade3Count { get; private set; }
+    public int Upgrade4Count { get; private set; }
+    public int Upgrade5Count { get; private set; }
+    
+    public bool HasAllUpgrades =>
+        WeaponScriptableObject != null &&
+        Upgrade1Count >= WeaponScriptableObject.Upgrade1Stack &&
+        Upgrade2Count >= WeaponScriptableObject.Upgrade2Stack &&
+        Upgrade3Count >= WeaponScriptableObject.Upgrade3Stack &&
+        Upgrade4Count >= WeaponScriptableObject.Upgrade4Stack &&
+        Upgrade5Count >= WeaponScriptableObject.Upgrade5Stack;
+
     #endregion
 
     private void Awake()
@@ -105,4 +132,80 @@ public abstract class PlayerWeapon : MonoBehaviour, IDamager
     }
 
     protected abstract void CustomStopShooting(PlayerWeaponManager playerWeaponManager);
+
+    #region Upgrades
+
+    public void Upgrade1()
+    {
+        if (Upgrade1Count >= WeaponScriptableObject.Upgrade1Stack)
+        {
+            Debug.Log($"Returning!: {Upgrade1Count}, {WeaponScriptableObject.Upgrade1Stack}");
+            
+            return;
+        }
+
+        // Set the upgrade flags
+        Upgrade1Count++;
+
+        CustomUpgrade1();
+    }
+
+    protected abstract void CustomUpgrade1();
+
+    public void Upgrade2()
+    {
+        if (Upgrade2Count >= WeaponScriptableObject.Upgrade2Stack)
+            return;
+
+        // Set the upgrade flags
+        Upgrade2Count++;
+
+        CustomUpgrade2();
+    }
+
+    protected abstract void CustomUpgrade2();
+
+
+    public void Upgrade3()
+    {
+        if (Upgrade3Count >= WeaponScriptableObject.Upgrade3Stack)
+            return;
+
+        // Set the upgrade flags
+        Upgrade3Count++;
+
+        CustomUpgrade3();
+    }
+
+    protected abstract void CustomUpgrade3();
+
+
+    public void Upgrade4()
+    {
+        if (Upgrade4Count >= WeaponScriptableObject.Upgrade4Stack)
+            return;
+
+        // Set the upgrade flags
+        Upgrade4Count++;
+
+        CustomUpgrade4();
+    }
+
+    protected abstract void CustomUpgrade4();
+
+
+    public void Upgrade5()
+    {
+        if (Upgrade5Count >= WeaponScriptableObject.Upgrade5Stack)
+            return;
+
+        // Set the upgrade flags
+        Upgrade5Count++;
+
+        CustomUpgrade5();
+    }
+
+    protected abstract void CustomUpgrade5();
+
+    #endregion
 }

@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -130,6 +131,9 @@ public class Player : MonoBehaviour, IActor
         
         // Update the invincibility timer
         UpdateInvincibility();
+
+        if (Input.GetKeyDown(KeyCode.G))
+            PlayerWeaponManager.GetWeapon(PlayerWeaponManager.WeaponPrefabs.First()).Upgrade1();
     }
 
     private void UpdateInvincibility()

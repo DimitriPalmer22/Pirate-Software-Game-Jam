@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 [RequireComponent(typeof(Player))]
 public class PlayerWeaponManager : MonoBehaviour
@@ -14,7 +15,7 @@ public class PlayerWeaponManager : MonoBehaviour
     [SerializeField] private Transform firePoint;
     [SerializeField] private Animator animatorForShooting;
 
-    [SerializeField] private List<PlayerWeapon> weapons;
+    [SerializeField] private List<PlayerWeapon> weaponPrefabs;
 
     #endregion
 
@@ -30,7 +31,7 @@ public class PlayerWeaponManager : MonoBehaviour
 
     public Transform FirePoint => firePoint;
 
-    public IReadOnlyCollection<PlayerWeapon> Weapons => weapons;
+    public IReadOnlyCollection<PlayerWeapon> WeaponPrefabs => weaponPrefabs;
 
     #endregion
 
@@ -83,7 +84,7 @@ public class PlayerWeaponManager : MonoBehaviour
 
     private void StartShooting()
     {
-        foreach (var weapon in weapons)
+        foreach (var weapon in weaponPrefabs)
         {
             // Check if the weapon is already instantiated
             // Instantiate the weapon prefab
@@ -100,7 +101,7 @@ public class PlayerWeaponManager : MonoBehaviour
 
     private void StopShooting()
     {
-        foreach (var weapon in weapons.Where(weapon => _prefabInstances.ContainsKey(weapon)))
+        foreach (var weapon in weaponPrefabs.Where(weapon => _prefabInstances.ContainsKey(weapon)))
         {
             // Get the weapon instance
             var weaponInstance = _prefabInstances[weapon];
@@ -113,9 +114,24 @@ public class PlayerWeaponManager : MonoBehaviour
     public void AddWeapon(PlayerWeapon weapon)
     {
         // Check if the weapon is already in the list
-        if (weapons.Contains(weapon))
+        if (weaponPrefabs.Contains(weapon))
             return;
         
-        weapons.Add(weapon);
+        weaponPrefabs.Add(weapon);
+    }
+
+    public PlayerWeapon GetWeapon(PlayerWeapon weaponPrefab)
+    {
+        // Check if the weapon is already instantiated
+        if (_prefabInstances.ContainsKey(weaponPrefab))
+            return _prefabInstances[weaponPrefab];
+
+        // Instantiate the weapon prefab
+        var weapon = Instantiate(weaponPrefab, firePoint.transform);
+
+        // Add the weapon to the list
+        _prefabInstances.Add(weaponPrefab, weapon);
+
+        return weapon;
     }
 }

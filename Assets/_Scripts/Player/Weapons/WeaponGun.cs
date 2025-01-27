@@ -82,4 +82,28 @@ public class WeaponGun : PlayerWeapon
     protected override void CustomStopShooting(PlayerWeaponManager playerWeaponManager)
     {
     }
+
+    #region Upgrades
+
+    protected override void CustomUpgrade1()
+    {
+    }
+
+    protected override void CustomUpgrade2()
+    {
+    }
+
+    protected override void CustomUpgrade3()
+    {
+    }
+
+    protected override void CustomUpgrade4()
+    {
+    }
+
+    protected override void CustomUpgrade5()
+    {
+    }
+
+    #endregion
 }

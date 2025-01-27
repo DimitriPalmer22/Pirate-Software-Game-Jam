@@ -39,7 +39,7 @@ public class PowerPicker : GameMenu
 
         // Get the current weapons
         var currentWeapons =
-            new HashSet<WeaponType>(Player.Instance.PlayerWeaponManager.Weapons.Select(n => n.WeaponType));
+            new HashSet<WeaponType>(Player.Instance.PlayerWeaponManager.WeaponPrefabs.Select(n => n.WeaponType));
 
         // For each current weapon, remove it from the allWeapons
         foreach (var currentWeapon in currentWeapons)
