@@ -33,6 +33,8 @@ public class WaveManager : MonoBehaviour, IDebugged
     private int _currentWaveIndex;
     private bool _isBetweenWaves;
 
+    private bool _hasGameStarted;
+
     #endregion
 
     #region Getters
@@ -66,10 +68,8 @@ public class WaveManager : MonoBehaviour, IDebugged
 
     private void Start()
     {
-        onWaveComplete += SpawnNextWaveOnWaveComplete;
+        onWaveComplete += SpawnNextWave;
         onWaveComplete += UpgradePowerOnWaveComplete;
-        
-        SpawnNextWaveOnWaveComplete();
     }
 
     private void UpgradePowerOnWaveComplete()
@@ -85,7 +85,7 @@ public class WaveManager : MonoBehaviour, IDebugged
         UpgradePicker.Instance.Activate();
     }
 
-    private void SpawnNextWaveOnWaveComplete()
+    private void SpawnNextWave()
     {
         _isBetweenWaves = true;
         
@@ -119,6 +119,22 @@ public class WaveManager : MonoBehaviour, IDebugged
     {
         // Update the spawn timer
         _batchSpawnTimer.Update(Time.deltaTime);
+        
+        if (Input.GetKeyDown(KeyCode.P))
+            StartGame();
+    }
+
+    public void StartGame()
+    {
+        // Return if the game has already started
+        if (_hasGameStarted)
+            return;
+        
+        // Set the game as started
+        _hasGameStarted = true;
+                
+        // Spawn the first wave
+        SpawnNextWave();
     }
 
     #region Wave Controls
