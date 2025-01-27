@@ -35,7 +35,7 @@ public class WeaponScriptableObject : ScriptableObject
 
     #endregion
 
-    public WeaponScriptableObject()
+    public void Initialize()
     {
         // Add this weapon to the static collection
         allWeapons.Add(this);
