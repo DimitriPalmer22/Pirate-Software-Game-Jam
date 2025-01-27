@@ -12,6 +12,8 @@ public class ChainLightning : PlayerWeapon
     [SerializeField, Min(0)] private float chainStopTime = .25f;
     [SerializeField, Min(0)] private int chainStepCount = 3;
     [SerializeField, Min(0)] private float enemyStunTime = .5f;
+    
+    [SerializeField] private Sound chainLightningSound;
 
     protected override void CustomAwake()
     {
@@ -34,19 +36,13 @@ public class ChainLightning : PlayerWeapon
             playerWeaponManager.FirePoint.transform.forward
         );
 
-        if (!Physics.Raycast(ray, out var hitInfo, range, ~layersToIgnore))
-        {
-            // yield break;
-        }
+        Physics.Raycast(ray, out var hitInfo, range, ~layersToIgnore);
 
         // Get the enemy component from the hit object
         Enemy currentEnemy = null;
 
         if (hitInfo.collider != null)
             hitInfo.collider.TryGetComponentInParent(out currentEnemy);
-
-        // if (!hit || currentEnemy == null)
-        //     yield break;
 
         // Instantiate the trail prefab
         var trail = Instantiate(bulletPrefab, playerWeaponManager.FirePoint.position, Quaternion.identity);
@@ -100,6 +96,9 @@ public class ChainLightning : PlayerWeapon
             var enemyPosition = currentEnemy.transform.position;
 
             // TODO: Do more stuff here. Spawn a VFX, play a sound, etc.
+            
+            // Play the sound at the enemy position
+            var audioSource = SoundManager.Instance.PlaySfxAtPoint(chainLightningSound, enemyPosition);
 
             var remainingStepCount = chainStepCount;
             while (remainingStepCount > 0)
@@ -115,6 +114,10 @@ public class ChainLightning : PlayerWeapon
 
                 // Set the forward direction of the trail
                 trail.transform.forward = enemyPosition - previousPosition;
+                
+                // Move the audio source to the trail position
+                if (audioSource != null)
+                    audioSource.transform.position = trailPosition;
 
                 // Wait for the step delay time
                 yield return new WaitForSeconds(chainDelayTime / chainStepCount);
