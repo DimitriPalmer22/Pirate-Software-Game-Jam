@@ -12,6 +12,10 @@ public class ManekiManager : MonoBehaviour, IInteractable
     
     private bool _hasInteracted;
 
+    private void Start()
+    {
+    }
+
     private void Update()
     {
         // Update the maneki mode
@@ -20,12 +24,13 @@ public class ManekiManager : MonoBehaviour, IInteractable
 
     private void UpdateManekiMode()
     {
-        
         // Set the mode back to none
         _currentMode = ManekiMode.None;
         
         if (!WaveManager.Instance.HasStartedGame)
             _currentMode = ManekiMode.Start;
+        else if (WaveManager.Instance.HasStartedGame && WaveManager.Instance.IsWaitingForNextWave)
+            _currentMode = ManekiMode.ChoosePower;
     }
 
     public void Interact(PlayerInteraction playerInteraction)
@@ -38,6 +43,11 @@ public class ManekiManager : MonoBehaviour, IInteractable
             case ManekiMode.Start:
                 PowerPicker.Instance.Activate();
                 WaveManager.Instance.StartGame();
+                break;
+            
+            case ManekiMode.ChoosePower:
+                PowerPicker.Instance.Activate();
+                WaveManager.Instance.ResumeGame();
                 break;
             
             default:
@@ -54,7 +64,9 @@ public class ManekiManager : MonoBehaviour, IInteractable
         {
             case ManekiMode.Start:
                 return "E to Start Game";
-                break;
+
+            case ManekiMode.ChoosePower:
+                return "E to Choose Power & Start Next Wave";
 
             case ManekiMode.None:
             default:
@@ -66,6 +78,7 @@ public class ManekiManager : MonoBehaviour, IInteractable
     {
         None,
         Start,
+        ChoosePower
     }
     
 }

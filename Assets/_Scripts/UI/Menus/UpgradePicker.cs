@@ -15,11 +15,11 @@ public class UpgradePicker : GameMenu
         Instance = this;
     }
     
-    private void Start()
+    protected override void CustomStart()
     {
     }
 
-    private void CreateWeaponButtons()
+    private bool CreateWeaponButtons()
     {
         // Clear all the children of the upgradeButtonParent
         foreach (Transform child in upgradeButtonParent.transform)
@@ -40,6 +40,8 @@ public class UpgradePicker : GameMenu
             // Add the tokens to the allUpgrades list
             allUpgrades.AddRange(weapon.GetUpgradeTokens());
         }
+        
+        var upgradeCount = 0;
 
         //  Create upgrade buttons for each upgrade up to maxUpgrades (and the remaining current upgrades)
         for (var i = 0; i < maxUpgrades && allUpgrades.Count > 0; i++)
@@ -55,7 +57,11 @@ public class UpgradePicker : GameMenu
 
             // Set the data for the upgrade button
             upgradeButton.SetData(this, randomUpgrade);
+            
+            upgradeCount++;
         }
+        
+        return upgradeCount > 0;
     }
 
     protected override void CustomDestroy()
@@ -65,7 +71,11 @@ public class UpgradePicker : GameMenu
     protected override void CustomActivate()
     {
         // Create the power buttons
-        CreateWeaponButtons();
+        var hasUpgrades = CreateWeaponButtons();
+        
+        // If no upgrades were created, deactivate the menu
+        if (!hasUpgrades)
+            ResumeGame();
     }
 
     protected override void CustomDeactivate()
@@ -78,5 +88,10 @@ public class UpgradePicker : GameMenu
 
     public override void OnBackPressed()
     {
+    }
+
+    public void ResumeGame()
+    {
+        Deactivate();
     }
 }

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class WaveManager : MonoBehaviour, IDebugged
 {
@@ -18,6 +20,7 @@ public class WaveManager : MonoBehaviour, IDebugged
 
     [SerializeField, Min(0)] private float timeBetweenWaves = 5;
 
+    [SerializeField] private int[] upgradeWaves = { 2, 4 };
     [SerializeField] private Enemy[] enemyPrefabs;
     [SerializeField] private Transform[] spawnPoints;
 
@@ -33,21 +36,20 @@ public class WaveManager : MonoBehaviour, IDebugged
     private int _currentWaveIndex;
     private bool _isBetweenWaves;
 
-    private bool _hasGameStarted;
-
     #endregion
 
     #region Getters
 
     public IReadOnlyList<Transform> SpawnPoints => spawnPoints;
-    
+
     public int CurrentWaveIndex => _currentWaveIndex;
-    
+
     public float TimeBetweenWavesRemaining { get; private set; }
-    
+
     private bool IsLastBatch => _currentWaveBatchIndex >= _currentWave.EnemyBatchInfos.Length;
-    
-    public bool HasStartedGame => _hasGameStarted;
+
+    public bool HasStartedGame { get; private set; }
+    public bool IsWaitingForNextWave { get; private set; }
 
     #endregion
 
@@ -70,19 +72,31 @@ public class WaveManager : MonoBehaviour, IDebugged
 
     private void Start()
     {
-        onWaveComplete += SpawnNextWave;
+        onWaveComplete += SpawnNextWaveOnWaveComplete;
         onWaveComplete += UpgradePowerOnWaveComplete;
+    }
+
+    private void SpawnNextWaveOnWaveComplete()
+    {
+        // After every 5 waves, wait for the player to upgrade
+        if (_currentWaveIndex % 5 == 0)
+        {
+            IsWaitingForNextWave = true;
+            return;
+        }
+
+        SpawnNextWave();
     }
 
     private void UpgradePowerOnWaveComplete()
     {
-        if (_currentWaveIndex % 5 != 3)
+        if (!upgradeWaves.Contains(_currentWaveIndex % 5))
             return;
-        
+
         // If the player has all upgrades, don't upgrade
         if (Player.Instance.PlayerWeaponManager.HasAllUpgrades)
             return;
-        
+
         // Upgrade the player's power
         UpgradePicker.Instance.Activate();
     }
@@ -90,29 +104,32 @@ public class WaveManager : MonoBehaviour, IDebugged
     private void SpawnNextWave()
     {
         _isBetweenWaves = true;
-        
+
+        // Set the wave as waiting for the next wave
+        IsWaitingForNextWave = false;
+
         // Start the coroutine to wait between waves
         StartCoroutine(WaitBetweenWaves());
     }
-    
+
     private IEnumerator WaitBetweenWaves()
     {
         var startTime = Time.time;
-        
+
         TimeBetweenWavesRemaining = timeBetweenWaves;
-        
+
         // Wait for the time between waves
         while (Time.time - startTime < timeBetweenWaves)
         {
             TimeBetweenWavesRemaining = timeBetweenWaves - (Time.time - startTime);
             yield return null;
         }
-        
+
         TimeBetweenWavesRemaining = 0;
-        
+
         // Reset the wave
         _isBetweenWaves = false;
-        
+
         // Spawn the next wave
         SetWave(CreateRandomEnemyWave(5, 3));
     }
@@ -121,7 +138,7 @@ public class WaveManager : MonoBehaviour, IDebugged
     {
         // Update the spawn timer
         _batchSpawnTimer.Update(Time.deltaTime);
-        
+
         if (Input.GetKeyDown(KeyCode.P))
             StartGame();
     }
@@ -129,12 +146,18 @@ public class WaveManager : MonoBehaviour, IDebugged
     public void StartGame()
     {
         // Return if the game has already started
-        if (_hasGameStarted)
+        if (HasStartedGame)
             return;
-        
+
         // Set the game as started
-        _hasGameStarted = true;
-                
+        HasStartedGame = true;
+
+        // Spawn the first wave
+        SpawnNextWave();
+    }
+
+    public void ResumeGame()
+    {
         // Spawn the first wave
         SpawnNextWave();
     }
@@ -217,7 +240,7 @@ public class WaveManager : MonoBehaviour, IDebugged
         // If there are no enemies left in the wave, invoke the on wave complete event
         if (_enemiesInWave.Count != 0 || _isBetweenWaves || !IsLastBatch)
             return;
-        
+
         onWaveComplete?.Invoke();
         _isBetweenWaves = true;
     }

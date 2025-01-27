@@ -7,7 +7,7 @@ using Random = UnityEngine.Random;
 public class PowerPicker : GameMenu
 {
     public static PowerPicker Instance { get; private set; }
-    
+
     [SerializeField, Min(0)] private int maxWeapons = 3;
     [SerializeField] private PowerButton powerButtonPrefab;
     [SerializeField] private GameObject powerButtonParent;
@@ -23,15 +23,19 @@ public class PowerPicker : GameMenu
 
     protected override void CustomActivate()
     {
-    }
-
-    private void Start()
-    {
         // Create the power buttons
-        CreateWeaponButtons();
+        var weaponsCreated = CreateWeaponButtons();
+        
+        // If no weapons were created, deactivate the menu
+        if (!weaponsCreated)
+            ResumeGame();
     }
 
-    private void CreateWeaponButtons()
+    protected override void CustomStart()
+    {
+    }
+
+    private bool CreateWeaponButtons()
     {
         // Clear all the children of the powerButtonParent
         foreach (Transform child in powerButtonParent.transform)
@@ -48,6 +52,8 @@ public class PowerPicker : GameMenu
         foreach (var currentWeapon in currentWeapons)
             allWeapons.Remove(currentWeapon);
 
+        var weaponCount = 0;
+        
         // Create power buttons for each weapon up to maxWeapons (and the remaining current weapons)
         for (var i = 0; i < maxWeapons && allWeapons.Count > 0; i++)
         {
@@ -62,7 +68,11 @@ public class PowerPicker : GameMenu
 
             // Set the data for the power button
             powerButton.SetData(this, WeaponScriptableObject.GetWeaponScriptableObject(randomWeapon));
+            
+            weaponCount++;
         }
+        
+        return weaponCount > 0;
     }
 
     protected override void CustomDeactivate()
@@ -75,5 +85,10 @@ public class PowerPicker : GameMenu
 
     public override void OnBackPressed()
     {
+    }
+
+    public void ResumeGame()
+    {
+        Deactivate();
     }
 }

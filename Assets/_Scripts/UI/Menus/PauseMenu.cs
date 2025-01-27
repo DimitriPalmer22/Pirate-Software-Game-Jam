@@ -29,7 +29,7 @@ public class PauseMenu : GameMenu
         _playerControls.Disable();
     }
 
-    private void Start()
+    protected override void CustomStart()
     {
         // Initialize the input
         InitializeInput();

@@ -55,6 +55,6 @@ public class UpgradeButton : MonoBehaviour
 
     public void ResumeGame()
     {
-        _upgradePicker.Deactivate();
+        _upgradePicker.ResumeGame();
     }
 }

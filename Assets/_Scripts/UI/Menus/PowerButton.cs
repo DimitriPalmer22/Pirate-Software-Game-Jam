@@ -25,6 +25,6 @@ public class PowerButton : MonoBehaviour
 
     public void ResumeGame()
     {
-        _powerPicker.Deactivate();
+        _powerPicker.ResumeGame();
     }
 }
