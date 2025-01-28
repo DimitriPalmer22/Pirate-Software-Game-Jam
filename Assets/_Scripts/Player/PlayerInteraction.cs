@@ -56,8 +56,6 @@ public class PlayerInteraction : MonoBehaviour
     {
         // Check for interactables
         CheckForInteractable();
-
-        Debug.Log($"Current interactable: {_currentInteractable}");
     }
 
     private void CheckForInteractable()
