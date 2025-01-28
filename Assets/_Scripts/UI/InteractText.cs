@@ -33,7 +33,7 @@ public class InteractText : MonoBehaviour
     {
         // Update the interact text
         UpdateInteractText();
-        
+
         // Update the opacity
         UpdateOpacity();
     }
@@ -67,9 +67,8 @@ public class InteractText : MonoBehaviour
 
     private void UpdateOpacity()
     {
-        var frameAmount = CustomFunctions.DEFAULT_FRAME_AMOUNT / Time.deltaTime;
-        
         // Lerp the alpha
-        canvasGroup.alpha = Mathf.Lerp(canvasGroup.alpha, _desiredOpacity, opacityLerpAmount * frameAmount);  
+        canvasGroup.alpha =
+            Mathf.Lerp(canvasGroup.alpha, _desiredOpacity, CustomFunctions.FrameAmount(opacityLerpAmount));
     }
 }

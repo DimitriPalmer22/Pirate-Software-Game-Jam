@@ -5,7 +5,7 @@ using UnityEngine;
 public class WaveText : MonoBehaviour
 {
     private const float OPACITY_THRESHOLD = .001f;
-    
+
     #region Serialized Fields
 
     [SerializeField] private CanvasGroup canvasGroup;
@@ -69,9 +69,8 @@ public class WaveText : MonoBehaviour
         _stayOnScreenTimer.Update(Time.deltaTime);
 
         // Lerp the opacity
-        var frameAmount = CustomFunctions.DEFAULT_FRAME_AMOUNT / Time.deltaTime;
-        canvasGroup.alpha = Mathf.Lerp(canvasGroup.alpha, _desiredOpacity, lerpAmount * frameAmount);
-        
+        canvasGroup.alpha = Mathf.Lerp(canvasGroup.alpha, _desiredOpacity, CustomFunctions.FrameAmount(lerpAmount));
+
         // If the opacity is close enough to the desired opacity, set it to the desired opacity
         if (Math.Abs(canvasGroup.alpha - _desiredOpacity) < OPACITY_THRESHOLD)
             canvasGroup.alpha = _desiredOpacity;

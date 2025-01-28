@@ -4,33 +4,67 @@ using static System.String;
 
 public class ManekiManager : MonoBehaviour, IInteractable
 {
+    #region Serialized Fields
+
+    [SerializeField] private CanvasGroup notificationCanvasGroup;
+    [SerializeField, Min(0)] private float notificationLerpAmount = 0.20f;
+
+    #endregion
+
+    #region Private Fields
+
     private ManekiMode _currentMode = ManekiMode.None;
-    
-    public bool IsInteractable => _currentMode != ManekiMode.None;
-    
-    public GameObject GameObject => gameObject;
-    
     private bool _hasInteracted;
+
+    #endregion
+
+    #region Getters
+
+    public bool IsInteractable => _currentMode != ManekiMode.None;
+
+    public GameObject GameObject => gameObject;
+
+    #endregion
 
     private void Start()
     {
+        notificationCanvasGroup.alpha = 0;
+
+        // Update the notification
+        UpdateNotification();
     }
 
     private void Update()
     {
         // Update the maneki mode
         UpdateManekiMode();
+
+        // Update the notification
+        UpdateNotification();
     }
 
     private void UpdateManekiMode()
     {
         // Set the mode back to none
         _currentMode = ManekiMode.None;
-        
+
         if (!WaveManager.Instance.HasStartedGame)
             _currentMode = ManekiMode.Start;
         else if (WaveManager.Instance.HasStartedGame && WaveManager.Instance.IsWaitingForNextWave)
             _currentMode = ManekiMode.ChoosePower;
+    }
+
+    private void UpdateNotification()
+    {
+        var desiredAlpha = _currentMode == ManekiMode.None ? 0 : 1;
+
+
+        // Set the notification game object active based on the current mode
+        notificationCanvasGroup.alpha = Mathf.Lerp(
+            notificationCanvasGroup.alpha,
+            desiredAlpha,
+            CustomFunctions.FrameAmount(notificationLerpAmount)
+        );
     }
 
     public void Interact(PlayerInteraction playerInteraction)
@@ -39,21 +73,21 @@ public class ManekiManager : MonoBehaviour, IInteractable
         {
             case ManekiMode.None:
                 break;
-            
+
             case ManekiMode.Start:
                 PowerPicker.Instance.Activate();
                 WaveManager.Instance.StartGame();
                 break;
-            
+
             case ManekiMode.ChoosePower:
                 PowerPicker.Instance.Activate();
                 WaveManager.Instance.ResumeGame();
                 break;
-            
+
             default:
                 throw new ArgumentOutOfRangeException();
         }
-        
+
         // Set the mode back to none
         _currentMode = ManekiMode.None;
     }
@@ -80,5 +114,4 @@ public class ManekiManager : MonoBehaviour, IInteractable
         Start,
         ChoosePower
     }
-    
 }
