@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerInteraction : MonoBehaviour
+public class PlayerInteraction : ComponentScript<Player>
 {
     #region Serialized Fields
 
@@ -20,15 +20,12 @@ public class PlayerInteraction : MonoBehaviour
 
     #region Getters
 
-    public Player Player { get; private set; }
-
     public IInteractable CurrentInteractable => _currentInteractable;
 
     #endregion
 
-    private void Awake()
+    protected override void CustomAwake()
     {
-        Player = GetComponent<Player>();
     }
 
     private void Start()
@@ -39,7 +36,7 @@ public class PlayerInteraction : MonoBehaviour
 
     private void InitializeInput()
     {
-        Player.PlayerControls.Player.Interact.performed += OnInteractPerformed;
+        ParentComponent.PlayerControls.Player.Interact.performed += OnInteractPerformed;
     }
 
     private void OnInteractPerformed(InputAction.CallbackContext obj)

@@ -127,7 +127,7 @@ public class ChainLightning : PlayerWeapon
             if (currentEnemy != null)
             {
                 // Damage the current enemy
-                currentEnemy.ChangeHealth(-baseDamage, playerWeaponManager.Player, this, enemyPosition);
+                currentEnemy.ChangeHealth(-baseDamage, playerWeaponManager.ParentComponent, this, enemyPosition);
 
                 // // Start the coroutine to stun the enemy
                 // StartCoroutine(StunEnemy(currentEnemy, enemyStunTime));

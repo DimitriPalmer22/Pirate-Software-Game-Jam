@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 
 [RequireComponent(typeof(Player))]
-public class PlayerWeaponManager : MonoBehaviour
+public class PlayerWeaponManager : ComponentScript<Player>
 {
     private static readonly int NormalFiringAnimationID = Animator.StringToHash("NormalFiring");
 
@@ -32,8 +32,6 @@ public class PlayerWeaponManager : MonoBehaviour
 
     #region Getters
 
-    public Player Player { get; private set; }
-
     public Transform FirePoint => firePoint;
 
     public IReadOnlyCollection<PlayerWeapon> WeaponPrefabs => weaponPrefabs;
@@ -46,16 +44,8 @@ public class PlayerWeaponManager : MonoBehaviour
 
     #region Initialization Functions
 
-    private void Awake()
+    protected override void CustomAwake()
     {
-        // Initialize the components
-        InitializeComponents();
-    }
-
-    private void InitializeComponents()
-    {
-        // Get the player component
-        Player = GetComponent<Player>();
     }
 
     private void Start()
@@ -67,8 +57,8 @@ public class PlayerWeaponManager : MonoBehaviour
     private void InitializeInput()
     {
         // Shoot input
-        Player.PlayerControls.Player.Shoot.performed += OnShootPerformed;
-        Player.PlayerControls.Player.Shoot.canceled += OnShootCanceled;
+        ParentComponent.PlayerControls.Player.Shoot.performed += OnShootPerformed;
+        ParentComponent.PlayerControls.Player.Shoot.canceled += OnShootCanceled;
     }
 
     private void OnShootPerformed(InputAction.CallbackContext obj)
@@ -116,7 +106,7 @@ public class PlayerWeaponManager : MonoBehaviour
                 continue;
 
             // Get the angle between the player forward and the vector to the enemy
-            var angle = Vector3.Angle(Player.Rigidbody.transform.forward, vectorToEnemy);
+            var angle = Vector3.Angle(ParentComponent.Rigidbody.transform.forward, vectorToEnemy);
 
             // If the angle is greater than the aim snap angle, continue
             if (angle > aimSnapAngle)
@@ -129,14 +119,14 @@ public class PlayerWeaponManager : MonoBehaviour
         // If there are no aim candidates, set the aim forward to the player forward
         if (aimCandidates.Count == 0)
         {
-            AimForward = Player.Rigidbody.transform.forward;
+            AimForward = ParentComponent.Rigidbody.transform.forward;
             return;
         }
 
         // Sort the aim candidates by dot product
         var candidate = aimCandidates.OrderBy(n => Vector3.Dot(
             (n.position - transform.position).normalized,
-            Player.Rigidbody.transform.forward)
+            ParentComponent.Rigidbody.transform.forward)
         ).First();
         
         // Set the aim forward to the candidate forward

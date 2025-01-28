@@ -4,13 +4,13 @@ using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
-public class EnemyMovement : MonoBehaviour
+public class EnemyMovement : ComponentScript<Enemy>
 {
     [SerializeField, Min(0)] private float navigationUpdateInterval = .25f;
     
     private NavMeshAgent _navMeshAgent;
 
-    private void Awake()
+    protected override void CustomAwake()
     {
         // Initialize the components
         InitializeComponents();
@@ -27,11 +27,6 @@ public class EnemyMovement : MonoBehaviour
     {
         // Start the FollowPlayer coroutine
         StartCoroutine(FollowPlayer());
-    }
-
-    // Update is called once per frame
-    private void Update()
-    {
     }
 
     private IEnumerator FollowPlayer()

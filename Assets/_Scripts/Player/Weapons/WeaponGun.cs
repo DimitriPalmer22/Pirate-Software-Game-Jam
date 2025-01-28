@@ -41,7 +41,7 @@ public class WeaponGun : PlayerWeapon
 
         // Perform a raycast
         var ray = new Ray(playerWeaponManager.FirePoint.position,
-            new Vector3(playerWeaponManager.AimForward.x, 0,playerWeaponManager.AimForward.z)
+            new Vector3(playerWeaponManager.AimForward.x, 0, playerWeaponManager.AimForward.z)
         );
 
         // Keep track of the start and end positions of the ray
@@ -66,7 +66,7 @@ public class WeaponGun : PlayerWeapon
 
         // If the object hit has an IActor component, deal damage to it
         if (hit && hitInfo.collider != null && hitInfo.collider.TryGetComponent(out IActor actor))
-            actor?.ChangeHealth(-baseDamage, playerWeaponManager.Player, this, hitInfo.point);
+            actor?.ChangeHealth(-baseDamage, playerWeaponManager.ParentComponent, this, hitInfo.point);
 
         // Wait for 5 seconds to let the trail disappear
         yield return new WaitForSeconds(5);

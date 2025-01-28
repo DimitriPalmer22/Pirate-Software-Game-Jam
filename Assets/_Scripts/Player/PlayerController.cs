@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Player), typeof(PlayerInput))]
-public class PlayerController : MonoBehaviour
+public class PlayerController : ComponentScript<Player>
 {
     private static readonly int SpeedAnimationID = Animator.StringToHash("Speed");
 
@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour
 
     #region Initialization Functions
 
-    private void Awake()
+    protected override void CustomAwake()
     {
         // Initialize the components
         InitializeComponents();
