@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 1133042530245702432}
   - component: {fileID: 2085626696230800914}
   - component: {fileID: 6815139665478187243}
-  - component: {fileID: 8571287592727075957}
   - component: {fileID: 1517000398973651338}
   - component: {fileID: 927110027351354687}
   m_Layer: 0
@@ -326,24 +325,6 @@ TrailRenderer:
   m_Autodestruct: 0
   m_Emitting: 1
   m_ApplyActiveColorSpace: 1
---- !u!114 &8571287592727075957
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3012262882571913840}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 411cffdc8f64b864da5d25a5a22ed2c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rotationSpeed: 100
-  movementSpeed: -200
-  delayTime: 0
-  time: 1
-  towardType: 1
-  maxDistance: 1
 --- !u!199 &1517000398973651338
 ParticleSystemRenderer:
   serializedVersion: 6
