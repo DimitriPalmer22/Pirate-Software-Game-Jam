@@ -53,22 +53,6 @@ public class BasicProjectile : EnemyProjectile
         _velocity = direction * (speed * speedMultiplier);
     }
 
-    // private void OnCollisionEnter(Collision other)
-    // {
-    //     // Get the actor component
-    //     var isActor = other.gameObject.transform.TryGetComponentInParent(out IActor actor);
-    //
-    //     // If the actor is null, return
-    //     if (!isActor)
-    //         return;
-    //
-    //     // Damage the actor
-    //     actor.ChangeHealth(-_totalDamage, shooter, this, other.GetContact(0).point);
-    //     
-    //     // Destroy the projectile
-    //     Destroy(gameObject);
-    // }
-
     private void OnTriggerEnter(Collider other)
     {
         // Get the actor component
