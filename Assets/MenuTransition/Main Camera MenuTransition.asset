@@ -27,7 +27,7 @@ MonoBehaviour:
   - From: CinemachineCameraMenu
     To: CreditsCamera
     Blend:
-      Style: 3
+      Style: 2
       Time: 2
       CustomCurve:
         serializedVersion: 2
