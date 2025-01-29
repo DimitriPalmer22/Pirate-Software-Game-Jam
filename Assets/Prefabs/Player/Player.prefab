@@ -252,6 +252,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 12
   animator: {fileID: 6226352149878942045}
+  dodgeSpeed: 30
+  dodgeDuration: 0.2
+  dodgeCooldown: 1
 --- !u!114 &2392279437143218790
 MonoBehaviour:
   m_ObjectHideFlags: 0

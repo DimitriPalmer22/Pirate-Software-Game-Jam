@@ -53,6 +53,10 @@ public class Player : MonoBehaviour, IActor
         // Return if the player is invincible
         if (_invincibilityTimer.IsActive && !_invincibilityTimer.IsComplete)
             return;
+        
+        // Return if the player is currently dodging
+        if (PlayerController.IsDodging)
+            return;
 
         currentHealth = Mathf.Clamp(currentHealth - damageAmount, 0, maxHealth);
 
@@ -130,21 +134,6 @@ public class Player : MonoBehaviour, IActor
 
         // Update the invincibility timer
         UpdateInvincibility();
-
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            var weapon = PlayerWeaponManager.GetWeapon(PlayerWeaponManager.WeaponPrefabs.First());
-
-            var randomToken = WeaponUpgradeToken.ChooseRandomUpgradeToken(weapon.GetUpgradeTokens());
-
-            if (randomToken != null)
-            {
-                weapon.Upgrade(randomToken.UpgradeIndex);
-
-                Debug.Log(
-                    $"Upgraded: {randomToken.UpgradeIndex} ({weapon.WeaponScriptableObject.Upgrades[randomToken.UpgradeIndex].UpgradeName})");
-            }
-        }
     }
 
     private void UpdateInvincibility()

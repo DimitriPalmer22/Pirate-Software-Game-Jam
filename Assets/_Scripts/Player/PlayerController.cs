@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -12,6 +14,12 @@ public class PlayerController : ComponentScript<Player>
     [SerializeField, Min(0)] private float moveSpeed = 8f;
     [SerializeField] private Animator animator;
 
+    [Header("Dodge")] [SerializeField, Min(0)]
+    private float dodgeSpeed = 20f;
+
+    [SerializeField, Min(0)] private float dodgeDuration = 20f;
+    [SerializeField, Min(0)] private float dodgeCooldown = 1;
+
     #endregion
 
     #region Private Fields
@@ -23,6 +31,9 @@ public class PlayerController : ComponentScript<Player>
     private float _localVelX;
     private float _localVelZ;
 
+    private bool _isDodging;
+    private CountdownTimer _dodgeCooldownTimer;
+
     #endregion
 
     #region Getters
@@ -30,6 +41,8 @@ public class PlayerController : ComponentScript<Player>
     public Player Player { get; private set; }
 
     public PlayerInput PlayerInput { get; private set; }
+    
+    public bool IsDodging => _isDodging;
 
     #endregion
 
@@ -52,6 +65,10 @@ public class PlayerController : ComponentScript<Player>
     {
         // Initialize the input
         InitializeInput();
+
+        // Initialize the dodge cooldown timer
+        _dodgeCooldownTimer = new CountdownTimer(dodgeCooldown, true, true);
+        _dodgeCooldownTimer.Start();
     }
 
 
@@ -66,6 +83,56 @@ public class PlayerController : ComponentScript<Player>
         // Rotation Input
         Player.PlayerControls.Player.AimMouse.performed += OnAimMousePerformed;
         Player.PlayerControls.Player.AimStick.performed += OnAimStickPerformed;
+
+        // Dash Input
+        Player.PlayerControls.Player.Dodge.performed += OnDodgePerformed;
+    }
+
+    private void OnDodgePerformed(InputAction.CallbackContext obj)
+    {
+        // Start the dodge coroutine
+        StartCoroutine(DodgeCoroutine());
+    }
+
+    private IEnumerator DodgeCoroutine()
+    {
+        // Return if the player is already dodging
+        if (_isDodging)
+            yield break;
+
+        // Return if the dodge cooldown timer is not complete
+        if (!_dodgeCooldownTimer.IsComplete)
+            yield break;
+
+        // Set the dodge flag
+        _isDodging = true;
+
+        // Store the current movement vector and normalize it
+        var movement = Player.Rigidbody.linearVelocity;
+
+        // If the movement vector is zero, set it to the player's forward direction
+        if (movement == Vector3.zero)
+            movement = transform.forward;
+
+        movement.y = 0;
+        movement.Normalize();
+
+        // Store the start time
+        var startTime = Time.time;
+
+        while (Time.time - startTime < dodgeDuration)
+        {
+            // Set the player's velocity to the dodge speed
+            Player.Rigidbody.linearVelocity = movement * dodgeSpeed;
+
+            yield return null;
+        }
+
+        // Reset the dodge flag 
+        _isDodging = false;
+
+        // Reset the dodge cooldown timer
+        _dodgeCooldownTimer.SetMaxTimeAndReset(dodgeCooldown);
     }
 
     private void OnAimStickPerformed(InputAction.CallbackContext obj)
@@ -139,6 +206,13 @@ public class PlayerController : ComponentScript<Player>
 
     #region Update Functions
 
+    private void Update()
+    {
+        // Update the dodge cooldown timer
+        _dodgeCooldownTimer.SetMaxTime(dodgeCooldown);
+        _dodgeCooldownTimer.Update(Time.deltaTime);
+    }
+
     private void FixedUpdate()
     {
         // Update the player's position
@@ -153,6 +227,10 @@ public class PlayerController : ComponentScript<Player>
 
     private void UpdatePosition()
     {
+        // Return if the player is dodging
+        if (_isDodging)
+            return;
+
         // Get the camera from the camera manager
         var mainCamTransform = CameraManager.Instance.MainCam.transform;
 

@@ -81,6 +81,10 @@ public class BasicProjectile : EnemyProjectile
             Destruct();
             return;
         }
+        
+        // If the actor is a player, and the player is currently dodging, return
+        if (actor is Player player && player.PlayerController.IsDodging)
+            return;
 
         // Damage the actor
         actor.ChangeHealth(-_totalDamage, shooter, this, other.ClosestPoint(transform.position));
