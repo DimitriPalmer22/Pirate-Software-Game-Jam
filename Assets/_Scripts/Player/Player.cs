@@ -85,6 +85,8 @@ public class Player : MonoBehaviour, IActor
     
     public PlayerInteraction PlayerInteraction { get; private set; }
 
+    public bool IsInvincibleBecauseDamaged => _invincibilityTimer.IsActive && _invincibilityTimer.Percentage < 1;
+        
     #endregion
 
     private void Awake()
