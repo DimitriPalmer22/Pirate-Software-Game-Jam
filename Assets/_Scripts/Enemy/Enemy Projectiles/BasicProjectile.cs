@@ -6,6 +6,8 @@ public class BasicProjectile : Projectile
 {
     #region Serialized Fields
 
+    [SerializeField] protected int pierceCount = 0;
+
     #endregion
 
     #region Private Fields
@@ -15,12 +17,17 @@ public class BasicProjectile : Projectile
     private Vector3 _velocity;
     private float _totalDamage;
 
+    private int _remainingPierceCount;
+
     #endregion
 
     private void Awake()
     {
         // Initialize the components
         InitializeComponents();
+
+        // Set the remaining pierce count
+        _remainingPierceCount = pierceCount + 1;
     }
 
     private void InitializeComponents()
@@ -77,8 +84,15 @@ public class BasicProjectile : Projectile
         // Damage the actor
         actor.ChangeHealth(-_totalDamage, shooter, this, other.ClosestPoint(transform.position));
 
-        // Destroy the projectile
-        Destruct();
+        // Decrement the remaining pierce count
+        _remainingPierceCount--;
+        
+        Debug.Log(_remainingPierceCount);
+
+        // Destroy the projectile IFF the remaining pierce count is 0
+        // If the pierce count is -1, the projectile will never be destroyed
+        if (_remainingPierceCount == 0)
+            Destruct();
     }
 
     protected override void CustomDestruct()

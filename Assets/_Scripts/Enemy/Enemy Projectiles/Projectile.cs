@@ -6,7 +6,6 @@ public abstract class Projectile : MonoBehaviour, IDamager
 
     [SerializeField, Min(0)] protected float damageMultiplier = 1;
     [SerializeField, Min(0)] protected float speedMultiplier = 1;
-
     [SerializeField, Min(0)] protected float lifeTime = 5;
 
     protected IActor shooter;
