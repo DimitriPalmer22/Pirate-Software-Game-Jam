@@ -70,6 +70,12 @@ public class WaveManager : MonoBehaviour, IDebugged
         DebugManager.Instance.AddDebuggedObject(this);
     }
 
+    private void OnDestroy()
+    {
+        // Remove this from the debug manager
+        DebugManager.Instance.RemoveDebuggedObject(this);
+    }
+
     private void Start()
     {
         onWaveComplete += SpawnNextWaveOnWaveComplete;

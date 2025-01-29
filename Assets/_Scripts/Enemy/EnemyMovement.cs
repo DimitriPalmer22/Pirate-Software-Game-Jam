@@ -31,7 +31,8 @@ public class EnemyMovement : ComponentScript<Enemy>
 
     private IEnumerator FollowPlayer()
     {
-        while (true)
+        // Follow the player while the player's health is greater than 0
+        while (Player.Instance.CurrentHealth > 0)
         {
             // If there is no player instance, wait for the next frame
             if (Player.Instance == null)

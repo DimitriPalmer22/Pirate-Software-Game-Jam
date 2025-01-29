@@ -5,8 +5,8 @@ public class PauseMenu : GameMenu
 {
     public static PauseMenu Instance { get; private set; }
     
-    public Action OnPause;
-    public Action OnResume;
+    public Action onPause;
+    public Action onResume;
     
     private PlayerControls _playerControls;
     
@@ -58,7 +58,7 @@ public class PauseMenu : GameMenu
     protected override void CustomActivate()
     {
         // Invoke the pause event
-        OnPause?.Invoke();
+        onPause?.Invoke();
     }
 
     protected override void CustomDeactivate()
@@ -79,6 +79,6 @@ public class PauseMenu : GameMenu
         Deactivate();
         
         // Invoke the resume event
-        OnResume?.Invoke();
+        onResume?.Invoke();
     }
 }
