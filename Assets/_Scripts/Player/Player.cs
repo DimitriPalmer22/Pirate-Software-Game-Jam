@@ -51,7 +51,7 @@ public class Player : MonoBehaviour, IActor
     private void TakeDamage(float damageAmount, IActor changer, IDamager damager, Vector3 position)
     {
         // Return if the player is invincible
-        if (_invincibilityTimer.IsActive)
+        if (_invincibilityTimer.IsActive && !_invincibilityTimer.IsComplete)
             return;
 
         currentHealth = Mathf.Clamp(currentHealth - damageAmount, 0, maxHealth);
@@ -60,11 +60,9 @@ public class Player : MonoBehaviour, IActor
         var args = new HealthChangedEventArgs(this, changer, damager, damageAmount, position);
         OnDamaged?.Invoke(this, args);
 
+        // Invoke the OnDeath event
         if (currentHealth <= 0)
-        {
-            // Invoke the OnDeath event
             OnDeath?.Invoke(this, args);
-        }
 
         // Start the invincibility timer
         _invincibilityTimer.SetMaxTimeAndReset(invincibilityDuration);
@@ -150,6 +148,7 @@ public class Player : MonoBehaviour, IActor
     private void UpdateInvincibility()
     {
         // Update the invincibility timer
+        _invincibilityTimer.SetMaxTime(invincibilityDuration);
         _invincibilityTimer.Update(Time.deltaTime);
     }
 }
