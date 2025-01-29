@@ -1,59 +1,134 @@
-using System;
 using UnityEngine;
-using UnityEngine.InputSystem;
+using UnityEngine.UI;
 using UnityEngine.Playables;
-using UnityEngine.Video;
-
 
 public class CineMachineSwitcher : MonoBehaviour
 {
     private Animator _animator;
-    
-    
-    
-    private bool MenuCam = true;
-    
-   
-    [SerializeField] private Animator PlayerAnimator; 
-    [SerializeField] private GameObject fakePlayerObject; 
-    [SerializeField] private GameObject uiObject;
+
+    [Header("References")]
+    [SerializeField] private Animator playerAnimator;
     [SerializeField] private PlayableDirector cutscenePlayer;
+    [SerializeField] private AudioSource MenuMusic;
+    [SerializeField] private AudioSource PlayerMusic;
+        
+    [SerializeField] private Button _hideBackButton;
+    [SerializeField] private GameObject _backButton;
+    [SerializeField] private Button[] buttonsToHide;
     
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Awake()
+    [SerializeField] private GameObject[] buttonGameObjects;
+
+    // Tracks the current camera state
+    private CameraState _currentCameraState = CameraState.Menu;
+
+    // Define the camera states
+    private enum CameraState
+    {
+        Menu,
+        Player,
+        Credits
+    }
+
+    private void Awake()
     {
         _animator = GetComponent<Animator>();
+        // Optionally ensure we start in Menu state
+        SetCameraState(CameraState.Menu);
     }
 
-    //switches between the player camera and the menu camera
-    public void SwitchState()
+    // Centralized camera state logic
+    private void SetCameraState(CameraState newState)
     {
-        if (MenuCam)
+        switch (newState)
         {
-            _animator.Play("PlayerCam");
-            //turn off layer weight for idle animations
-            PlayerAnimator.SetLayerWeight(2, 0);
-            //play cutscene
-            PlayCutscene();
-            //turn on ui
-           // TurnOnUi();
+            case CameraState.Menu:
+                _animator.Play("MenuCam");
+                ShowButtons();
+                _backButton.gameObject.SetActive(false);
+                break;
+
+            case CameraState.Player:
+                _animator.Play("PlayerCam");
+                HideButtons();
+                playerAnimator.SetLayerWeight(2, 0);
+                cutscenePlayer.Play();
+                MenuMusic.Stop();
+                
+                
+                _backButton.gameObject.SetActive(false);
+                break;
+
+            case CameraState.Credits:
+                _animator.Play("CreditsCam");
+                HideButtons();
+                _backButton.gameObject.SetActive(true);
+                break;
         }
+
+        _currentCameraState = newState;
+    }
+
+    // Show / hide UI buttons
+    private void HideButtons()
+    {
+        foreach (var button in buttonsToHide)
+        {
+            if (button != null)
+            {
+                button.enabled = false;
+            }
+        }
+
+        foreach (var go in buttonGameObjects)
+        {
+            if (go != null)
+            {
+                go.SetActive(false);
+            }
+        }
+    }
+
+    private void ShowButtons()
+    {
+        foreach (var button in buttonsToHide)
+        {
+            if (button != null)
+            {
+                button.enabled = true;
+            }
+        }
+
+        foreach (var go in buttonGameObjects)
+        {
+            if (go != null)
+            {
+                go.SetActive(true);
+            }
+        }
+    }
+
+    #region Public Methods (Menu Input)
+
+    public void SwitchToPlayer()
+    {
+        if (_currentCameraState == CameraState.Menu)
+            SetCameraState(CameraState.Player);
         else
-        {
-            _animator.Play("MenuCam");
-        }
-        MenuCam = !MenuCam;
-    }
-    //plays the cutscene of fake player transitioning to realtime player
-    public void PlayCutscene()
-    {
-        //play cutscene through timeline
-        cutscenePlayer.Play();
+            SetCameraState(CameraState.Menu);
     }
 
-    public void TurnOnUi()
+    public void SwitchToCredits()
     {
-        //set active gameobject to true
-        uiObject.SetActive(true);
+        if (_currentCameraState == CameraState.Menu)
+            SetCameraState(CameraState.Credits);
+        else
+            SetCameraState(CameraState.Menu);
     }
+
+    public void SwitchToMenu()
+    {
+        SetCameraState(CameraState.Menu);
+    }
+
+    #endregion
 }
