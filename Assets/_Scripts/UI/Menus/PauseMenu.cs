@@ -4,26 +4,26 @@ using UnityEngine.InputSystem;
 public class PauseMenu : GameMenu
 {
     public static PauseMenu Instance { get; private set; }
-    
+
     public Action onPause;
     public Action onResume;
-    
+
     private PlayerControls _playerControls;
-    
+
     protected override void CustomAwake()
     {
         // Set the instance
         Instance = this;
-        
+
         // Initialize the input
         _playerControls = new PlayerControls();
     }
-    
+
     private void OnEnable()
     {
         _playerControls.Enable();
     }
-    
+
     private void OnDisable()
     {
         _playerControls.Disable();
@@ -42,6 +42,10 @@ public class PauseMenu : GameMenu
 
     private void OnPausePerformed(InputAction.CallbackContext obj)
     {
+        // If there is another menu active in the menu manager, deactivate it
+        if (MenuManager.Instance.ActiveMenus.Count > 0)
+            return;
+
         // If the menu is active, deactivate it
         if (IsActive)
             Resume();
@@ -77,7 +81,7 @@ public class PauseMenu : GameMenu
     {
         // Deactivate the menu
         Deactivate();
-        
+
         // Invoke the resume event
         onResume?.Invoke();
     }
