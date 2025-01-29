@@ -108,7 +108,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   layersToIgnore:
     serializedVersion: 2
-    m_Bits: 576
+    m_Bits: 704
   damageMultiplier: 1
   speedMultiplier: 1.5
 --- !u!96 &4772540898453811552

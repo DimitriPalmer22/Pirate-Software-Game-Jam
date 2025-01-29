@@ -2,7 +2,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
-public class BasicProjectile : EnemyProjectile
+public class BasicProjectile : Projectile
 {
     #region Serialized Fields
 
@@ -44,7 +44,7 @@ public class BasicProjectile : EnemyProjectile
         _rigidbody.linearVelocity = _velocity;
     }
 
-    protected override void CustomShoot(Enemy projectileShooter, Vector3 direction, float damageMult, float speed)
+    protected override void CustomShoot(IActor projectileShooter, Vector3 direction, float damageMult, float speed)
     {
         // Set the total damage
         _totalDamage = damageMult * damageMultiplier;
@@ -65,21 +65,23 @@ public class BasicProjectile : EnemyProjectile
             Destruct();
             return;
         }
-        
+
+        // If the actor is the shooter, return
+        if (actor == shooter)
+            return;
+
         // If the actor is a player, and the player is currently dodging, return
         if (actor is Player player && player.PlayerController.IsDodging)
             return;
 
         // Damage the actor
         actor.ChangeHealth(-_totalDamage, shooter, this, other.ClosestPoint(transform.position));
-        
+
         // Destroy the projectile
         Destruct();
     }
 
-    private void Destruct()
+    protected override void CustomDestruct()
     {
-        // Destroy the projectile
-        Destroy(gameObject);
     }
 }

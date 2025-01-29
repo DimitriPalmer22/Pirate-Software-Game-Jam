@@ -6,22 +6,12 @@ public class EnemyRangedAttack : ComponentScript<Enemy>
     [SerializeField] private float attackRange = 10f;
     [SerializeField] private float attackDamage = 10f;
     [SerializeField] private Transform projectileSpawnPoint;
-    [SerializeField] private EnemyProjectile projectilePrefab;
+    [SerializeField] private Projectile projectilePrefab;
 
     private Player _player;
     private float _lastAttackTime;
 
     protected override void CustomAwake()
-    {
-    }
-
-    private void InitializeComponents()
-    {
-
-    }
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    private void Start()
     {
     }
 

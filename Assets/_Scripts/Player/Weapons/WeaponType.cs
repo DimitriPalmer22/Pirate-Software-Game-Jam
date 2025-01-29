@@ -2,4 +2,5 @@
 {
     ChainLightning,
     BasicGun,
+    EnergyBolts,
 }
