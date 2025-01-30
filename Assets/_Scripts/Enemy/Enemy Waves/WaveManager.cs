@@ -30,6 +30,9 @@ public class WaveManager : MonoBehaviour, IDebugged
     [SerializeField] private Enemy[] enemyPrefabs;
     [SerializeField] private Transform[] spawnPoints;
 
+    [Header("Difficulty"), SerializeField] private int diffEnemyAdd = 5;
+    [SerializeField] private int diffBatchAdd = 3;
+
     #endregion
 
     #region Private Fields
@@ -60,9 +63,14 @@ public class WaveManager : MonoBehaviour, IDebugged
     public EnemyWave CurrentWave => _currentWave;
     public EnemyWave NextWave { get; private set; }
 
-    private EnemyWave StandardRandomWave => CreateRandomEnemyWave(5, 3);
+    private EnemyWave StandardRandomWave => CreateRandomEnemyWave(
+        5 + (int)(diffBatchAdd * Difficulty),
+        3 + (int)(diffEnemyAdd * Difficulty)
+    );
 
     public float PlayerWaveHealAmount => playerWaveHealAmount;
+
+    public float Difficulty => _currentWaveIndex / (WAVE_CYCLE * 5f);
 
     #endregion
 
@@ -75,7 +83,7 @@ public class WaveManager : MonoBehaviour, IDebugged
         Instance = this;
 
         // Initialize the spawn timer 
-        _batchSpawnTimer = new CountdownTimer(1000f);
+        _batchSpawnTimer = new CountdownTimer(10000f);
         _batchSpawnTimer.OnTimerEnd += SpawnNextBatch;
         _batchSpawnTimer.Stop();
 

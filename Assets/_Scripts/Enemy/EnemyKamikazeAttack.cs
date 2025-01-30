@@ -13,10 +13,24 @@ public class EnemyKamikazeAttack : ComponentScript<Enemy>, IDamager
     [SerializeField] private ParticleSystem smokeParticlesPrefab;
     [SerializeField] private ParticleSystem explosionParticlesPrefab;
 
+    [Header("Difficulty"), SerializeField] private float diffDamageAdd = 20;
+    
     private Player _player;
     private bool _isExploding;
 
     public GameObject GameObject => gameObject;
+
+    private void Start()
+    {
+        // Apply the difficulty
+        ApplyDifficulty();
+    }
+
+    private void ApplyDifficulty()
+    {
+        // Add the difficulty damage to the damage
+        damage += diffDamageAdd * WaveManager.Instance.Difficulty;
+    }
 
     private void Update()
     {

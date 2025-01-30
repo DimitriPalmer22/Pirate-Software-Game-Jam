@@ -5,9 +5,9 @@ using UnityEngine;
 public class Enemy : MonoBehaviour, IActor
 {
     private static HashSet<Enemy> _allEnemies = new();
-    
+
     public static IReadOnlyCollection<Enemy> AllEnemies => _allEnemies;
-    
+
     #region IActor
 
     [SerializeField, Min(0)] private float maxHealth;
@@ -62,23 +62,37 @@ public class Enemy : MonoBehaviour, IActor
 
     #endregion
 
+    [SerializeField] private float difficultyHealthAdd = 100;
+
     public GameObject GameObject => gameObject;
 
     private void Awake()
     {
         // Set the current health to the max health
         currentHealth = maxHealth;
-        
+
         // Add this enemy to the list of all enemies
         _allEnemies.Add(this);
-        
+
         OnDeath += (sender, args) => _allEnemies.Remove(this);
     }
-    
+
+    private void Start()
+    {
+        // Apply the difficulty
+        ApplyDifficulty();
+    }
+
+    private void ApplyDifficulty()
+    {
+        // Add the difficulty health to the max health
+        maxHealth += difficultyHealthAdd * WaveManager.Instance.Difficulty;
+        currentHealth += difficultyHealthAdd * WaveManager.Instance.Difficulty;
+    }
+
     private void OnDestroy()
     {
         // Remove this enemy from the list of all enemies
         _allEnemies.Remove(this);
     }
-
 }

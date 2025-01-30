@@ -182,6 +182,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 500
   currentHealth: 500
+  difficultyHealthAdd: 1500
 --- !u!114 &5056608455845933334
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -195,6 +196,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   navigationUpdateInterval: 0.032
+  diffSpeedAdd: 4
 --- !u!114 &5148248110858238426
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -210,5 +212,10 @@ MonoBehaviour:
   attackInterval: 1
   attackRange: 15
   attackDamage: 20
+  projectileSpeed: 10
   projectileSpawnPoint: {fileID: 4983945139648590330}
   projectilePrefab: {fileID: 6886210589200326369, guid: c47de1813f71b2f409398248e190e16b, type: 3}
+  diffIntervalAdd: -0.25
+  diffDamageAdd: 10
+  diffRangeAdd: 5
+  diffSpeedAdd: 2
