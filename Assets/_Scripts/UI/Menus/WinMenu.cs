@@ -18,13 +18,13 @@ public class WinMenu : GameMenu
     private void ActivateOnWaveComplete()
     {
         // Return if the current wave is not a boss wave
-        if (!WaveManager.Instance.CurrentWave.IsBossWave) 
+        if (!WaveManager.Instance.CurrentWave.IsBossWave)
             return;
-        
+
         // Return if the current wave is not the last wave (25)
-        if (WaveManager.Instance.CurrentWaveIndex != 25) 
+        if (WaveManager.Instance.CurrentWaveIndex != WaveManager.WAVE_CYCLE * 5 + 1)
             return;
-        
+
         // Activate the win menu
         Activate();
     }
