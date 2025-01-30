@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Energized Bullets
   m_EditorClassIdentifier: 
   displayName: Energized Bullets
-  icon: {fileID: 21300062, guid: 7ab74e659e1f0a34d9cfec21c478fc12, type: 3}
+  icon: {fileID: 21300000, guid: 2a0b66a7e9bb30f43891588e6c6c17ab, type: 3}
   weaponType: 3
   weaponPrefab: {fileID: -1257353887186163990, guid: dc2cf2af9d0b08a488bfab75cb975292, type: 3}
   upgrades:

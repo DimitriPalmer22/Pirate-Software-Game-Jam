@@ -9,14 +9,15 @@ public class UpgradeButton : MonoBehaviour
     [SerializeField] private Image weaponImage;
     [SerializeField] private Image rarityImage;
 
-    [SerializeField] private Color commonColor = Color.white;
-    [SerializeField] private Color rareColor = Color.blue;
-    [SerializeField] private Color legendaryColor = Color.yellow;
+    [SerializeField] private Sprite commonImage;
+    [SerializeField] private Sprite rareImage;
+    [SerializeField] private Sprite legendaryImage;
+
 
     private UpgradePicker _upgradePicker;
     private WeaponUpgradeToken _upgradeToken;
     private PlayerWeapon _weapon;
-    
+
     public void SetData(UpgradePicker upgradePicker, WeaponUpgradeToken upgradeToken)
     {
         _upgradePicker = upgradePicker;
@@ -34,17 +35,17 @@ public class UpgradeButton : MonoBehaviour
 
         // Set the data for the weapon button
         weaponNameText.text = _weapon.WeaponScriptableObject.DisplayName;
-        
+
         // Set the image for the upgrade button
         weaponImage.sprite = upgradeToken.WeaponScriptableObject.Icon;
 
         // Set the color for the upgrade button
-        rarityImage.color = upgradeInfo.Rarity switch
+        rarityImage.sprite = upgradeInfo.Rarity switch
         {
-            WeaponUpgradeRarity.Common => commonColor,
-            WeaponUpgradeRarity.Rare => rareColor,
-            WeaponUpgradeRarity.Legendary => legendaryColor,
-            _ => Color.white
+            WeaponUpgradeRarity.Common => commonImage,
+            WeaponUpgradeRarity.Rare => rareImage,
+            WeaponUpgradeRarity.Legendary => legendaryImage,
+            _ => commonImage
         };
     }
 
