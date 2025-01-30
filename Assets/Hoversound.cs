@@ -14,11 +14,6 @@ public class Hoversound : MonoBehaviour, IPointerEnterHandler
         Debug.Log("Mouse entered");
         
     }
-
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        Debug.Log("Mouse exited");
-    }
 }
 
 

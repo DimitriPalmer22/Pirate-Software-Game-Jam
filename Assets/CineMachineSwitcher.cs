@@ -11,6 +11,7 @@ public class CineMachineSwitcher : MonoBehaviour
     [SerializeField] private PlayableDirector cutscenePlayer;
     [SerializeField] private AudioSource MenuMusic;
     [SerializeField] private AudioSource PlayerMusic;
+    [SerializeField] private GameObject _playerFake;
         
     [SerializeField] private Button _hideBackButton;
     [SerializeField] private GameObject _backButton;
@@ -34,6 +35,16 @@ public class CineMachineSwitcher : MonoBehaviour
         _animator = GetComponent<Animator>();
         // Optionally ensure we start in Menu state
         SetCameraState(CameraState.Menu);
+        cutscenePlayer.stopped += OnCutsceneFinished;
+    }
+    
+    private void OnDestroy()
+    {
+        // Unsubscribe to prevent memory leaks
+        if (cutscenePlayer != null)
+        {
+            cutscenePlayer.stopped -= OnCutsceneFinished;
+        }
     }
 
     // Centralized camera state logic
@@ -53,8 +64,6 @@ public class CineMachineSwitcher : MonoBehaviour
                 playerAnimator.SetLayerWeight(2, 0);
                 cutscenePlayer.Play();
                 MenuMusic.Stop();
-                
-                
                 _backButton.gameObject.SetActive(false);
                 break;
 
@@ -106,13 +115,20 @@ public class CineMachineSwitcher : MonoBehaviour
             }
         }
     }
+    
+    private void OnCutsceneFinished(PlayableDirector objDirector)
+    {
+        _playerFake.SetActive(false);
+    }
 
     #region Public Methods (Menu Input)
 
     public void SwitchToPlayer()
     {
         if (_currentCameraState == CameraState.Menu)
+        {
             SetCameraState(CameraState.Player);
+        }
         else
             SetCameraState(CameraState.Menu);
     }
