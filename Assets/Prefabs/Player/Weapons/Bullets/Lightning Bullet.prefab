@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 3559566730359725318}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0.258819, z: 0, w: 0.9659259}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -57,7 +57,7 @@ TrailRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 410fa9a27b8dd1f4989dd201babd7d76, type: 2}
+  - {fileID: 2100000, guid: 732750dc657bd5743a994b90f56901ae, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -78,7 +78,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 0.125
+  m_Time: 0.2
   m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
@@ -109,24 +109,24 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 0.39, b: 0.39, a: 0.627451}
-      key1: {r: 1, g: 0, b: 0, a: 0.84313726}
-      key2: {r: 1, g: 0, b: 0, a: 0.627451}
-      key3: {r: 1, g: 0, b: 0, a: 0}
+      key0: {r: 1, g: 0.39, b: 0.39, a: 0.39215687}
+      key1: {r: 1, g: 0.35500002, b: 0.35500002, a: 0.39215687}
+      key2: {r: 1, g: 0.35500002, b: 0.35500002, a: 0.627451}
+      key3: {r: 1, g: 0.35500002, b: 0.35500002, a: 0}
       key4: {r: 1, g: 0.35500002, b: 0.35500002, a: 0}
       key5: {r: 0, g: 0, b: 0, a: 0}
       key6: {r: 0, g: 0, b: 0, a: 0}
       key7: {r: 0, g: 0, b: 0, a: 0}
       ctime0: 0
-      ctime1: 16384
-      ctime2: 32382
-      ctime3: 49537
+      ctime1: 65535
+      ctime2: 65535
+      ctime3: 65535
       ctime4: 65535
       ctime5: 0
       ctime6: 0
       ctime7: 0
-      atime0: 11180
-      atime1: 31997
+      atime0: 0
+      atime1: 65535
       atime2: 52235
       atime3: 0
       atime4: 0
@@ -135,8 +135,8 @@ TrailRenderer:
       atime7: 0
       m_Mode: 0
       m_ColorSpace: 0
-      m_NumColorKeys: 5
-      m_NumAlphaKeys: 3
+      m_NumColorKeys: 2
+      m_NumAlphaKeys: 2
     numCornerVertices: 0
     numCapVertices: 0
     alignment: 0
@@ -144,7 +144,7 @@ TrailRenderer:
     textureScale: {x: 1, y: 1}
     shadowBias: 0.5
     generateLightingData: 0
-  m_MinVertexDistance: 0.1
+  m_MinVertexDistance: 0
   m_MaskInteraction: 0
   m_Autodestruct: 0
   m_Emitting: 1
@@ -162,7 +162,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jitterAmount: {x: 0.5, y: 0.5, z: 0.5}
-  jitterSpeed: 0.03125
+  jitterSpeed: 0.03
 --- !u!1 &3700936102033532842
 GameObject:
   m_ObjectHideFlags: 0
@@ -220,7 +220,7 @@ TrailRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 410fa9a27b8dd1f4989dd201babd7d76, type: 2}
+  - {fileID: 2100000, guid: 732750dc657bd5743a994b90f56901ae, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -241,7 +241,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 0.125
+  m_Time: 0.2
   m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
@@ -272,24 +272,24 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 0.39, b: 0.39, a: 0.627451}
-      key1: {r: 1, g: 0, b: 0, a: 0.84313726}
-      key2: {r: 1, g: 0, b: 0, a: 0.627451}
-      key3: {r: 1, g: 0, b: 0, a: 0}
+      key0: {r: 1, g: 0.39, b: 0.39, a: 0.39215687}
+      key1: {r: 1, g: 0.35500002, b: 0.35500002, a: 0.39215687}
+      key2: {r: 1, g: 0.35500002, b: 0.35500002, a: 0.627451}
+      key3: {r: 1, g: 0.35500002, b: 0.35500002, a: 0}
       key4: {r: 1, g: 0.35500002, b: 0.35500002, a: 0}
       key5: {r: 0, g: 0, b: 0, a: 0}
       key6: {r: 0, g: 0, b: 0, a: 0}
       key7: {r: 0, g: 0, b: 0, a: 0}
       ctime0: 0
-      ctime1: 16384
-      ctime2: 32382
-      ctime3: 49537
+      ctime1: 65535
+      ctime2: 65535
+      ctime3: 65535
       ctime4: 65535
       ctime5: 0
       ctime6: 0
       ctime7: 0
-      atime0: 11180
-      atime1: 31997
+      atime0: 0
+      atime1: 65535
       atime2: 52235
       atime3: 0
       atime4: 0
@@ -298,8 +298,8 @@ TrailRenderer:
       atime7: 0
       m_Mode: 0
       m_ColorSpace: 0
-      m_NumColorKeys: 5
-      m_NumAlphaKeys: 3
+      m_NumColorKeys: 2
+      m_NumAlphaKeys: 2
     numCornerVertices: 0
     numCapVertices: 0
     alignment: 0
@@ -307,7 +307,7 @@ TrailRenderer:
     textureScale: {x: 1, y: 1}
     shadowBias: 0.5
     generateLightingData: 0
-  m_MinVertexDistance: 0.1
+  m_MinVertexDistance: 0
   m_MaskInteraction: 0
   m_Autodestruct: 0
   m_Emitting: 1
@@ -324,8 +324,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c8efeff6e174d8aac702bfa315465d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jitterAmount: {x: 0.5, y: 0.5, z: 0.5}
-  jitterSpeed: 0.03125
+  jitterAmount: {x: 0.3, y: 0.3, z: 0.3}
+  jitterSpeed: 0.03
 --- !u!1 &6006259092124854573
 GameObject:
   m_ObjectHideFlags: 0
@@ -355,7 +355,7 @@ Transform:
   m_GameObject: {fileID: 6006259092124854573}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 2.895, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -390,7 +390,7 @@ TrailRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 410fa9a27b8dd1f4989dd201babd7d76, type: 2}
+  - {fileID: 2100000, guid: 732750dc657bd5743a994b90f56901ae, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -411,7 +411,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 0.125
+  m_Time: 0.5
   m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
@@ -442,42 +442,42 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 0.39, b: 0.39, a: 0.627451}
-      key1: {r: 1, g: 0, b: 0, a: 0.84313726}
-      key2: {r: 1, g: 0, b: 0, a: 0.627451}
+      key0: {r: 1, g: 1, b: 1, a: 0}
+      key1: {r: 1, g: 1, b: 1, a: 1}
+      key2: {r: 1, g: 0, b: 0, a: 0.74509805}
       key3: {r: 1, g: 0, b: 0, a: 0}
       key4: {r: 1, g: 0.35500002, b: 0.35500002, a: 0}
       key5: {r: 0, g: 0, b: 0, a: 0}
       key6: {r: 0, g: 0, b: 0, a: 0}
       key7: {r: 0, g: 0, b: 0, a: 0}
       ctime0: 0
-      ctime1: 16384
+      ctime1: 65535
       ctime2: 32382
       ctime3: 49537
       ctime4: 65535
       ctime5: 0
       ctime6: 0
       ctime7: 0
-      atime0: 11180
-      atime1: 31997
-      atime2: 52235
-      atime3: 0
+      atime0: 0
+      atime1: 9830
+      atime2: 34492
+      atime3: 65535
       atime4: 0
       atime5: 0
       atime6: 0
       atime7: 0
       m_Mode: 0
       m_ColorSpace: 0
-      m_NumColorKeys: 5
-      m_NumAlphaKeys: 3
+      m_NumColorKeys: 2
+      m_NumAlphaKeys: 4
     numCornerVertices: 0
     numCapVertices: 0
     alignment: 0
-    textureMode: 0
+    textureMode: 2
     textureScale: {x: 1, y: 1}
     shadowBias: 0.5
     generateLightingData: 0
-  m_MinVertexDistance: 0.1
+  m_MinVertexDistance: 0
   m_MaskInteraction: 0
   m_Autodestruct: 0
   m_Emitting: 1
@@ -5327,7 +5327,7 @@ Transform:
   m_GameObject: {fileID: 6775742146601020992}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.13052596, z: -0, w: 0.99144495}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.3, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5357,7 +5357,7 @@ TrailRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 410fa9a27b8dd1f4989dd201babd7d76, type: 2}
+  - {fileID: 2100000, guid: 732750dc657bd5743a994b90f56901ae, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5378,7 +5378,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 0.125
+  m_Time: 0.5
   m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
@@ -5409,34 +5409,34 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 0.39, b: 0.39, a: 0.627451}
-      key1: {r: 1, g: 0, b: 0, a: 0.84313726}
-      key2: {r: 1, g: 0, b: 0, a: 0.627451}
+      key0: {r: 1, g: 1, b: 1, a: 0}
+      key1: {r: 1, g: 1, b: 1, a: 1}
+      key2: {r: 1, g: 0, b: 0, a: 0.74509805}
       key3: {r: 1, g: 0, b: 0, a: 0}
       key4: {r: 1, g: 0.35500002, b: 0.35500002, a: 0}
       key5: {r: 0, g: 0, b: 0, a: 0}
       key6: {r: 0, g: 0, b: 0, a: 0}
       key7: {r: 0, g: 0, b: 0, a: 0}
       ctime0: 0
-      ctime1: 16384
+      ctime1: 65535
       ctime2: 32382
       ctime3: 49537
       ctime4: 65535
       ctime5: 0
       ctime6: 0
       ctime7: 0
-      atime0: 11180
-      atime1: 31997
-      atime2: 52235
-      atime3: 0
+      atime0: 0
+      atime1: 9830
+      atime2: 34492
+      atime3: 65535
       atime4: 0
       atime5: 0
       atime6: 0
       atime7: 0
       m_Mode: 0
       m_ColorSpace: 0
-      m_NumColorKeys: 5
-      m_NumAlphaKeys: 3
+      m_NumColorKeys: 2
+      m_NumAlphaKeys: 4
     numCornerVertices: 0
     numCapVertices: 0
     alignment: 0
@@ -5444,7 +5444,7 @@ TrailRenderer:
     textureScale: {x: 1, y: 1}
     shadowBias: 0.5
     generateLightingData: 0
-  m_MinVertexDistance: 0.1
+  m_MinVertexDistance: 0
   m_MaskInteraction: 0
   m_Autodestruct: 0
   m_Emitting: 1
@@ -5462,7 +5462,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jitterAmount: {x: 0.5, y: 0.5, z: 0.5}
-  jitterSpeed: 0.03125
+  jitterSpeed: 0.03
 --- !u!1 &6992544465860934227
 GameObject:
   m_ObjectHideFlags: 0
@@ -5490,7 +5490,7 @@ Transform:
   m_GameObject: {fileID: 6992544465860934227}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.2588191, z: 0, w: 0.9659258}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5520,7 +5520,7 @@ TrailRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 410fa9a27b8dd1f4989dd201babd7d76, type: 2}
+  - {fileID: 2100000, guid: 732750dc657bd5743a994b90f56901ae, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5541,7 +5541,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 0.125
+  m_Time: 0.5
   m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
@@ -5572,34 +5572,34 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 0.39, b: 0.39, a: 0.627451}
-      key1: {r: 1, g: 0, b: 0, a: 0.84313726}
-      key2: {r: 1, g: 0, b: 0, a: 0.627451}
+      key0: {r: 1, g: 1, b: 1, a: 0}
+      key1: {r: 1, g: 1, b: 1, a: 1}
+      key2: {r: 1, g: 0, b: 0, a: 0.74509805}
       key3: {r: 1, g: 0, b: 0, a: 0}
       key4: {r: 1, g: 0.35500002, b: 0.35500002, a: 0}
       key5: {r: 0, g: 0, b: 0, a: 0}
       key6: {r: 0, g: 0, b: 0, a: 0}
       key7: {r: 0, g: 0, b: 0, a: 0}
       ctime0: 0
-      ctime1: 16384
+      ctime1: 65535
       ctime2: 32382
       ctime3: 49537
       ctime4: 65535
       ctime5: 0
       ctime6: 0
       ctime7: 0
-      atime0: 11180
-      atime1: 31997
-      atime2: 52235
-      atime3: 0
+      atime0: 0
+      atime1: 9830
+      atime2: 34492
+      atime3: 65535
       atime4: 0
       atime5: 0
       atime6: 0
       atime7: 0
       m_Mode: 0
       m_ColorSpace: 0
-      m_NumColorKeys: 5
-      m_NumAlphaKeys: 3
+      m_NumColorKeys: 2
+      m_NumAlphaKeys: 4
     numCornerVertices: 0
     numCapVertices: 0
     alignment: 0
@@ -5607,7 +5607,7 @@ TrailRenderer:
     textureScale: {x: 1, y: 1}
     shadowBias: 0.5
     generateLightingData: 0
-  m_MinVertexDistance: 0.1
+  m_MinVertexDistance: 0
   m_MaskInteraction: 0
   m_Autodestruct: 0
   m_Emitting: 1
@@ -5625,7 +5625,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jitterAmount: {x: 0.5, y: 0.5, z: 0.5}
-  jitterSpeed: 0.03125
+  jitterSpeed: 0.03
 --- !u!1 &7530425833671077218
 GameObject:
   m_ObjectHideFlags: 0
@@ -5653,7 +5653,7 @@ Transform:
   m_GameObject: {fileID: 7530425833671077218}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.13052596, z: -0, w: 0.99144495}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.3, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5683,7 +5683,7 @@ TrailRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 410fa9a27b8dd1f4989dd201babd7d76, type: 2}
+  - {fileID: 2100000, guid: 732750dc657bd5743a994b90f56901ae, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5704,7 +5704,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 0.125
+  m_Time: 0.5
   m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
@@ -5735,34 +5735,34 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 0.39, b: 0.39, a: 0.627451}
-      key1: {r: 1, g: 0, b: 0, a: 0.84313726}
-      key2: {r: 1, g: 0, b: 0, a: 0.627451}
+      key0: {r: 1, g: 1, b: 1, a: 0}
+      key1: {r: 1, g: 1, b: 1, a: 1}
+      key2: {r: 1, g: 0, b: 0, a: 0.74509805}
       key3: {r: 1, g: 0, b: 0, a: 0}
       key4: {r: 1, g: 0.35500002, b: 0.35500002, a: 0}
       key5: {r: 0, g: 0, b: 0, a: 0}
       key6: {r: 0, g: 0, b: 0, a: 0}
       key7: {r: 0, g: 0, b: 0, a: 0}
       ctime0: 0
-      ctime1: 16384
+      ctime1: 65535
       ctime2: 32382
       ctime3: 49537
       ctime4: 65535
       ctime5: 0
       ctime6: 0
       ctime7: 0
-      atime0: 11180
-      atime1: 31997
-      atime2: 52235
-      atime3: 0
+      atime0: 0
+      atime1: 9830
+      atime2: 34492
+      atime3: 65535
       atime4: 0
       atime5: 0
       atime6: 0
       atime7: 0
       m_Mode: 0
       m_ColorSpace: 0
-      m_NumColorKeys: 5
-      m_NumAlphaKeys: 3
+      m_NumColorKeys: 2
+      m_NumAlphaKeys: 4
     numCornerVertices: 0
     numCapVertices: 0
     alignment: 0
@@ -5770,7 +5770,7 @@ TrailRenderer:
     textureScale: {x: 1, y: 1}
     shadowBias: 0.5
     generateLightingData: 0
-  m_MinVertexDistance: 0.1
+  m_MinVertexDistance: 0
   m_MaskInteraction: 0
   m_Autodestruct: 0
   m_Emitting: 1
@@ -5788,4 +5788,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jitterAmount: {x: 0.5, y: 0.5, z: 0.5}
-  jitterSpeed: 0.03125
+  jitterSpeed: 0.03

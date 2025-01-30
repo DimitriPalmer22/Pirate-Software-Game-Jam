@@ -4583,13 +4583,73 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2907940608052773542, guid: 901c7888965525d469a35bce2c0885d0, type: 3}
+      propertyPath: m_Parameters.colorGradient.atime0
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2907940608052773542, guid: 901c7888965525d469a35bce2c0885d0, type: 3}
+      propertyPath: m_Parameters.colorGradient.atime1
+      value: 65535
+      objectReference: {fileID: 0}
+    - target: {fileID: 2907940608052773542, guid: 901c7888965525d469a35bce2c0885d0, type: 3}
+      propertyPath: m_Parameters.colorGradient.atime2
+      value: 65535
+      objectReference: {fileID: 0}
+    - target: {fileID: 2907940608052773542, guid: 901c7888965525d469a35bce2c0885d0, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2907940608052773542, guid: 901c7888965525d469a35bce2c0885d0, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2907940608052773542, guid: 901c7888965525d469a35bce2c0885d0, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2907940608052773542, guid: 901c7888965525d469a35bce2c0885d0, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2907940608052773542, guid: 901c7888965525d469a35bce2c0885d0, type: 3}
+      propertyPath: m_Parameters.colorGradient.key1.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2907940608052773542, guid: 901c7888965525d469a35bce2c0885d0, type: 3}
+      propertyPath: m_Parameters.colorGradient.key2.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2907940608052773542, guid: 901c7888965525d469a35bce2c0885d0, type: 3}
+      propertyPath: m_Parameters.colorGradient.m_NumAlphaKeys
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2907940608052773542, guid: 901c7888965525d469a35bce2c0885d0, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[1].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2907940608052773542, guid: 901c7888965525d469a35bce2c0885d0, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[1].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2907940608052773542, guid: 901c7888965525d469a35bce2c0885d0, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[1].inSlope
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2907940608052773542, guid: 901c7888965525d469a35bce2c0885d0, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].outSlope
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5919222062953472579, guid: 901c7888965525d469a35bce2c0885d0, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6006259092124854573, guid: 901c7888965525d469a35bce2c0885d0, type: 3}
       propertyPath: m_Name
       value: Lightning Bullet
       objectReference: {fileID: 0}
     - target: {fileID: 6831916049879454790, guid: 901c7888965525d469a35bce2c0885d0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 11
+      value: -24.67
       objectReference: {fileID: 0}
     - target: {fileID: 6831916049879454790, guid: 901c7888965525d469a35bce2c0885d0, type: 3}
       propertyPath: m_LocalPosition.y
