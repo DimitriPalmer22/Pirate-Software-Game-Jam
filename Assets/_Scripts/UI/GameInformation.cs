@@ -45,10 +45,17 @@ public class GameInformation : MonoBehaviour
         {
             // Set the wave text to the next wave
             waveText.text = $"Wave {waveManager.CurrentWaveIndex + 1}";
+
+            if (waveManager.NextWave.IsBossWave)
+                waveText.text = "Boss Wave!";
+
             return;
         }
 
         // Set the wave text to the current wave
         waveText.text = $"Wave {waveManager.CurrentWaveIndex}";
+
+        if (waveManager.CurrentWave.IsBossWave)
+            waveText.text = "Boss Wave!";
     }
 }

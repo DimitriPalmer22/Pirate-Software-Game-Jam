@@ -17,7 +17,17 @@ public class FireworksManager : MonoBehaviour
 
     private void Start()
     {
-        WaveManager.Instance.onWaveComplete += PlayFireworks;
+        WaveManager.Instance.onWaveComplete += PlayFireworksOnWaveComplete;
+    }
+
+    private void PlayFireworksOnWaveComplete()
+    {
+        // If the current wave is not a boss wave, return
+        if (!WaveManager.Instance.CurrentWave.IsBossWave)
+            return;
+        
+        // Play the fireworks
+        PlayFireworks();
     }
 
     public void PlayFireworks()

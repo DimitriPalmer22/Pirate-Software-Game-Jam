@@ -46,7 +46,10 @@ public class WaveText : MonoBehaviour
         _stayOnScreenTimer.Start();
 
         // Set the text
-        text.text = $"Wave {WaveManager.Instance.CurrentWaveIndex}";
+        if (!WaveManager.Instance.CurrentWave.IsBossWave)
+            text.text = $"Wave {WaveManager.Instance.CurrentWaveIndex}";
+        else
+            text.text = "Boss Wave!";
     }
 
     private void Start()

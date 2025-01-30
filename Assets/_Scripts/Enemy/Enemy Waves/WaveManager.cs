@@ -51,6 +51,11 @@ public class WaveManager : MonoBehaviour, IDebugged
     public bool HasStartedGame { get; private set; }
     public bool IsWaitingForNextWave { get; private set; }
 
+    public EnemyWave CurrentWave => _currentWave;
+    public EnemyWave NextWave { get; private set; }
+
+    private EnemyWave StandardRandomWave => CreateRandomEnemyWave(5, 3);
+
     #endregion
 
     public Action onWaveStart;
@@ -84,14 +89,32 @@ public class WaveManager : MonoBehaviour, IDebugged
 
     private void SpawnNextWaveOnWaveComplete()
     {
-        // After every 5 waves, wait for the player to upgrade
-        if (_currentWaveIndex % 5 == 0)
+        // // After every 5 waves, wait for the player to upgrade
+        // if (_currentWaveIndex % 5 == 0)
+        // {
+        //     IsWaitingForNextWave = true;
+        //     return;
+        // }
+
+        // After a boss wave, wait for the player to upgrade
+        if (CurrentWave.IsBossWave)
         {
             IsWaitingForNextWave = true;
+
+            // Decrement the wave index to fix the upgrade wave
+            _currentWaveIndex--;
+
             return;
         }
 
-        SpawnNextWave();
+        // TODO: Random waves based on difficulty
+        // After every 5 waves, spawn a boss wave
+        var nextWave = (_currentWaveIndex % 5 == 0)
+            ? CreateBossWave()
+            : StandardRandomWave;
+
+        // Spawn the next wave
+        SpawnNextWave(nextWave);
     }
 
     private void UpgradePowerOnWaveComplete()
@@ -107,7 +130,7 @@ public class WaveManager : MonoBehaviour, IDebugged
         UpgradePicker.Instance.Activate();
     }
 
-    private void SpawnNextWave()
+    private void SpawnNextWave(EnemyWave wave)
     {
         _isBetweenWaves = true;
 
@@ -115,14 +138,17 @@ public class WaveManager : MonoBehaviour, IDebugged
         IsWaitingForNextWave = false;
 
         // Start the coroutine to wait between waves
-        StartCoroutine(WaitBetweenWaves());
+        StartCoroutine(WaitBetweenWaves(wave));
     }
 
-    private IEnumerator WaitBetweenWaves()
+    private IEnumerator WaitBetweenWaves(EnemyWave wave)
     {
         var startTime = Time.time;
 
         TimeBetweenWavesRemaining = timeBetweenWaves;
+        
+        // Set the next wave
+        NextWave = wave;
 
         // Wait for the time between waves
         while (Time.time - startTime < timeBetweenWaves)
@@ -137,7 +163,7 @@ public class WaveManager : MonoBehaviour, IDebugged
         _isBetweenWaves = false;
 
         // Spawn the next wave
-        SetWave(CreateRandomEnemyWave(5, 3));
+        SetWave(wave);
     }
 
     private void Update()
@@ -159,13 +185,13 @@ public class WaveManager : MonoBehaviour, IDebugged
         HasStartedGame = true;
 
         // Spawn the first wave
-        SpawnNextWave();
+        SpawnNextWave(StandardRandomWave);
     }
 
     public void ResumeGame()
     {
         // Spawn the first wave
-        SpawnNextWave();
+        SpawnNextWave(StandardRandomWave);
     }
 
     #region Wave Controls
@@ -313,6 +339,20 @@ public class WaveManager : MonoBehaviour, IDebugged
             enemyBatchInfos[i] = CreateRandomEnemyBatchInfo(batchSize);
 
         return CreateEnemyWave(enemyBatchInfos);
+    }
+
+    private EnemyWave CreateBossWave()
+    {
+        var enemyBatchInfos = new List<EnemyBatchInfo>();
+
+        // TODO: Add the boss batch
+        enemyBatchInfos.Add(CreateEnemyBatchInfo(CreateRandomEnemyBatch(1), 5));
+
+        // TODO: Add the normal batches
+        for (var i = 0; i < 4; i++)
+            enemyBatchInfos.Add(CreateRandomEnemyBatchInfo(3));
+
+        return new EnemyWave(enemyBatchInfos.ToArray(), true);
     }
 
     #endregion
