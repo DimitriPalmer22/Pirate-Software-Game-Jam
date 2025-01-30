@@ -15,7 +15,7 @@ public class BasicProjectile : Projectile
     protected Rigidbody rb;
 
     protected Vector3 velocity;
-    private float _totalDamage;
+    protected float totalDamage;
 
     private int _remainingPierceCount;
 
@@ -54,7 +54,7 @@ public class BasicProjectile : Projectile
     protected override void CustomShoot(IActor projectileShooter, Vector3 direction, float damageMult, float speed)
     {
         // Set the total damage
-        _totalDamage = damageMult * damageMultiplier;
+        totalDamage = damageMult * damageMultiplier;
 
         // Set the velocity
         velocity = direction * (speed * speedMultiplier);
@@ -82,7 +82,7 @@ public class BasicProjectile : Projectile
             return;
 
         // Damage the actor
-        actor.ChangeHealth(-_totalDamage, shooter, this, other.ClosestPoint(transform.position));
+        actor.ChangeHealth(-totalDamage, shooter, this, other.ClosestPoint(transform.position));
 
         // Decrement the remaining pierce count
         _remainingPierceCount--;

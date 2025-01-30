@@ -31,7 +31,8 @@ public abstract class Projectile : MonoBehaviour, IDamager
         CustomDestruct();
 
         // Destroy the projectile's game object
-        Destroy(gameObject);
+        if (gameObject != null)
+            Destroy(gameObject);
     }
 
     protected abstract void CustomDestruct();

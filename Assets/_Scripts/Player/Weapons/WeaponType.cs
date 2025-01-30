@@ -4,4 +4,5 @@
     BasicGun,
     EnergyBolts,
     EnergizedBullets,
+    RocketLauncher
 }

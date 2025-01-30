@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68db67877f33431f9c58145b6df6cc2f, type: 3}
+  m_Name: Rocket Launcher
+  m_EditorClassIdentifier: 
+  displayName: Rocket Launcher
+  icon: {fileID: 21300094, guid: 7ab74e659e1f0a34d9cfec21c478fc12, type: 3}
+  weaponType: 4
+  weaponPrefab: {fileID: -7666018712940385853, guid: b6bccfe70a4184547a29d4479fe44ff8, type: 3}
+  upgrades:
+  - upgradeName: Upgrade 1
+    maxStack: 2
+    weight: 30
+    rarity: 0
+  - upgradeName: Upgrade 2
+    maxStack: 1
+    weight: 30
+    rarity: 0
+  - upgradeName: Upgrade 3
+    maxStack: 1
+    weight: 15
+    rarity: 1
+  - upgradeName: Upgrade 4
+    maxStack: 1
+    weight: 15
+    rarity: 1
+  - upgradeName: Upgrade 5
+    maxStack: 1
+    weight: 10
+    rarity: 2
