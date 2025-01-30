@@ -13,8 +13,10 @@ public class ManekiManager : MonoBehaviour, IInteractable
     [SerializeField, Min(0)] private float notificationLerpAmount = 0.20f;
     [SerializeField] private GameObject manekiObject;
 
+    [SerializeField] private ParticleSystem glow;
+
     [SerializeField] private UnityEvent onInteract;
-    
+
     #endregion
 
     #region Private Fields
@@ -29,7 +31,7 @@ public class ManekiManager : MonoBehaviour, IInteractable
     public bool IsInteractable => _currentMode != ManekiMode.None;
 
     public GameObject GameObject => gameObject;
-    
+
     public GameObject ManekiObject => manekiObject;
 
     #endregion
@@ -56,6 +58,19 @@ public class ManekiManager : MonoBehaviour, IInteractable
 
         // Update the notification
         UpdateNotification();
+
+        // Update the glow
+        UpdateGlow();
+    }
+
+    private void UpdateGlow()
+    {
+        // Play the glow if the object is interactable 
+        if (IsInteractable && !glow.isPlaying)
+            glow.Play();
+        
+        else if (!IsInteractable && glow.isPlaying)
+            glow.Stop();
     }
 
     private void UpdateManekiMode()
@@ -104,7 +119,7 @@ public class ManekiManager : MonoBehaviour, IInteractable
 
         // Set the mode back to none
         _currentMode = ManekiMode.None;
-        
+
         // Invoke the on interact event
         onInteract.Invoke();
     }
