@@ -4,6 +4,8 @@ using static System.String;
 
 public class ManekiManager : MonoBehaviour, IInteractable
 {
+    public static ManekiManager Instance { get; private set; }
+
     #region Serialized Fields
 
     [SerializeField] private CanvasGroup notificationCanvasGroup;
@@ -25,6 +27,13 @@ public class ManekiManager : MonoBehaviour, IInteractable
     public GameObject GameObject => gameObject;
 
     #endregion
+
+
+    private void Awake()
+    {
+        // Set the instance to this
+        Instance = this;
+    }
 
     private void Start()
     {

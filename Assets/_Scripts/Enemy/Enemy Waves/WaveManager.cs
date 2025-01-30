@@ -21,7 +21,7 @@ public class WaveManager : MonoBehaviour, IDebugged
     [SerializeField, Min(0)] private float timeBetweenWaves = 5;
 
     [SerializeField] private float playerWaveHealAmount = 50;
-    
+
     [SerializeField] private Enemy bossEnemyPrefab;
     [SerializeField] private Transform bossSpawnPoint;
 
@@ -40,6 +40,8 @@ public class WaveManager : MonoBehaviour, IDebugged
     private readonly HashSet<Enemy> _enemiesInWave = new();
     private int _currentWaveIndex;
     private bool _isBetweenWaves;
+
+    private Renderer _renderer;
 
     #endregion
 
@@ -62,7 +64,7 @@ public class WaveManager : MonoBehaviour, IDebugged
     private EnemyWave StandardRandomWave => CreateRandomEnemyWave(5, 3);
 
     public float PlayerWaveHealAmount => playerWaveHealAmount;
-    
+
     #endregion
 
     public Action onWaveStart;
@@ -92,6 +94,32 @@ public class WaveManager : MonoBehaviour, IDebugged
     {
         onWaveComplete += SpawnNextWaveOnWaveComplete;
         onWaveComplete += UpgradePowerOnWaveComplete;
+
+        onWaveStart += DisableRendererOnBossWaveStart;
+        onWaveComplete += EnableRendererOnBossWaveComplete;
+
+        // Get the renderer
+        _renderer = ManekiManager.Instance.GetComponent<Renderer>();
+    }
+
+    private void EnableRendererOnBossWaveComplete()
+    {
+        // Return if this is not a boss wave
+        if (!CurrentWave.IsBossWave)
+            return;
+
+        // Enable the renderer of this object
+        _renderer.enabled = true;
+    }
+
+    private void DisableRendererOnBossWaveStart()
+    {
+        // Return if this is not a boss wave
+        if (!CurrentWave.IsBossWave)
+            return;
+
+        // Disable the renderer of this object
+        _renderer.enabled = false;
     }
 
     private void SpawnNextWaveOnWaveComplete()
