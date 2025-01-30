@@ -51,6 +51,7 @@ MonoBehaviour:
   upgradeWaves: 0200000004000000
   enemyPrefabs:
   - {fileID: 8231567678460553042, guid: ddeae1b36d58608439e6c064092b1e69, type: 3}
+  - {fileID: 8231567678460553042, guid: 7572db54060a45b4eae3c4f7d3f12ff0, type: 3}
   spawnPoints:
   - {fileID: 0}
   - {fileID: 0}
