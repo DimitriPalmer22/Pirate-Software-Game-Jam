@@ -3,4 +3,5 @@
     ChainLightning,
     BasicGun,
     EnergyBolts,
+    EnergizedBullets,
 }

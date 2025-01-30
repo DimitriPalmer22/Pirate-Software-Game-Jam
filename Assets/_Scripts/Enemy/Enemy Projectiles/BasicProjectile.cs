@@ -12,9 +12,9 @@ public class BasicProjectile : Projectile
 
     #region Private Fields
 
-    private Rigidbody _rigidbody;
+    protected Rigidbody rb;
 
-    private Vector3 _velocity;
+    protected Vector3 velocity;
     private float _totalDamage;
 
     private int _remainingPierceCount;
@@ -33,10 +33,10 @@ public class BasicProjectile : Projectile
     private void InitializeComponents()
     {
         // Get the Rigidbody component
-        _rigidbody = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>();
 
         // Set the rigidbody to ALSO ignore the layers to ignore
-        _rigidbody.excludeLayers |= layersToIgnore;
+        rb.excludeLayers |= layersToIgnore;
     }
 
     private void FixedUpdate()
@@ -45,10 +45,10 @@ public class BasicProjectile : Projectile
         UpdatePosition();
     }
 
-    private void UpdatePosition()
+    protected virtual void UpdatePosition()
     {
         // Set the velocity of the Rigidbody
-        _rigidbody.linearVelocity = _velocity;
+        rb.linearVelocity = velocity;
     }
 
     protected override void CustomShoot(IActor projectileShooter, Vector3 direction, float damageMult, float speed)
@@ -57,7 +57,7 @@ public class BasicProjectile : Projectile
         _totalDamage = damageMult * damageMultiplier;
 
         // Set the velocity
-        _velocity = direction * (speed * speedMultiplier);
+        velocity = direction * (speed * speedMultiplier);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -86,8 +86,6 @@ public class BasicProjectile : Projectile
 
         // Decrement the remaining pierce count
         _remainingPierceCount--;
-        
-        Debug.Log(_remainingPierceCount);
 
         // Destroy the projectile IFF the remaining pierce count is 0
         // If the pierce count is -1, the projectile will never be destroyed

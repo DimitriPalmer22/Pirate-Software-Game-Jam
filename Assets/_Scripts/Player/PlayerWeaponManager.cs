@@ -186,7 +186,6 @@ public class PlayerWeaponManager : ComponentScript<Player>
         return weapon;
     }
     
-    
     private void OnDrawGizmos()
     {
         // Draw a line representing the weapon's aim forward

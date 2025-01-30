@@ -74,14 +74,11 @@ public class Enemy : MonoBehaviour, IActor
         
         OnDeath += (sender, args) => _allEnemies.Remove(this);
     }
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    private void Start()
+    
+    private void OnDestroy()
     {
+        // Remove this enemy from the list of all enemies
+        _allEnemies.Remove(this);
     }
 
-    // Update is called once per frame
-    private void Update()
-    {
-    }
 }
