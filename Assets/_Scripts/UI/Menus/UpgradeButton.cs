@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,10 +14,29 @@ public class UpgradeButton : MonoBehaviour
     [SerializeField] private Sprite rareImage;
     [SerializeField] private Sprite legendaryImage;
 
+    [SerializeField] private float commonRotationSpeed = .5f;
+    [SerializeField] private float rareRotationSpeed = 1;
+    [SerializeField] private float legendaryRotationSpeed = 2;
 
     private UpgradePicker _upgradePicker;
     private WeaponUpgradeToken _upgradeToken;
     private PlayerWeapon _weapon;
+    private WeaponUpgradeRarity _rarity;
+
+    private void Update()
+    {
+        var rotationSpeed = _rarity switch
+        {
+            WeaponUpgradeRarity.Common => commonRotationSpeed,
+            WeaponUpgradeRarity.Rare => rareRotationSpeed,
+            WeaponUpgradeRarity.Legendary => legendaryRotationSpeed,
+            _ => commonRotationSpeed
+        };
+
+        rarityImage.transform.Rotate(Vector3.forward, rotationSpeed * Mathf.PI * Time.unscaledDeltaTime);
+        
+        Debug.Log("Update");
+    }
 
     public void SetData(UpgradePicker upgradePicker, WeaponUpgradeToken upgradeToken)
     {
@@ -38,6 +58,9 @@ public class UpgradeButton : MonoBehaviour
 
         // Set the image for the upgrade button
         weaponImage.sprite = upgradeToken.WeaponScriptableObject.Icon;
+
+        // Set the rarity for the upgrade button
+        _rarity = upgradeInfo.Rarity;
 
         // Set the color for the upgrade button
         rarityImage.sprite = upgradeInfo.Rarity switch

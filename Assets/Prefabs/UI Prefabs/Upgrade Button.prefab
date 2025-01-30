@@ -386,6 +386,9 @@ MonoBehaviour:
   commonImage: {fileID: 21300000, guid: 694bae1f04ad2e94680fa63203c7c3ff, type: 3}
   rareImage: {fileID: 21300000, guid: a296b4ad8f2191c40ab7e9fec96b50c3, type: 3}
   legendaryImage: {fileID: 21300000, guid: f57cbd581cf41ca418e94c7b4985ead1, type: 3}
+  commonRotationSpeed: 8
+  rareRotationSpeed: 16
+  legendaryRotationSpeed: 32
 --- !u!114 &5290047917960427454
 MonoBehaviour:
   m_ObjectHideFlags: 0
