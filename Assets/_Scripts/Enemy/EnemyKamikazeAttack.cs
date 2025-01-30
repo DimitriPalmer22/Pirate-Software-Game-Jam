@@ -10,6 +10,9 @@ public class EnemyKamikazeAttack : ComponentScript<Enemy>, IDamager
     [SerializeField, Min(0)] private float explosionRadius = 5f;
     [SerializeField, Min(0)] private float fuseTime = 3f;
 
+    [SerializeField] private ParticleSystem smokeParticlesPrefab;
+    [SerializeField] private ParticleSystem explosionParticlesPrefab;
+
     private Player _player;
     private bool _isExploding;
 
@@ -48,8 +51,27 @@ public class EnemyKamikazeAttack : ComponentScript<Enemy>, IDamager
         // Set the enemy to exploding
         _isExploding = true;
 
+        ParticleSystem smokeParticles = null;
+
+        // If there is a prefab for the smoke, instantiate it
+        if (smokeParticlesPrefab != null)
+        {
+            smokeParticles = Instantiate(smokeParticlesPrefab, transform);
+            smokeParticles.Play();
+        }
+
         // Wait for the fuse time
         yield return new WaitForSeconds(fuseTime);
+
+        // Stop the smoke particles
+        smokeParticles?.Stop();
+        
+        // If there is a prefab for the explosion, instantiate it
+        if (explosionParticlesPrefab != null)
+        {
+            var explosionParticles = Instantiate(explosionParticlesPrefab, transform.position, Quaternion.identity);
+            explosionParticles.Play();
+        }
 
         // Create a hash set to store all the actors that have been damaged
         var damagedActors = new HashSet<IActor>();

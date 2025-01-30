@@ -11,6 +11,8 @@ public class WaveManager : MonoBehaviour, IDebugged
 
     private const float MIN_RANDOM_TIME_BETWEEN_SPAWNS = 1f;
     private const float MAX_RANDOM_TIME_BETWEEN_SPAWNS = 3f;
+    
+    public const int WAVE_CYCLE = 5;
 
     #endregion
 
@@ -137,7 +139,7 @@ public class WaveManager : MonoBehaviour, IDebugged
 
         // TODO: Random waves based on difficulty
         // After every 5 waves, spawn a boss wave
-        var nextWave = (_currentWaveIndex % 5 == 0)
+        var nextWave = (_currentWaveIndex % WAVE_CYCLE == 0)
             ? CreateBossWave()
             : StandardRandomWave;
 
@@ -147,7 +149,7 @@ public class WaveManager : MonoBehaviour, IDebugged
 
     private void UpgradePowerOnWaveComplete()
     {
-        if (!upgradeWaves.Contains(_currentWaveIndex % 5))
+        if (!upgradeWaves.Contains(_currentWaveIndex % WAVE_CYCLE))
             return;
 
         // If the player has all upgrades, don't upgrade
@@ -379,7 +381,7 @@ public class WaveManager : MonoBehaviour, IDebugged
         enemyBatchInfos.Add(bossBatchInfo);
 
         // TODO: Add the normal batches
-        for (var i = 0; i < _currentWaveIndex / 5 - 1; i++)
+        for (var i = 0; i < _currentWaveIndex / WAVE_CYCLE - 1; i++)
             enemyBatchInfos.Add(CreateRandomEnemyBatchInfo(5));
 
         return new EnemyWave(enemyBatchInfos.ToArray(), true);
