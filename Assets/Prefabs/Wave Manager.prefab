@@ -44,6 +44,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 054417152bcb4da79031608bb1a035fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timeBetweenWaves: 5
+  playerWaveHealAmount: 50
+  bossEnemyPrefab: {fileID: 8231567678460553042, guid: 443a3d32ba71cdd438998a202cc76f37, type: 3}
+  bossSpawnPoint: {fileID: 3286557679755702471}
+  upgradeWaves: 0200000004000000
   enemyPrefabs:
   - {fileID: 8231567678460553042, guid: ddeae1b36d58608439e6c064092b1e69, type: 3}
   spawnPoints:

@@ -10,7 +10,7 @@ public class WaveManager : MonoBehaviour, IDebugged
     #region Constants
 
     private const float MIN_RANDOM_TIME_BETWEEN_SPAWNS = 1f;
-    private const float MAX_RANDOM_TIME_BETWEEN_SPAWNS = 5f;
+    private const float MAX_RANDOM_TIME_BETWEEN_SPAWNS = 3f;
 
     #endregion
 
@@ -19,6 +19,11 @@ public class WaveManager : MonoBehaviour, IDebugged
     #region Serialized Fields
 
     [SerializeField, Min(0)] private float timeBetweenWaves = 5;
+
+    [SerializeField] private float playerWaveHealAmount = 50;
+    
+    [SerializeField] private Enemy bossEnemyPrefab;
+    [SerializeField] private Transform bossSpawnPoint;
 
     [SerializeField] private int[] upgradeWaves = { 2, 4 };
     [SerializeField] private Enemy[] enemyPrefabs;
@@ -56,6 +61,8 @@ public class WaveManager : MonoBehaviour, IDebugged
 
     private EnemyWave StandardRandomWave => CreateRandomEnemyWave(5, 3);
 
+    public float PlayerWaveHealAmount => playerWaveHealAmount;
+    
     #endregion
 
     public Action onWaveStart;
@@ -146,7 +153,7 @@ public class WaveManager : MonoBehaviour, IDebugged
         var startTime = Time.time;
 
         TimeBetweenWavesRemaining = timeBetweenWaves;
-        
+
         // Set the next wave
         NextWave = wave;
 
@@ -345,12 +352,14 @@ public class WaveManager : MonoBehaviour, IDebugged
     {
         var enemyBatchInfos = new List<EnemyBatchInfo>();
 
-        // TODO: Add the boss batch
-        enemyBatchInfos.Add(CreateEnemyBatchInfo(CreateRandomEnemyBatch(1), 5));
+        // Add the boss batch
+        var bossSpawnInfo = CreateEnemySpawnInfo(bossEnemyPrefab, bossSpawnPoint);
+        var bossBatchInfo = CreateEnemyBatchInfo(new EnemyBatch(bossSpawnInfo), 5);
+        enemyBatchInfos.Add(bossBatchInfo);
 
         // TODO: Add the normal batches
-        for (var i = 0; i < 4; i++)
-            enemyBatchInfos.Add(CreateRandomEnemyBatchInfo(3));
+        for (var i = 0; i < _currentWaveIndex / 5 - 1; i++)
+            enemyBatchInfos.Add(CreateRandomEnemyBatchInfo(5));
 
         return new EnemyWave(enemyBatchInfos.ToArray(), true);
     }

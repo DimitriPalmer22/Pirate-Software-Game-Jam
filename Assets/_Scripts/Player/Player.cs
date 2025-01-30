@@ -53,7 +53,7 @@ public class Player : MonoBehaviour, IActor
         // Return if the player is invincible
         if (_invincibilityTimer.IsActive && !_invincibilityTimer.IsComplete)
             return;
-        
+
         // Return if the player is currently dodging
         if (PlayerController.IsDodging)
             return;
@@ -86,11 +86,11 @@ public class Player : MonoBehaviour, IActor
     public PlayerController PlayerController { get; private set; }
 
     public PlayerWeaponManager PlayerWeaponManager { get; private set; }
-    
+
     public PlayerInteraction PlayerInteraction { get; private set; }
 
     public bool IsInvincibleBecauseDamaged => _invincibilityTimer.IsActive && _invincibilityTimer.Percentage < 1;
-        
+
     #endregion
 
     private void Awake()
@@ -122,6 +122,18 @@ public class Player : MonoBehaviour, IActor
     private void OnDisable()
     {
         PlayerControls.Disable();
+    }
+
+    private void Start()
+    {
+        WaveManager.Instance.onWaveComplete += HealOnWaveComplete;
+    }
+
+    private void HealOnWaveComplete()
+    {
+        // Heal after the 3rd wave & the boss wave
+        if (WaveManager.Instance.CurrentWaveIndex == 3 || WaveManager.Instance.CurrentWave.IsBossWave)
+            ChangeHealth(WaveManager.Instance.PlayerWaveHealAmount, this, null, transform.position);
     }
 
     // Update is called once per frame
