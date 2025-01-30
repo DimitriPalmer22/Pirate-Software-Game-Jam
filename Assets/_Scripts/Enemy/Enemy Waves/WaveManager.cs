@@ -124,13 +124,6 @@ public class WaveManager : MonoBehaviour, IDebugged
 
     private void SpawnNextWaveOnWaveComplete()
     {
-        // // After every 5 waves, wait for the player to upgrade
-        // if (_currentWaveIndex % 5 == 0)
-        // {
-        //     IsWaitingForNextWave = true;
-        //     return;
-        // }
-
         // After a boss wave, wait for the player to upgrade
         if (CurrentWave.IsBossWave)
         {
