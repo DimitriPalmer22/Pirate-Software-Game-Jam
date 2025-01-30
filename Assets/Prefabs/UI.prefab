@@ -1720,6 +1720,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1032225198009844549}
+  - component: {fileID: 6730419835330500691}
+  - component: {fileID: 4707023736148154662}
   m_Layer: 0
   m_Name: UI
   m_TagString: Untagged
@@ -1752,6 +1754,33 @@ Transform:
   - {fileID: 608826960091878258}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!225 &6730419835330500691
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3157472895145607633}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!114 &4707023736148154662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3157472895145607633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd4648550c78423e85508826924b0056, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvasGroup: {fileID: 6730419835330500691}
+  lerpAmount: 0.2
+  startAlpha: 1
 --- !u!1 &3871038308570569794
 GameObject:
   m_ObjectHideFlags: 0

@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class WaveManager : MonoBehaviour, IDebugged
 {
@@ -11,7 +10,7 @@ public class WaveManager : MonoBehaviour, IDebugged
 
     private const float MIN_RANDOM_TIME_BETWEEN_SPAWNS = 1f;
     private const float MAX_RANDOM_TIME_BETWEEN_SPAWNS = 3f;
-    
+
     public const int WAVE_CYCLE = 5;
 
     #endregion
@@ -42,8 +41,6 @@ public class WaveManager : MonoBehaviour, IDebugged
     private readonly HashSet<Enemy> _enemiesInWave = new();
     private int _currentWaveIndex;
     private bool _isBetweenWaves;
-
-    private Renderer _renderer;
 
     #endregion
 
@@ -99,9 +96,6 @@ public class WaveManager : MonoBehaviour, IDebugged
 
         onWaveStart += DisableRendererOnBossWaveStart;
         onWaveComplete += EnableRendererOnBossWaveComplete;
-
-        // Get the renderer
-        _renderer = ManekiManager.Instance.GetComponent<Renderer>();
     }
 
     private void EnableRendererOnBossWaveComplete()
@@ -111,7 +105,7 @@ public class WaveManager : MonoBehaviour, IDebugged
             return;
 
         // Enable the renderer of this object
-        _renderer.enabled = true;
+        ManekiManager.Instance.ManekiObject.SetActive(true);
     }
 
     private void DisableRendererOnBossWaveStart()
@@ -121,7 +115,7 @@ public class WaveManager : MonoBehaviour, IDebugged
             return;
 
         // Disable the renderer of this object
-        _renderer.enabled = false;
+        ManekiManager.Instance.ManekiObject.SetActive(false);
     }
 
     private void SpawnNextWaveOnWaveComplete()

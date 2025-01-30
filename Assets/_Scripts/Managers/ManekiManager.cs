@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.Events;
 using static System.String;
 
 public class ManekiManager : MonoBehaviour, IInteractable
@@ -10,7 +11,10 @@ public class ManekiManager : MonoBehaviour, IInteractable
 
     [SerializeField] private CanvasGroup notificationCanvasGroup;
     [SerializeField, Min(0)] private float notificationLerpAmount = 0.20f;
+    [SerializeField] private GameObject manekiObject;
 
+    [SerializeField] private UnityEvent onInteract;
+    
     #endregion
 
     #region Private Fields
@@ -25,6 +29,8 @@ public class ManekiManager : MonoBehaviour, IInteractable
     public bool IsInteractable => _currentMode != ManekiMode.None;
 
     public GameObject GameObject => gameObject;
+    
+    public GameObject ManekiObject => manekiObject;
 
     #endregion
 
@@ -67,7 +73,6 @@ public class ManekiManager : MonoBehaviour, IInteractable
     {
         var desiredAlpha = _currentMode == ManekiMode.None ? 0 : 1;
 
-
         // Set the notification game object active based on the current mode
         notificationCanvasGroup.alpha = Mathf.Lerp(
             notificationCanvasGroup.alpha,
@@ -99,6 +104,9 @@ public class ManekiManager : MonoBehaviour, IInteractable
 
         // Set the mode back to none
         _currentMode = ManekiMode.None;
+        
+        // Invoke the on interact event
+        onInteract.Invoke();
     }
 
     public string InteractText(PlayerInteraction playerInteraction)
