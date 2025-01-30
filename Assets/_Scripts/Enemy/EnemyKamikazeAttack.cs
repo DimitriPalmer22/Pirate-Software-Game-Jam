@@ -10,11 +10,11 @@ public class EnemyKamikazeAttack : ComponentScript<Enemy>, IDamager
     [SerializeField, Min(0)] private float explosionRadius = 5f;
     [SerializeField, Min(0)] private float fuseTime = 3f;
 
-    [SerializeField] private ParticleSystem smokeParticlesPrefab;
+    [SerializeField] private ParticleSystem smokeParticles;
     [SerializeField] private ParticleSystem explosionParticlesPrefab;
 
     [Header("Difficulty"), SerializeField] private float diffDamageAdd = 20;
-    
+
     private Player _player;
     private bool _isExploding;
 
@@ -55,7 +55,6 @@ public class EnemyKamikazeAttack : ComponentScript<Enemy>, IDamager
         if (_isExploding)
             return;
 
-
         // Explode
         StartCoroutine(Explode());
     }
@@ -65,21 +64,15 @@ public class EnemyKamikazeAttack : ComponentScript<Enemy>, IDamager
         // Set the enemy to exploding
         _isExploding = true;
 
-        ParticleSystem smokeParticles = null;
-
-        // If there is a prefab for the smoke, instantiate it
-        if (smokeParticlesPrefab != null)
-        {
-            smokeParticles = Instantiate(smokeParticlesPrefab, transform);
-            smokeParticles.Play();
-        }
+        // If the smoke is not null, play it
+        smokeParticles?.Play();
 
         // Wait for the fuse time
         yield return new WaitForSeconds(fuseTime);
 
         // Stop the smoke particles
         smokeParticles?.Stop();
-        
+
         // If there is a prefab for the explosion, instantiate it
         if (explosionParticlesPrefab != null)
         {
@@ -115,5 +108,8 @@ public class EnemyKamikazeAttack : ComponentScript<Enemy>, IDamager
             // Damage the actor
             actor.ChangeHealth(-damage, ParentComponent, this, cCollider.ClosestPoint(transform.position));
         }
+
+        // Die
+        ParentComponent.ChangeHealth(-ParentComponent.MaxHealth, ParentComponent, this, transform.position);
     }
 }
