@@ -9,6 +9,8 @@ public class EnemyRangedAttack : ComponentScript<Enemy>
     [SerializeField] private float projectileSpeed = 10f;
     [SerializeField] private Transform projectileSpawnPoint;
     [SerializeField] private Projectile projectilePrefab;
+    private Animator _animatorManeki;
+
 
     [Header("Difficulty"), SerializeField] private float diffIntervalAdd = -.25f;
     [SerializeField] private float diffDamageAdd = 10;
@@ -17,9 +19,14 @@ public class EnemyRangedAttack : ComponentScript<Enemy>
 
     private Player _player;
     private float _lastAttackTime;
+    
+    //static hash for the animator
+    private static readonly int Fire = Animator.StringToHash("Fire");
 
     protected override void CustomAwake()
     {
+        //get componenet in child and set it to the animator
+        _animatorManeki = GetComponentInChildren<Animator>();
     }
 
     private void Start()
@@ -47,10 +54,10 @@ public class EnemyRangedAttack : ComponentScript<Enemy>
         _player = Player.Instance;
 
         // Attack the player
-        Attack();
+        //Attack();
     }
 
-    private void Attack()
+    public void Attack()
     {
         // If the player is null, return
         if (_player == null)
@@ -68,6 +75,7 @@ public class EnemyRangedAttack : ComponentScript<Enemy>
         _lastAttackTime = Time.time;
 
         // Instantiate the projectile
+        _animatorManeki.SetTrigger(Fire);
         var projectile = Instantiate(projectilePrefab, projectileSpawnPoint.position, Quaternion.identity);
 
         // Shoot the projectile at the player
