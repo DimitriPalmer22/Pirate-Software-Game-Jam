@@ -42,16 +42,12 @@ public class PauseMenu : GameMenu
 
     private void OnPausePerformed(InputAction.CallbackContext obj)
     {
-        // If there is another menu active in the menu manager, deactivate it
-        if (MenuManager.Instance.ActiveMenus.Count > 0)
-            return;
-
         // If the menu is active, deactivate it
         if (IsActive)
             Resume();
 
         // If the menu is not active, activate it
-        else
+        else if (MenuManager.Instance.ActiveMenus.Count <= 0)
             Activate();
     }
 
