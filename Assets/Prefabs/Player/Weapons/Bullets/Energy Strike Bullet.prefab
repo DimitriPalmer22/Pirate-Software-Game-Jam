@@ -232,6 +232,7 @@ MonoBehaviour:
   speedMultiplier: 1
   lifeTime: 5
   pierceCount: 0
+  explosionEffectPrefab: {fileID: 5726470857268766986, guid: 5dce71120cab7044cbac4690c2217f32, type: 3}
 --- !u!199 &-891643568417458219
 ParticleSystemRenderer:
   serializedVersion: 6
