@@ -72,6 +72,8 @@ public class WaveManager : MonoBehaviour, IDebugged
 
     public float Difficulty => _currentWaveIndex / (WAVE_CYCLE * 5f);
 
+    public int BossWaveCount { get; private set; }
+
     #endregion
 
     public Action onWaveStart;
@@ -104,6 +106,13 @@ public class WaveManager : MonoBehaviour, IDebugged
 
         onWaveStart += DisableRendererOnBossWaveStart;
         onWaveComplete += EnableRendererOnBossWaveComplete;
+        onWaveStart += BossWaveCountIncrement;
+    }
+
+    private void BossWaveCountIncrement()
+    {
+        if (CurrentWave.IsBossWave)
+            BossWaveCount++;
     }
 
     private void EnableRendererOnBossWaveComplete()

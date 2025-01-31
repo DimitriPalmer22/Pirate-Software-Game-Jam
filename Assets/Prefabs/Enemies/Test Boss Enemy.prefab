@@ -9881,7 +9881,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 500
   currentHealth: 500
-  difficultyHealthAdd: 1500
+  difficultyHealthAdd: 2000
 --- !u!114 &5056608455845933334
 MonoBehaviour:
   m_ObjectHideFlags: 0
