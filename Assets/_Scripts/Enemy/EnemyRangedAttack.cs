@@ -26,7 +26,8 @@ public class EnemyRangedAttack : ComponentScript<Enemy>
 
     private Player _player;
     private float _lastAttackTime;
-    private Animator _animatorManeki;
+    private Animator _animator;
+    
     private bool _isFiring;
 
     #endregion
@@ -34,7 +35,7 @@ public class EnemyRangedAttack : ComponentScript<Enemy>
     protected override void CustomAwake()
     {
         //get component in child and set it to the animator
-        _animatorManeki = GetComponentInChildren<Animator>();
+        _animator = GetComponentInChildren<Animator>();
     }
 
     private void Start()
@@ -93,7 +94,7 @@ public class EnemyRangedAttack : ComponentScript<Enemy>
         _isFiring = true;
 
         // Set the trigger for the fire animation
-        _animatorManeki?.SetTrigger(FireAnimationID);
+        _animator?.SetTrigger(FireAnimationID);
     }
 
     public void Attack()
