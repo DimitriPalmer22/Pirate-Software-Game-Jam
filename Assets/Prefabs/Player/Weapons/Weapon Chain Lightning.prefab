@@ -48,8 +48,8 @@ MonoBehaviour:
   layersToIgnore:
     serializedVersion: 2
     m_Bits: 192
-  baseDamage: 34
-  fireRate: 0.5
+  baseDamage: 33
+  fireRate: 0.8
   range: 20
   bulletPrefab: {fileID: 6006259092124854573, guid: 901c7888965525d469a35bce2c0885d0, type: 3}
   maxChainCount: 3

@@ -48,7 +48,7 @@ MonoBehaviour:
   layersToIgnore:
     serializedVersion: 2
     m_Bits: 192
-  baseDamage: 15
+  baseDamage: 10
   fireRate: 0.33
   range: 20
   boltCount: 3
