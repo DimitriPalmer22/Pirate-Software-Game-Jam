@@ -63,6 +63,7 @@ public class Enemy : MonoBehaviour, IActor
     #endregion
 
     [SerializeField] private float difficultyHealthAdd = 100;
+    [SerializeField] private AudioSource hitSound;
 
     public GameObject GameObject => gameObject;
 
@@ -75,6 +76,9 @@ public class Enemy : MonoBehaviour, IActor
         _allEnemies.Add(this);
 
         OnDeath += (sender, args) => _allEnemies.Remove(this);
+        
+        // Connect the hit sound to the OnDamaged event
+        OnDamaged += (sender, args) => hitSound?.Play();
     }
 
     private void Start()
