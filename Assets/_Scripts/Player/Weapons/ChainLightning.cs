@@ -205,25 +205,29 @@ public class ChainLightning : PlayerWeapon
 
     protected override void CustomUpgrade1()
     {
-        Debug.Log($"Chain Lightning Upgrade 1!");
-
-        fireRate /= 1.5f;
+        maxChainDistance += 10;
+        range += 15;
     }
 
     protected override void CustomUpgrade2()
     {
+        chainDelayTime *= .75f;
+        chainStopTime *= .75f;
     }
 
     protected override void CustomUpgrade3()
     {
+        fireRate *= .8f;
     }
 
     protected override void CustomUpgrade4()
     {
+        baseDamage += 15;
     }
 
     protected override void CustomUpgrade5()
     {
+        maxChainCount += 3;
     }
 
     #endregion
