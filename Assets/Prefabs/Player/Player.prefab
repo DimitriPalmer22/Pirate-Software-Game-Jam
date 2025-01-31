@@ -254,6 +254,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 12
   animator: {fileID: 6226352149878942045}
+  layersToIgnore:
+    serializedVersion: 2
+    m_Bits: 128
   dodgeSpeed: 30
   dodgeDuration: 0.2
   dodgeCooldown: 1
