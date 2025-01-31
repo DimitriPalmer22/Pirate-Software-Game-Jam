@@ -59,7 +59,7 @@ MonoBehaviour:
   chainStepCount: 8
   enemyStunTime: 0.5
   chainLightningSound:
-    clip: {fileID: 8300000, guid: 4b755832c1fd5eb4ea5772de60409ab7, type: 3}
+    clip: {fileID: 0}
     soundType: 1
     volume: 0.25
     isPersistent: 0
