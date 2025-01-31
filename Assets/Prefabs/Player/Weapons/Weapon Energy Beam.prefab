@@ -53,6 +53,6 @@ MonoBehaviour:
   range: 40
   homingStrength: 0
   bulletSpeed: 35
-  explosionRadius: 0
-  explosionDamage: 0
+  explosionRadius: 1
+  explosionDamage: 10
   projectilePrefab: {fileID: -6475184534242868521, guid: c37f6e0de492ffb47af93a4796fab3d1, type: 3}
