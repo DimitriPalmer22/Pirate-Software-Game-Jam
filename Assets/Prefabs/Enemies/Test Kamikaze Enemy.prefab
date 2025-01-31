@@ -187,6 +187,7 @@ MonoBehaviour:
   fuseTime: 3
   smokeParticles: {fileID: 7052941187383595983}
   explosionParticlesPrefab: {fileID: 9196112873180517576, guid: f93236028aed27942a3950616ea4e66c, type: 3}
+  _animator: {fileID: 2739191250665159117}
   diffDamageAdd: 20
 --- !u!1001 &2475174679845337371
 PrefabInstance:

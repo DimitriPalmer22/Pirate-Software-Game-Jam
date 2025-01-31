@@ -12,12 +12,14 @@ public class EnemyKamikazeAttack : ComponentScript<Enemy>, IDamager
 
     [SerializeField] private ParticleSystem smokeParticles;
     [SerializeField] private ParticleSystem explosionParticlesPrefab;
-
+    [SerializeField] private Animator _animator;
+    
     [Header("Difficulty"), SerializeField] private float diffDamageAdd = 20;
-
+    
     private Player _player;
     private bool _isExploding;
-
+    
+    private static readonly int BombAnimationID = Animator.StringToHash("Bomb");
     public GameObject GameObject => gameObject;
 
     private void Start()
@@ -47,8 +49,7 @@ public class EnemyKamikazeAttack : ComponentScript<Enemy>, IDamager
     {
         // Stop the smoke particles
         smokeParticles?.Stop();
-        
-        // If there is a prefab for the explosion, instantiate it
+                // If there is a prefab for the explosion, instantiate it
         if (explosionParticlesPrefab != null)
         {
             var explosionParticles = Instantiate(explosionParticlesPrefab, transform.position, Quaternion.identity);
@@ -92,10 +93,13 @@ public class EnemyKamikazeAttack : ComponentScript<Enemy>, IDamager
     {
         // Set the enemy to exploding
         _isExploding = true;
+        _animator?.SetTrigger(BombAnimationID);
+        
 
         // If the smoke is not null, play it
         smokeParticles?.Play();
 
+        
         // // Wait for the fuse time
         // yield return new WaitForSeconds(fuseTime);
         
