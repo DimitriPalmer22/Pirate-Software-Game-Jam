@@ -59,8 +59,21 @@ public class EnemyMovement : ComponentScript<Enemy>
 
             // Set the destination of the NavMeshAgent to the player's position
             SetDestination(Player.Instance.transform.position);
-            _animator.SetBool("isMoving", _navMeshAgent.velocity.magnitude > 0);
 
+            if (_animator != null)
+            {
+                // Check if the isMoving parameter exists in the animator
+                
+                try
+                {
+                    _animator.SetBool("isMoving", _navMeshAgent.velocity.magnitude > 0);
+                }
+                catch (Exception e)
+                {
+                    Debug.LogError(e);
+                }
+            }
+            
             // Wait for a second
             yield return new WaitForSeconds(navigationUpdateInterval);
         }

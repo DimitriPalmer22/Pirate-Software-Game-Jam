@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 054417152bcb4da79031608bb1a035fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeBetweenWaves: 5
+  timeBetweenWaves: 3
   playerWaveHealAmount: 50
   bossEnemyPrefab: {fileID: 8231567678460553042, guid: 443a3d32ba71cdd438998a202cc76f37, type: 3}
   bossSpawnPoint: {fileID: 0}
@@ -59,3 +59,5 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  diffEnemyAdd: 5
+  diffBatchAdd: 3

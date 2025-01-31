@@ -9894,6 +9894,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b1dd039721972f419f0f40ac7310f88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _animator: {fileID: 0}
   navigationUpdateInterval: 0.032
   diffSpeedAdd: 4
 --- !u!114 &5148248110858238426
@@ -9909,11 +9910,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackInterval: 1
-  attackRange: 15
+  attackRange: 25
   attackDamage: 20
   projectileSpeed: 10
   projectileSpawnPoint: {fileID: 4983945139648590330}
-  projectilePrefab: {fileID: 6886210589200326369, guid: c47de1813f71b2f409398248e190e16b, type: 3}
+  projectilePrefab: {fileID: 605202556283197350, guid: 7a4650780fb69e04ea003a3efc160616, type: 3}
   diffIntervalAdd: -0.25
   diffDamageAdd: 10
   diffRangeAdd: 5
