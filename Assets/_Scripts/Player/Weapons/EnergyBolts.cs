@@ -54,22 +54,32 @@ public class EnergyBolts : PlayerWeapon
 
     protected override void CustomUpgrade1()
     {
+        // Bolt speed
+        boltSpeed += 20;
     }
 
     protected override void CustomUpgrade2()
     {
+        // bolt angle
+        boltAngle -= 20;
     }
 
     protected override void CustomUpgrade3()
     {
+        // Fire rate
+        fireRate *= .75f;
     }
 
     protected override void CustomUpgrade4()
     {
+        // Damage 
+        baseDamage += 10;
     }
 
     protected override void CustomUpgrade5()
     {
+        // Bolt count *2
+        boltCount *= 2;
     }
 
     #endregion
