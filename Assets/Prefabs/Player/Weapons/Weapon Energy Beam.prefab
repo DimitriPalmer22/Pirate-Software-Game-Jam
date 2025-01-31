@@ -48,7 +48,7 @@ MonoBehaviour:
   layersToIgnore:
     serializedVersion: 2
     m_Bits: 192
-  baseDamage: 30
+  baseDamage: 34
   fireRate: 1.5
   range: 40
   homingStrength: 0

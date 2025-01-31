@@ -220,6 +220,7 @@ MonoBehaviour:
   speedMultiplier: 1
   lifeTime: 2
   pierceCount: 0
+  hitEffectPrefab: {fileID: 3607115017593060140, guid: bfa19ecb21907fb4d8b2803770fc35be, type: 3}
 --- !u!199 &-7911050773270604194
 ParticleSystemRenderer:
   serializedVersion: 6
