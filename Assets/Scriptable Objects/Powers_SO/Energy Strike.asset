@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Energy Strike
   m_EditorClassIdentifier: 
   displayName: Energy Strike
-  icon: {fileID: 21300000, guid: 9619f8eac7e00f846827dac65a635b3f, type: 3}
+  icon: {fileID: 21300000, guid: d67d8d7fa2d1fe344bc5f3f4ae56d2f4, type: 3}
   weaponType: 5
   weaponPrefab: {fileID: -7666018712940385853, guid: 887d00a1ab4cc1947a7bb270a09998cf, type: 3}
   upgrades:
