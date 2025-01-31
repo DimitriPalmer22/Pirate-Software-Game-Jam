@@ -17,23 +17,23 @@ MonoBehaviour:
   weaponType: 2
   weaponPrefab: {fileID: 781855448359159478, guid: 9d5ceb83d637fd14295ab2a6613a6915, type: 3}
   upgrades:
-  - upgradeName: Bolt Speed +
+  - upgradeName: + Bolt Speed
     maxStack: 1
     weight: 30
     rarity: 0
-  - upgradeName: Bolt Angle -
-    maxStack: 1
-    weight: 30
-    rarity: 0
-  - upgradeName: Fire Rate +
-    maxStack: 1
-    weight: 15
-    rarity: 1
-  - upgradeName: Damage +
-    maxStack: 1
-    weight: 15
-    rarity: 1
-  - upgradeName: Bolts x2
+  - upgradeName: '- Bolt Spread'
     maxStack: 2
+    weight: 30
+    rarity: 0
+  - upgradeName: + Fire Rate
+    maxStack: 1
+    weight: 15
+    rarity: 1
+  - upgradeName: + Damage
+    maxStack: 1
+    weight: 15
+    rarity: 1
+  - upgradeName: 'x2 Bolts '
+    maxStack: 1
     weight: 10
     rarity: 2
