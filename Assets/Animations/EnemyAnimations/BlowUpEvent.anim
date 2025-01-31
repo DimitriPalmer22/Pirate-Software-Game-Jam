@@ -118588,7 +118588,7 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 2.0833333
-    functionName: 
+    functionName: ListenForAttack
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

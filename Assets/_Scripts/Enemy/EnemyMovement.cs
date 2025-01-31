@@ -8,6 +8,7 @@ public class EnemyMovement : ComponentScript<Enemy>
 {
     #region Serialized Fields
 
+    [SerializeField] private Animator _animator;
     [SerializeField, Min(0)] private float navigationUpdateInterval = .25f;
 
     [Header("Difficulty"), SerializeField] private float diffSpeedAdd = 4;
@@ -58,11 +59,13 @@ public class EnemyMovement : ComponentScript<Enemy>
 
             // Set the destination of the NavMeshAgent to the player's position
             SetDestination(Player.Instance.transform.position);
+            _animator.SetBool("isMoving", _navMeshAgent.velocity.magnitude > 0);
 
             // Wait for a second
             yield return new WaitForSeconds(navigationUpdateInterval);
         }
     }
+    
 
     private void SetDestination(Vector3 destination)
     {
