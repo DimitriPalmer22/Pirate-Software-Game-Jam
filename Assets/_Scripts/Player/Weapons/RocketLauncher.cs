@@ -48,22 +48,27 @@ public class RocketLauncher : PlayerWeapon
 
     protected override void CustomUpgrade1()
     {
+        baseDamage += 10;
     }
 
     protected override void CustomUpgrade2()
     {
+        bulletSpeed += 10;
     }
 
     protected override void CustomUpgrade3()
     {
+        explosionRadius += 5;
     }
 
     protected override void CustomUpgrade4()
     {
+        explosionDamage += 20;
     }
 
     protected override void CustomUpgrade5()
     {
+        homingStrength += 0.15f;
     }
 
     #endregion

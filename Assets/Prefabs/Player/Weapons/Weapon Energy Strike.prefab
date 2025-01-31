@@ -48,11 +48,11 @@ MonoBehaviour:
   layersToIgnore:
     serializedVersion: 2
     m_Bits: 192
-  baseDamage: 30
+  baseDamage: 20
   fireRate: 0.5
   range: 40
   homingStrength: 0
   bulletSpeed: 20
   explosionRadius: 5
-  explosionDamage: 40
+  explosionDamage: 35
   projectilePrefab: {fileID: -6475184534242868521, guid: d75ff275b8b3b51429d59dac3585ec5f, type: 3}
