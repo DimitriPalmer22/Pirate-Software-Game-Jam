@@ -453,8 +453,8 @@ CanvasGroup:
   m_GameObject: {fileID: 5108380556983504208}
   m_Enabled: 1
   m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!114 &1255405839191982502
 MonoBehaviour:
@@ -470,7 +470,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvasGroup: {fileID: 8330687316093859564}
   lerpAmount: 0.1
-  startAlpha: 1
+  startAlpha: 0
 --- !u!1 &5317509606997226078
 GameObject:
   m_ObjectHideFlags: 0

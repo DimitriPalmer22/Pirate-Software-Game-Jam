@@ -1,9 +1,11 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class DeathMenu : GameMenu
 {
     [SerializeField] private string mainMenuSceneName;
+    [SerializeField] private TMP_Text waveText;
 
     protected override void CustomAwake()
     {
@@ -13,6 +15,13 @@ public class DeathMenu : GameMenu
     {
         // Connect to the onDeath event of the player
         Player.Instance.OnDeath += ActivateOnDeath;
+        Player.Instance.OnDeath += UpdateWaveText;
+    }
+
+    private void UpdateWaveText(object sender, HealthChangedEventArgs args)
+    {
+        // Set the wave text to the current wave
+        waveText.text = $"You Died On Wave {WaveManager.Instance.CurrentWaveIndex}";
     }
 
     private void ActivateOnDeath(object sender, HealthChangedEventArgs args)
@@ -40,7 +49,7 @@ public class DeathMenu : GameMenu
     public override void OnBackPressed()
     {
     }
-    
+
     public void OnMainMenuPressed()
     {
         // Load the main menu scene
