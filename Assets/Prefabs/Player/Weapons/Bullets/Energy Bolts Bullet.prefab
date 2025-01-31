@@ -228,7 +228,7 @@ MonoBehaviour:
   damageMultiplier: 1
   speedMultiplier: 1
   lifeTime: 5
-  pierceCount: 0
+  pierceCount: 2
 --- !u!199 &-2835016646068582000
 ParticleSystemRenderer:
   serializedVersion: 6
