@@ -218,7 +218,7 @@ MonoBehaviour:
     m_Bits: 448
   damageMultiplier: 1
   speedMultiplier: 1
-  lifeTime: 5
+  lifeTime: 2
   pierceCount: 0
 --- !u!199 &-7911050773270604194
 ParticleSystemRenderer:
