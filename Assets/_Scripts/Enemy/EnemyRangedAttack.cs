@@ -116,7 +116,7 @@ public class EnemyRangedAttack : ComponentScript<Enemy>
         // Shoot the projectile at the player
         projectile.Shoot(
             ParentComponent,
-            (_player.transform.position - transform.position).normalized,
+            (_player.transform.position - projectileSpawnPoint.position).normalized,
             attackDamage,
             projectileSpeed
         );
