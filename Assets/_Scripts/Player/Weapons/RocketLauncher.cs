@@ -4,10 +4,10 @@ public class RocketLauncher : PlayerWeapon
 {
     #region Serialized Fields
 
-    [SerializeField, Range(0, 1)] private float homingStrength = 0f;
-    [SerializeField, Min(0)] private float bulletSpeed = 10f;
-    [SerializeField, Min(0)] private float explosionRadius = 5f;
-    [SerializeField, Min(0)] private float explosionDamage = 40f;
+    [SerializeField, Range(0, 1)] protected float homingStrength = 0f;
+    [SerializeField, Min(0)] protected float bulletSpeed = 10f;
+    [SerializeField, Min(0)] protected float explosionRadius = 5f;
+    [SerializeField, Min(0)] protected float explosionDamage = 40f;
 
     [SerializeField] private RocketLauncherProjectile projectilePrefab;
 
