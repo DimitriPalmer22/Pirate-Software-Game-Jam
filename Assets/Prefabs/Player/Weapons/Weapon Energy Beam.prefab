@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6831916049879454790}
   - component: {fileID: -7666018712940385853}
   m_Layer: 6
-  m_Name: Weapon Rocket Launcher
+  m_Name: Weapon Energy Beam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -53,6 +53,6 @@ MonoBehaviour:
   range: 40
   homingStrength: 0
   bulletSpeed: 35
-  explosionRadius: 5
-  explosionDamage: 40
+  explosionRadius: 0
+  explosionDamage: 0
   projectilePrefab: {fileID: -6475184534242868521, guid: c37f6e0de492ffb47af93a4796fab3d1, type: 3}

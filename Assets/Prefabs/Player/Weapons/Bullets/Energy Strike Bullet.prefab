@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: -891643568417458219}
   - component: {fileID: -321855023966093171}
   m_Layer: 6
-  m_Name: Energy Beam Bullet
+  m_Name: Energy Strike Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -228,7 +228,7 @@ MonoBehaviour:
   damageMultiplier: 1
   speedMultiplier: 1
   lifeTime: 5
-  pierceCount: 9999
+  pierceCount: 0
 --- !u!199 &-891643568417458219
 ParticleSystemRenderer:
   serializedVersion: 6

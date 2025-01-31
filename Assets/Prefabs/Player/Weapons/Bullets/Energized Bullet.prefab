@@ -216,7 +216,7 @@ MonoBehaviour:
   layersToIgnore:
     serializedVersion: 2
     m_Bits: 448
-  damageMultiplier: 0.5
+  damageMultiplier: 1
   speedMultiplier: 1
   lifeTime: 5
   pierceCount: 0

@@ -4,5 +4,6 @@
     BasicGun,
     EnergyBolts,
     EnergizedBullets,
-    RocketLauncher
+    EnergyBeam,
+    EnergyStrike
 }

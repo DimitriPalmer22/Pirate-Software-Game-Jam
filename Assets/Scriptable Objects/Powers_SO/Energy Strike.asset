@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 68db67877f33431f9c58145b6df6cc2f, type: 3}
-  m_Name: Rocket Launcher
+  m_Name: Energy Strike
   m_EditorClassIdentifier: 
-  displayName: Rocket Launcher
-  icon: {fileID: 21300000, guid: 7eff8dd149f5d854ab1409c6d108e713, type: 3}
-  weaponType: 4
-  weaponPrefab: {fileID: -7666018712940385853, guid: b6bccfe70a4184547a29d4479fe44ff8, type: 3}
+  displayName: Energy Strike
+  icon: {fileID: 21300000, guid: 9619f8eac7e00f846827dac65a635b3f, type: 3}
+  weaponType: 5
+  weaponPrefab: {fileID: -7666018712940385853, guid: 887d00a1ab4cc1947a7bb270a09998cf, type: 3}
   upgrades:
   - upgradeName: Upgrade 1
-    maxStack: 2
+    maxStack: 1
     weight: 30
     rarity: 0
   - upgradeName: Upgrade 2

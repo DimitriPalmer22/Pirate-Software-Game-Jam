@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 68db67877f33431f9c58145b6df6cc2f, type: 3}
-  m_Name: Energy Bolts
+  m_Name: Energy Beam
   m_EditorClassIdentifier: 
-  displayName: Energy Bolts
-  icon: {fileID: 21300000, guid: f7d091f037f50bf4f8ec68473921daaa, type: 3}
-  weaponType: 2
-  weaponPrefab: {fileID: 781855448359159478, guid: 9d5ceb83d637fd14295ab2a6613a6915, type: 3}
+  displayName: Energy Beam
+  icon: {fileID: 21300000, guid: 7eff8dd149f5d854ab1409c6d108e713, type: 3}
+  weaponType: 4
+  weaponPrefab: {fileID: -7666018712940385853, guid: b6bccfe70a4184547a29d4479fe44ff8, type: 3}
   upgrades:
   - upgradeName: Upgrade 1
     maxStack: 1

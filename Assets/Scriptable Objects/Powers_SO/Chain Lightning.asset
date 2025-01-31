@@ -18,7 +18,7 @@ MonoBehaviour:
   weaponPrefab: {fileID: 1130248493202506112, guid: a9e2913adb3201941a3a8376c3e86416, type: 3}
   upgrades:
   - upgradeName: Upgrade 1
-    maxStack: 2
+    maxStack: 1
     weight: 30
     rarity: 0
   - upgradeName: Upgrade 2

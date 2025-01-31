@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6831916049879454790}
-  - component: {fileID: -1257353887186163990}
+  - component: {fileID: -7666018712940385853}
   m_Layer: 6
-  m_Name: Weapon Energized Bullets
+  m_Name: Weapon Energy Strike
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-1257353887186163990
+--- !u!114 &-7666018712940385853
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,16 +41,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 6006259092124854573}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a59446f4164e4784a16bf9d0e08a4103, type: 3}
+  m_Script: {fileID: 11500000, guid: cfbac57f2e424440b7fa57f704185951, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponType: 3
+  weaponType: 5
   layersToIgnore:
     serializedVersion: 2
     m_Bits: 192
-  baseDamage: 17
-  fireRate: 0.25
-  range: 20
-  homingStrength: 0.0625
-  bulletSpeed: 20
-  projectilePrefab: {fileID: -7476842854930472304, guid: d6925b334d90b5540b030c0c9b12568c, type: 3}
+  baseDamage: 30
+  fireRate: 0.5
+  range: 40
+  homingStrength: 0
+  bulletSpeed: 60
+  explosionRadius: 5
+  explosionDamage: 40
+  projectilePrefab: {fileID: -6475184534242868521, guid: d75ff275b8b3b51429d59dac3585ec5f, type: 3}
