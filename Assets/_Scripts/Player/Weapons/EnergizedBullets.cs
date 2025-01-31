@@ -43,22 +43,27 @@ public class EnergizedBullets : PlayerWeapon
 
     protected override void CustomUpgrade1()
     {
+        baseDamage += 10;
     }
 
     protected override void CustomUpgrade2()
     {
+        baseDamage += 10;
     }
 
     protected override void CustomUpgrade3()
     {
+        homingStrength += .25f;
     }
 
     protected override void CustomUpgrade4()
     {
+        bulletSpeed += 15;
     }
 
     protected override void CustomUpgrade5()
     {
+        fireRate *= .5f;
     }
 
     #endregion

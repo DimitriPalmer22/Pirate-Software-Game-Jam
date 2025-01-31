@@ -17,23 +17,23 @@ MonoBehaviour:
   weaponType: 3
   weaponPrefab: {fileID: -1257353887186163990, guid: dc2cf2af9d0b08a488bfab75cb975292, type: 3}
   upgrades:
-  - upgradeName: Upgrade 1
+  - upgradeName: + Damage
     maxStack: 1
     weight: 30
     rarity: 0
-  - upgradeName: Upgrade 2
+  - upgradeName: + Damage
     maxStack: 1
     weight: 30
     rarity: 0
-  - upgradeName: Upgrade 3
+  - upgradeName: + Homing
     maxStack: 1
     weight: 15
     rarity: 1
-  - upgradeName: Upgrade 4
+  - upgradeName: + Bullet Speed
     maxStack: 1
     weight: 15
     rarity: 1
-  - upgradeName: Upgrade 5
+  - upgradeName: + Fire Rate
     maxStack: 1
     weight: 10
     rarity: 2
