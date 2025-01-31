@@ -48,9 +48,9 @@ MonoBehaviour:
   layersToIgnore:
     serializedVersion: 2
     m_Bits: 192
-  baseDamage: 17
-  fireRate: 0.25
+  baseDamage: 6
+  fireRate: 0.1
   range: 20
   homingStrength: 0.0625
-  bulletSpeed: 20
+  bulletSpeed: 40
   projectilePrefab: {fileID: -7476842854930472304, guid: d6925b334d90b5540b030c0c9b12568c, type: 3}

@@ -49,7 +49,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 192
   baseDamage: 30
-  fireRate: 0.5
+  fireRate: 1.5
   range: 40
   homingStrength: 0
   bulletSpeed: 35
