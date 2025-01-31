@@ -81,6 +81,8 @@ public class PlayerWeaponManager : ComponentScript<Player>
 
     #endregion
 
+    public Action<WeaponScriptableObject> onWeaponAdded;
+    
     private void Update()
     {
         // Update the aim forward
@@ -169,6 +171,9 @@ public class PlayerWeaponManager : ComponentScript<Player>
             return;
 
         weaponPrefabs.Add(weapon);
+        
+        // Invoke the event
+        onWeaponAdded?.Invoke(WeaponScriptableObject.GetWeaponScriptableObject(weapon.WeaponType));
     }
 
     public PlayerWeapon GetWeapon(PlayerWeapon weaponPrefab)

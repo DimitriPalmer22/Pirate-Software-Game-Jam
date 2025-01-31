@@ -34,8 +34,6 @@ public class UpgradeButton : MonoBehaviour
         };
 
         rarityImage.transform.Rotate(Vector3.forward, rotationSpeed * Mathf.PI * Time.unscaledDeltaTime);
-        
-        Debug.Log("Update");
     }
 
     public void SetData(UpgradePicker upgradePicker, WeaponUpgradeToken upgradeToken)
