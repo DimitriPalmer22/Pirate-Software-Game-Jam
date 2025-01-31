@@ -13,6 +13,7 @@ public class PlayerController : ComponentScript<Player>
 
     [SerializeField, Min(0)] private float moveSpeed = 8f;
     [SerializeField] private Animator animator;
+    [SerializeField] private LayerMask layersToIgnore;
 
     [Header("Dodge")] [SerializeField, Min(0)]
     private float dodgeSpeed = 20f;
@@ -41,7 +42,7 @@ public class PlayerController : ComponentScript<Player>
     public Player Player { get; private set; }
 
     public PlayerInput PlayerInput { get; private set; }
-    
+
     public bool IsDodging => _isDodging;
 
     #endregion
@@ -170,7 +171,7 @@ public class PlayerController : ComponentScript<Player>
         var ray = mainCam.ScreenPointToRay(mousePosition);
 
         // Check if the ray hits something
-        var lookAtPoint = Physics.Raycast(ray, out var hit)
+        var lookAtPoint = Physics.Raycast(ray, out var hit, 100f, ~layersToIgnore)
             ? hit.point
             : ray.GetPoint(100f);
 

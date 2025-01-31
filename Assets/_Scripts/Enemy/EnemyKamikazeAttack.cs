@@ -37,42 +37,17 @@ public class EnemyKamikazeAttack : ComponentScript<Enemy>, IDamager
         // Get the player
         _player = Player.Instance;
 
+        // Attack();
+
         // Attack the player
-        Attack();
+        StartAttackAnimation();
     }
 
-    private void Attack()
+    public void Attack()
     {
-        // If the player is null, return
-        if (_player == null)
-            return;
-
-        // If the player is not in range, return
-        if (Vector3.Distance(transform.position, _player.transform.position) > attackRange)
-            return;
-
-        // If the enemy is already exploding, return
-        if (_isExploding)
-            return;
-
-        // Explode
-        StartCoroutine(Explode());
-    }
-
-    private IEnumerator Explode()
-    {
-        // Set the enemy to exploding
-        _isExploding = true;
-
-        // If the smoke is not null, play it
-        smokeParticles?.Play();
-
-        // Wait for the fuse time
-        yield return new WaitForSeconds(fuseTime);
-
         // Stop the smoke particles
         smokeParticles?.Stop();
-
+        
         // If there is a prefab for the explosion, instantiate it
         if (explosionParticlesPrefab != null)
         {
@@ -111,5 +86,37 @@ public class EnemyKamikazeAttack : ComponentScript<Enemy>, IDamager
 
         // Die
         ParentComponent.ChangeHealth(-ParentComponent.MaxHealth, ParentComponent, this, transform.position);
+    }
+
+    private IEnumerator Explode()
+    {
+        // Set the enemy to exploding
+        _isExploding = true;
+
+        // If the smoke is not null, play it
+        smokeParticles?.Play();
+
+        // // Wait for the fuse time
+        // yield return new WaitForSeconds(fuseTime);
+        
+        yield break;
+    }
+
+    private void StartAttackAnimation()
+    {
+        // If the player is null, return
+        if (_player == null)
+            return;
+
+        // If the player is not in range, return
+        if (Vector3.Distance(transform.position, _player.transform.position) > attackRange)
+            return;
+
+        // If the enemy is already exploding, return
+        if (_isExploding)
+            return;
+
+        // Explode
+        StartCoroutine(Explode());
     }
 }
