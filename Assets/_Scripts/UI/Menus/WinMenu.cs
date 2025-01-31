@@ -21,8 +21,11 @@ public class WinMenu : GameMenu
         if (!WaveManager.Instance.CurrentWave.IsBossWave)
             return;
 
-        // Return if the current wave is not the last wave (25)
-        if (WaveManager.Instance.CurrentWaveIndex != WaveManager.WAVE_CYCLE * 5 + 1)
+        // // Return if the current wave is not the last wave (25)
+        // if (WaveManager.Instance.CurrentWaveIndex != WaveManager.WAVE_CYCLE * 5 + 1)
+        //     return;
+
+        if (WaveManager.Instance.BossWaveCount != 5)
             return;
 
         // Activate the win menu
