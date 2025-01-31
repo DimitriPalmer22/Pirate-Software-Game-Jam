@@ -7,6 +7,7 @@ public class BasicProjectile : Projectile
     #region Serialized Fields
 
     [SerializeField] protected int pierceCount = 0;
+    [SerializeField] protected ParticleSystem hitEffectPrefab;
 
     #endregion
 
@@ -91,6 +92,17 @@ public class BasicProjectile : Projectile
         // If the pierce count is -1, the projectile will never be destroyed
         if (_remainingPierceCount == 0)
             Destruct();
+        
+        // If the hit effect prefab is null, return
+        if (hitEffectPrefab == null)
+            return;
+        
+        // Instantiate the hit effect prefab
+        var particle = Instantiate(hitEffectPrefab, transform.position, Quaternion.identity);
+        particle.Play();
+        
+        // Destroy the particle system after the duration
+        Destroy(particle.gameObject, 5);
     }
 
     protected override void CustomDestruct()
