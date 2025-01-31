@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class RocketLauncherProjectile : BasicProjectile
 {
+    [SerializeField] private ParticleSystem explosionEffectPrefab;
+    
     private Enemy _target;
     private float _homingStrength;
     private float _speed;
@@ -140,8 +142,12 @@ public class RocketLauncherProjectile : BasicProjectile
                 continue;
 
             // Damage the enemy
-            enemy.ChangeHealth(-totalDamage, shooter, this, enemy.transform.position);
+            enemy.ChangeHealth(-_explosionDamage, shooter, this, enemy.transform.position);
         }
+        
+        // Instantiate the explosion effect
+        if (explosionEffectPrefab != null)
+            Instantiate(explosionEffectPrefab, transform.position, Quaternion.identity);
 
         // Destroy the projectile
         Destroy(gameObject);

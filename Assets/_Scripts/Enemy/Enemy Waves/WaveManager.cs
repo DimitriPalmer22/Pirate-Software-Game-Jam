@@ -291,6 +291,18 @@ public class WaveManager : MonoBehaviour, IDebugged
         // Connect to the on death event
         enemy.OnDeath += RemoveEnemyOnEnemyDeath;
         enemy.OnDeath += CheckIfWaveOverOnEnemyDeath;
+        enemy.OnDeath += ForceNextBatchOnEnemyDeath;
+    }
+
+    private void ForceNextBatchOnEnemyDeath(object sender, HealthChangedEventArgs args)
+    {
+        // If this is the last batch in the wave, return
+        // If there are more enemies left in the wave, return
+        if (IsLastBatch || _enemiesInWave.Count > 0)
+            return;
+
+        // Force the batch timer to end
+        _batchSpawnTimer.ForcePercent(1);
     }
 
     private void RemoveEnemyOnEnemyDeath(object sender, HealthChangedEventArgs args)
@@ -379,7 +391,7 @@ public class WaveManager : MonoBehaviour, IDebugged
 
         // Add the boss batch
         var bossSpawnInfo = CreateEnemySpawnInfo(bossEnemyPrefab, bossSpawnPoint);
-        var bossBatchInfo = CreateEnemyBatchInfo(new EnemyBatch(bossSpawnInfo), 5);
+        var bossBatchInfo = CreateEnemyBatchInfo(new EnemyBatch(bossSpawnInfo), .5f);
         enemyBatchInfos.Add(bossBatchInfo);
 
         // TODO: Add the normal batches
